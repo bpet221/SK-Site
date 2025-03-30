@@ -1,0 +1,33 @@
+<div id="footer-mobile-menu-1">
+    <a href="https://sandwichkitchens.com/home" id="footer-mobile-menu-1-1" class="footer-mobile-menu-1-btn">
+        <span class="label default">home</span>
+        <span class="label hover">home</span>
+    </a>
+    <a href="https://sandwichkitchens.com/about" id="footer-mobile-menu-1-2" class="footer-mobile-menu-1-btn">
+        <span class="label default">about</span>
+        <span class="label hover">about</span>
+    </a>
+    <a href="https://sandwichkitchens.com/contact" id="footer-mobile-menu-1-3" class="footer-mobile-menu-1-btn">
+        <span class="label default">contact</span>
+        <span class="label hover">contact</span>
+    </a>
+    <a href="https://sandwichkitchens.com/contact" id="footer-mobile-menu-1-4" class="footer-mobile-menu-1-btn">
+        <span class="label default">support</span>
+        <span class="label hover">support</span>
+    </a>
+    <a href="https://sandwichkitchens.com/faq" id="footer-mobile-menu-1-5" class="footer-mobile-menu-1-btn">
+        <span class="label default">faq</span>
+        <span class="label hover">faq</span>
+    </a>
+</div>
+
+<script>
+    document.querySelectorAll('.footer-mobile-menu-1-btn').forEach(btn => {
+        btn.addEventListener('touchstart', function() {
+            this.classList.add('active');
+        });
+        btn.addEventListener('touchend', function() {
+            this.classList.remove('active');
+        });
+    });
+</script>

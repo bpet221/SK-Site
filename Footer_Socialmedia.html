@@ -1,0 +1,45 @@
+<div id="custom-code-social-links">
+  <div class="social-image-section">
+    <a href="https://www.facebook.com/sandwichkitchens" target="_blank">
+      <div class="social-image-wrapper">
+        <img class="social-image-item" src="https://images.leadconnectorhq.com/image/f_webp/q_80/r_1200/u_https://assets.cdn.filesafe.space/FahnfAK4Y2D0yi846rOF/media/67e46e47625f83bec0d34664.png" alt="Facebook Page">
+      </div>
+    </a>
+    <a href="https://www.instagram.com/sandwichkitchens/" target="_blank">
+      <div class="social-image-wrapper">
+        <img class="social-image-item" src="https://images.leadconnectorhq.com/image/f_webp/q_80/r_1200/u_https://assets.cdn.filesafe.space/FahnfAK4Y2D0yi846rOF/media/67e4703d13c4b6355b0b8bc5.png" alt="Instagram Page">
+      </div>
+    </a>
+    <a href="https://www.google.com/search?q=sandwich+kitchens+%26+construction&sca_esv=1fcf1833b6ed7c4a&hl=en&ei=f3bkZ7i5Hdr8ptQPh-66oQM&ved=0ahUKEwj49IqJ3aiMAxVavokEHQe3LjQQ4dUDCBA&uact=5&oq=sandwich+kitchens+%26+construction&gs_lp=Egxnd3Mtd2l6LXNlcnAiIHNhbmR3aWNoIGtpdGNoZW5zICYgY29uc3RydWN0aW9uMg4QLhiABBjHARiOBRivATICECYyBRAAGO8FMggQABiABBiiBDIIEAAYgAQYogQyCBAAGIAEGKIEMggQABiABBiiBDIdEC4YgAQYxwEYjgUYrwEYlwUY3AQY3gQY4ATYAQFI3FFQ1ANY5x5wAngAkAEBmAHZAaAB7AuqAQYxMS4zLjG4AQPIAQD4AQGYAhCgAqELwgIREC4YgAQYsAMYxwEYjgUYrwHCAgkQABiwAxgIGB7CAg4QABiABBiwAxiGAxiKBcICCBAAGLADGO8FwgILEAAYgAQYsAMYogTCAgYQABgWGB7CAgsQABiABBiGAxiKBZgDAIgGAZAGCroGBggBEAEYFJIHBjExLjQuMaAH0oQBsgcFOS40LjG4B5ML&sclient=gws-wiz-serp" target="_blank">
+      <div class="social-image-wrapper">
+        <img class="social-image-item" src="https://images.leadconnectorhq.com/image/f_webp/q_80/r_1200/u_https://assets.cdn.filesafe.space/FahnfAK4Y2D0yi846rOF/media/67e473482be3f7910222c370.png" alt="Google Business Page">
+      </div>
+    </a>
+    <a href="https://www.angi.com/companylist/us/ma/east-sandwich/sandwich-kitchens-and-construction-reviews-8328076.htm" target="_blank">
+      <div class="social-image-wrapper">
+        <img class="social-image-item" src="https://storage.googleapis.com/msgsndr/FahnfAK4Y2D0yi846rOF/media/67e486967146fe6e1d4fd8b1.png" alt="Angi's List Page">
+      </div>
+    </a>
+  </div>
+</div>
+
+<script>
+    // Handle touch events for mobile animation
+    document.querySelectorAll('.social-image-wrapper').forEach(wrapper => {
+        wrapper.addEventListener('touchstart', function(e) {
+            this.classList.add('active');
+        });
+
+        wrapper.addEventListener('touchend', function(e) {
+            this.classList.remove('active');
+            const parentLink = this.parentElement;
+            window.open(parentLink.href, '_blank');
+        });
+
+        wrapper.addEventListener('click', function(e) {
+            e.preventDefault();
+            const parentLink = this.parentElement;
+            window.open(parentLink.href, '_blank');
+        });
+    });
+</script>

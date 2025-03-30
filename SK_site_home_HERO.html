@@ -1,0 +1,108 @@
+<!-- Loader HTML -->
+<div id="loader">
+  <div class="spinner"></div>
+</div>
+
+<!-- Navigation Sections (placeholders; ensure these exist on your page) -->
+<div id="section-4hcS9sD17J" style="display:none;"></div>
+<div id="section-gs7_Vr7US1" style="display:none;"></div>
+<div id="section-p-41UvcD17" style="display:none;"></div>
+
+<!-- Second Background Element -->
+<div id="second-bg"></div>
+
+<!-- Scroll Up Arrow Element (with corrected URL) -->
+<img class="scroll-up-arrow" src="https://storage.googleapis.com/msgsndr/FahnfAK4Y2D0yi846rOF/media/67bcccc4c3edf624fc05abe5.png" alt="Scroll Up Arrow" />
+
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+    // Attach click event to the scroll-up arrow to scroll to the top.
+    var scrollUpButton = document.querySelector('.scroll-up-arrow');
+    if (scrollUpButton) {
+      scrollUpButton.addEventListener("click", function() {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      });
+    }
+    
+    // Auto-scroll to the top 3.7 seconds after page load.
+    setTimeout(function() {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }, 2100);
+    
+    // Toggle navigation sections based on current window width.
+    function toggleNav() {
+      var width = window.innerWidth;
+      var navIds = ["section-4hcS9sD17J", "section-gs7_Vr7US1", "section-p-41UvcD17"];
+      navIds.forEach(function(id) {
+        var el = document.getElementById(id);
+        if (el) {
+          el.classList.remove("show");
+          // Override inline display style to hide the element
+          el.style.display = "none";
+        }
+      });
+      
+      // Get the second background element.
+      var secondBg = document.getElementById("second-bg");
+      
+      if (width > 1250) {
+        var nav = document.getElementById("section-4hcS9sD17J");
+        if (nav) { 
+          nav.style.display = "block"; 
+          nav.classList.add("show");
+          if(secondBg) { secondBg.classList.add("moved"); }
+        }
+      } else if (width >= 481 && width <= 1250) {
+        var nav = document.getElementById("section-gs7_Vr7US1");
+        if (nav) { 
+          nav.style.display = "block"; 
+          nav.classList.add("show");
+          if(secondBg) { secondBg.classList.add("moved"); }
+        }
+      } else { // width < 481px
+        var nav = document.getElementById("section-p-41UvcD17");
+        if (nav) { 
+          nav.style.display = "block"; 
+          nav.classList.add("show");
+          if(secondBg) { secondBg.classList.add("moved"); }
+        }
+      }
+    }
+    
+    // Initial animation sequence.
+    setTimeout(function() {
+      document.getElementById("loader").classList.add("hide");
+      setTimeout(function(){
+        toggleNav();
+        setTimeout(function(){
+          document.getElementById("second-bg").classList.add("fade");
+        }, 900);
+      }, 750);
+    }, 2000);
+    
+    // Update navigation on window resize.
+    window.addEventListener('resize', function() {
+      toggleNav();
+    });
+    
+    // Toggle visibility of the scroll-up arrow based on scroll position.
+    window.addEventListener("scroll", function() {
+      var scrollUpArrow = document.querySelector(".scroll-up-arrow");
+      if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight) {
+        scrollUpArrow.classList.add("visible");
+      } else {
+        scrollUpArrow.classList.remove("visible");
+      }
+    });
+
+    // Listen for visibility change to force animations to complete when the tab becomes active.
+    document.addEventListener("visibilitychange", function() {
+      if (!document.hidden) {
+        // Ensure loader is hidden and nav is toggled immediately.
+        document.getElementById("loader").classList.add("hide");
+        toggleNav();
+        document.getElementById("second-bg").classList.add("fade");
+      }
+    });
+  });
+</script>

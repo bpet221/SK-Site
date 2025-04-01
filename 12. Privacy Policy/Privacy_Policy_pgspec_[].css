@@ -1,1 +1,98 @@
-/* Dummy CSS for Privacy_Policy */
+/* 🟢🟢🟢 PAGE SPECIFIC CSS */
+
+.custom-code-container {
+    padding: 0;
+    margin: 0;
+}
+
+.privacy-policy-container {
+    font-family: 'OpenSans', sans-serif;
+    font-weight: 300;
+    font-style: normal;
+    font-size: 16px;
+    line-height: 1.8;
+    color: #1B1B18;
+    width: 100%;
+    margin: 0;
+    padding: 66px 0 40px 0;
+    position: relative;
+}
+
+.privacy-policy-container .last-updated-wrapper {
+    position: absolute;
+    top: 20px;
+    left: 0;
+}
+
+.privacy-policy-container .last-updated {
+    font-weight: 400;
+    padding-left: 0;
+    margin-bottom: 0;
+}
+
+.privacy-policy-container .intro-no-indent {
+    padding-left: 0;
+ /* No indent for intro paragraphs */
+    margin-bottom: 50px;
+}
+
+.privacy-policy-container .section-title {
+    font-family: 'Teodor', serif;
+    font-weight: 300;
+    font-size: 40px;
+    line-height: 45px;
+    color: #1B1B18;
+    margin-top: 20px;
+    margin-bottom: 10px;
+}
+
+.privacy-policy-container .subsection-title {
+    font-family: 'Teodor', serif;
+    font-weight: 300;
+    font-size: 30px;
+    line-height: 45px;
+    color: #1B1B18;
+    padding-left: 2%;
+ /* Indent H3 by 2% from H2 */
+    margin-bottom: 20px;
+    margin-top: 30px;
+}
+
+.privacy-policy-container p {
+    font-size: 16px;
+    padding-left: 4%;
+ /* Indent paragraphs by 2% from H3 (total 4%) */
+    margin-bottom: 20px;
+}
+
+.privacy-policy-container .policy-list {
+    list-style-type: disc;
+    padding-left: 8%;
+ /* Indent lists by 2% from P (total 6%) + 2% for bullet spacing (total 8%) */
+    margin-bottom: 60px;
+}
+
+.privacy-policy-container .policy-list li {
+    font-family: 'OpenSans', sans-serif;
+    font-weight: 300;
+    font-size: 16px;
+    color: #1B1B18;
+    margin-bottom: 5px;
+}
+
+.privacy-policy-container strong {
+    font-weight: 600;
+}
+
+.privacy-policy-container a {
+    color: #1B1B18;
+    font-weight: 400;
+    text-decoration: underline;
+}
+
+.privacy-policy-container a:hover {
+    text-decoration: none;
+}
+
+/* 🛑🛑🛑 PAGE SPECIFIC CSS
+--------------------------------------------------*/

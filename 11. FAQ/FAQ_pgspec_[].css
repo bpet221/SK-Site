@@ -1,1 +1,250 @@
-/* Dummy CSS for FAQ */
+/* 🟢🟢🟢 PAGE SPECIFIC CSS */
+
+#faq-section {
+    padding: 20px;
+    position: relative;
+}
+
+.faq-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0;
+}
+
+#faq-search {
+    width: 30vw;
+    padding: 10px;
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 300;
+    font-size: 16px;
+    background: #F7F5F1;
+    border: 1px solid #1B1B18;
+    border-radius: 50px;
+    color: #1B1B18;
+    box-sizing: border-box;
+}
+
+#faq-search::placeholder {
+    color: #1B1B18;
+}
+
+#faq-toggle-all {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid #1B1B18;
+    border-radius: 50px;
+    background: transparent;
+    color: #1B1B18;
+    padding: 6px 10px;
+    margin-left: 5px;
+    overflow: hidden;
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 300;
+    font-size: 9px;
+    text-transform: lowercase;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    box-sizing: border-box;
+    white-space: nowrap;
+    max-width: 150px;
+}
+
+#faq-toggle-all:hover {
+    padding: 4px 8px;
+}
+
+#faq-toggle-all .label {
+    display: inline-block;
+    white-space: nowrap;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+#faq-toggle-all .label.default {
+    position: relative;
+}
+
+#faq-toggle-all .label.hover {
+    position: absolute;
+    top: 50%;
+    left: 10px;
+    transform: translateY(150%);
+    opacity: 0;
+}
+
+#faq-toggle-all:hover .label.default {
+    transform: translateY(-150%);
+    opacity: 0;
+}
+
+#faq-toggle-all:hover .label.hover {
+    transform: translateY(-50%);
+    opacity: 1;
+}
+
+#faq-list {
+    padding-top: 30px;
+}
+
+.faq-item {
+    margin-bottom: 10px;
+    border: 1px solid #1B1B18;
+    border-radius: 10px;
+    background-color: transparent;
+    transition: transform 0.2s ease;
+}
+
+.faq-item:not(.expanded):hover {
+    transform: scale(0.98);
+}
+
+.faq-question {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px;
+    cursor: pointer;
+    background-color: transparent;
+}
+
+.faq-question h3 {
+    font-family: 'Teodor', serif;
+    font-weight: 300;
+    font-size: 25px;
+    color: #1B1B18;
+    margin: 0;
+    text-decoration: none;
+}
+
+.faq-toggle {
+    width: 32px;
+    height: 32px;
+    transition: transform 0.3s ease;
+    flex-shrink: 0;
+}
+
+.faq-toggle.open {
+    transform: rotate(180deg);
+}
+
+.faq-answer {
+    padding: 0 15px 15px;
+    display: none;
+    background-color: transparent;
+}
+
+.faq-answer p {
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 300;
+    font-size: 14px;
+    color: #1B1B18;
+    margin: 0 0 10px;
+}
+
+.faq-answer a {
+    color: #1B1B18;
+    text-decoration: underline;
+}
+
+.faq-answer ul {
+    font-family: 'Open Sans', sans-serif !important;
+    font-weight: 300 !important;
+    font-size: 14px !important;
+    color: #1B1B18 !important;
+    margin: 0;
+    padding-left: 20px;
+}
+
+.faq-answer ul li {
+    font-family: 'Open Sans', sans-serif !important;
+    font-weight: 300 !important;
+    font-size: 14px !important;
+    color: #1B1B18 !important;
+}
+
+.faq-answer small {
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 300;
+    font-size: 12px;
+    color: #1B1B18;
+    display: block;
+    margin-top: 10px;
+}
+
+.highlight {
+    background-color: #B6A997;
+    padding: 2px 0;
+    border-radius: 4px;
+}
+
+@media (max-width: 767px) {
+    .faq-header {
+        position: static;
+        width: 100%;
+    }
+
+    #faq-search {
+        position: absolute;
+        left: 20px;
+        right: calc(20px + 15px + 80px);
+        width: auto;
+        height: 32px;
+        padding: 6px 10px;
+        font-size: 16px;
+    }
+
+    #faq-search::placeholder {
+        transform: scale(1);
+        font-size: 16px;
+    }
+
+    #faq-search:focus {
+        -webkit-text-size-adjust: 100%;
+        font-size: 16px;
+    }
+
+    #faq-toggle-all {
+        position: absolute;
+        right: 20px;
+        width: 80px;
+        height: 32px;
+        padding: 6px 10px;
+        font-size: 9px;
+    }
+
+    #faq-list {
+        padding-top: 40px;
+    }
+
+    .faq-question h3 {
+        font-size: 18px;
+    }
+
+    .faq-answer p,
+    .faq-answer ul,
+    .faq-answer ul li {
+        font-size: 12px !important;
+    }
+
+    .faq-answer small {
+        font-size: 10px;
+    }
+
+    .faq-question:hover ~ .faq-item,
+    .faq-question.active ~ .faq-item {
+        transform: scale(1.02);
+    }
+
+    .faq-item:not(.expanded):hover {
+        transform: none;
+    }
+
+    .faq-item.last-expanded {
+        transform: scale(1.02);
+    }
+}
+
+/* 🛑🛑🛑 PAGE SPECIFIC CSS
+--------------------------------------------------*/

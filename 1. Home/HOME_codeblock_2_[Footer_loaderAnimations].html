@@ -1,0 +1,96 @@
+<!-- Loader HTML -->
+<div id="loader">
+    <div class="spinner"></div>
+  </div>
+  
+  <!-- Navigation Sections -->
+  <div id="section-4hcS9sD17J"></div>
+  <div id="section-gs7_Vr7US1" style="display:none;"></div>
+  <div id="section-p-41UvcD17" style="display:none;"></div>
+  
+  <!-- Second Background Element -->
+  <div id="second-bg"></div>
+  
+  <!-- Scroll Up Arrow Element -->
+  <img class="scroll-up-arrow" src="https://storage.googleapis.com/msgsndr/FahnfAK4Y2D0yi846rOF/media/67bcccc4c3edf624fc05abe5.png" alt="Scroll Up Arrow" />
+  
+  <script>
+  document.addEventListener("DOMContentLoaded", function () {
+      if (document.querySelector("iframe[name='funnel-builder']")) {
+          document.body.classList.add("has-funnel-builder");
+      }
+  
+      var scrollUpButton = document.querySelector('.scroll-up-arrow');
+      if (scrollUpButton) {
+          scrollUpButton.addEventListener("click", function () {
+              window.scrollTo({ top: 0, behavior: 'smooth' });
+          });
+      }
+  
+      function toggleNav() {
+          var width = window.innerWidth;
+          var navIds = ["section-4hcS9sD17J", "section-gs7_Vr7US1", "section-p-41UvcD17"];
+          
+          navIds.forEach(function (id) {
+              var el = document.getElementById(id);
+              if (el) {
+                  el.classList.remove("show");
+                  el.style.display = "none";
+                  el.style.transform = ""; // Clear overrides
+                  el.style.position = "fixed";
+                  el.style.top = "0px";
+                  el.style.zIndex = "1200";
+              }
+          });
+  
+          var nav = null;
+          if (width > 1250) {
+              nav = document.getElementById("section-4hcS9sD17J");
+          } else if (width >= 481 && width <= 1250) {
+              nav = document.getElementById("section-gs7_Vr7US1");
+          } else {
+              nav = document.getElementById("section-p-41UvcD17");
+          }
+  
+          if (nav) {
+              nav.style.display = "block";
+              nav.classList.add("show");
+          }
+      }
+  
+      function runLoaderSequence() {
+          if (window.scrollY > 0) {
+              window.scrollTo({ top: 0, behavior: 'instant' });
+          }
+  
+          var loader = document.getElementById("loader");
+          loader.classList.add("hide");
+  
+          setTimeout(() => {
+              toggleNav();
+              var secondBg = document.getElementById("second-bg");
+              if (secondBg) {
+                  setTimeout(() => secondBg.classList.add("fade"), 2000); // Matches current 2s delay
+              }
+              document.body.classList.add("loader-done");
+          }, 1000); // Wait for loader roll-up (1s)
+      }
+  
+      // Start after spinner delay
+      setTimeout(runLoaderSequence, 2000); // 2s spinner delay
+  
+      window.addEventListener('resize', toggleNav);
+  
+      window.addEventListener("scroll", function () {
+          var scrollUpArrow = document.querySelector(".scroll-up-arrow");
+          if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight) {
+              scrollUpArrow.classList.add("visible");
+          } else {
+              scrollUpArrow.classList.remove("visible");
+          }
+      });
+  
+      // Lock against GHL overrides
+      setInterval(toggleNav, 500); // Matches current 0.5s interval
+  });
+  </script>

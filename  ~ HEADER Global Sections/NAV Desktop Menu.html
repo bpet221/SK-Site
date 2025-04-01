@@ -1,0 +1,74 @@
+<div class="nav-menu">
+    <a href="https://sandwichkitchens.com/about" class="nav-menu-btn">
+        <span class="label default">ABOUT</span>
+        <span class="label hover">ABOUT</span>
+    </a>
+    <a href="https://sandwichkitchens.com/projects" class="nav-menu-btn">
+        <span class="label default">PROJECTS</span>
+        <span class="label hover">PROJECTS</span>
+    </a>
+    <div class="nav-menu-btn" id="products-btn">
+        <span class="label default">PRODUCTS</span>
+        <span class="label hover">PRODUCTS</span>
+        <div id="products-submenu">
+            <a href="https://sandwichkitchens.com/cabinets" class="submenu-btn">
+                <span class="label default">CABINETS</span>
+                <span class="label hover">CABINETS</span>
+            </a>
+            <a href="https://sandwichkitchens.com/countertops" class="submenu-btn">
+                <span class="label default">COUNTERTOPS</span>
+                <span class="label hover">COUNTERTOPS</span>
+            </a>
+            <a href="https://sandwichkitchens.com/knobs-pulls" class="submenu-btn">
+                <span class="label default">KNOBS + PULLS</span>
+                <span class="label hover">KNOBS + PULLS</span>
+            </a>
+        </div>
+    </div>
+    <a href="https://sandwichkitchens.com/contact" class="nav-menu-btn">
+        <span class="label default">CONTACT</span>
+        <span class="label hover">CONTACT</span>
+    </a>
+</div>
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+    const productsBtn = document.getElementById("products-btn");
+    const submenu = document.getElementById("products-submenu");
+    const container = document.getElementById("custom-code-Owq07THfuX");
+
+    submenu.querySelectorAll(".submenu-btn").forEach(btn => {
+        btn.addEventListener("click", function (e) {
+            e.preventDefault();
+            window.location.href = this.href;
+        });
+    });
+
+    function adjustMenu() {
+        const containerWidth = container.offsetWidth;
+        const buttons = container.querySelectorAll(".nav-menu-btn");
+        const totalButtonsWidth = Array.from(buttons).reduce((sum, btn) => sum + btn.offsetWidth, 0);
+        const minSpacing = 20;
+        const maxSpacing = 45;
+        const gapsNeeded = buttons.length - 1;
+
+        const availableSpace = containerWidth - totalButtonsWidth;
+        const gapSize = availableSpace / gapsNeeded;
+
+        if (gapSize < minSpacing) {
+            container.classList.add("tight");
+        } else {
+            container.classList.remove("tight");
+            container.style.gap = `${Math.min(maxSpacing, Math.max(minSpacing, gapSize))}px`;
+        }
+
+        // Prevent wrapping by forcing single row
+        container.style.flexWrap = "nowrap";
+    }
+
+    // Run immediately and on resize
+    adjustMenu();
+    window.addEventListener("resize", adjustMenu);
+    window.addEventListener("load", adjustMenu);
+});
+</script>

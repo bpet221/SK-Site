@@ -26,4 +26,4 @@
         document.addEventListener('DOMContentLoaded', () => setTimeout(init, 500));
     }
 })();
-</script>
+</script>†

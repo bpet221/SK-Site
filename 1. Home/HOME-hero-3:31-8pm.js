@@ -61,6 +61,7 @@
       document.querySelector(".hero-text-1").style.top = `calc(11vh - ${textOffset}px)`;
       document.querySelector(".hero-text-2").style.top = "0px";
       
+      // Fade out hero down arrow when scrolling begins.
       const heroDownArrow = document.querySelector(".hero-down-arrow");
       if (scrollPos > 0) {
         heroDownArrow.classList.add("fade");
@@ -120,6 +121,7 @@
         }
       }
       
+      // Fade out .top-bar when the hero image is no longer visible in the viewport.
       const topBar = document.querySelector(".top-bar");
       const heroImageRect = heroImage.getBoundingClientRect();
       if (heroImageRect.bottom <= 0) {
@@ -133,10 +135,12 @@
       document.querySelector(".hero-text-1").style.top = "14vh";
       document.querySelector(".hero-text-2").style.top = "0px";
       
+      // Trigger initial update to set positions and initial state.
       setTimeout(() => {
         updateClipPath();
       }, 50);
       
+      // Auto hover effect on the hero down arrow after 4 seconds.
       setTimeout(() => {
         const downArrow = document.querySelector(".hero-down-arrow");
         downArrow.classList.add("hover-animate");
@@ -145,6 +149,7 @@
         }, 1000);
       }, 4000);
       
+      // Click event for hero down arrow.
       const downArrow = document.querySelector(".hero-down-arrow");
       downArrow.addEventListener("click", () => {
         const vh = window.innerHeight;
@@ -190,10 +195,8 @@
   
   <!-- HERO CONTAINER (TEXT 2 + BUTTON) -->
   <div class="hero-container-2 fixed">
-    <div class="hero-text-2">
-      <span class="text-part-1">Created not just for you.</span>
-      <span class="text-part-2">But with you.</span>
-    </div>
+    <div class="hero-text-2">Created not just for you. But with you.
+</div>
     <button id="cta-btn" class="hero-button" onclick="window.open('https://sandwichkitchens.com/projects', '_blank');">
       <span class="label default">View Our Latest Projects</span>
       <span class="label hover">View Our Latest Projects</span>

@@ -24,22 +24,22 @@
 </div>
 
 <script>
-    // Handle touch events for mobile animation
-    document.querySelectorAll('.social-image-wrapper').forEach(wrapper => {
+  window.addEventListener('DOMContentLoaded', () => {
+    setTimeout(() => {
+      document.querySelectorAll('.social-image-wrapper').forEach(wrapper => {
+        const parentLink = wrapper.parentElement;
         wrapper.addEventListener('touchstart', function(e) {
-            this.classList.add('active');
-        });
-
+          this.classList.add('active');
+        }, { passive: true });
         wrapper.addEventListener('touchend', function(e) {
-            this.classList.remove('active');
-            const parentLink = this.parentElement;
-            window.open(parentLink.href, '_blank');
-        });
-
+          this.classList.remove('active');
+          window.open(parentLink.href, '_blank');
+        }, { passive: true });
         wrapper.addEventListener('click', function(e) {
-            e.preventDefault();
-            const parentLink = this.parentElement;
-            window.open(parentLink.href, '_blank');
+          e.preventDefault();
+          window.open(parentLink.href, '_blank');
         });
-    });
+      });
+    }, 100);
+  });
 </script>

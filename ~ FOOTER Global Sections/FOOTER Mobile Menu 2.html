@@ -1,7 +1,7 @@
 <div id="footer-mobile-menu-2">
-    <a href="https://sandwichkitchens.com/project" id="footer-mobile-menu-2-1" class="footer-mobile-menu-2-btn">
-        <span class="label default">project</span>
-        <span class="label hover">project</span>
+    <a href="https://sandwichkitchens.com/projects" id="footer-mobile-menu-2-1" class="footer-mobile-menu-2-btn">
+        <span class="label default">projects</span>
+        <span class="label hover">projects</span>
     </a>
     <a href="https://sandwichkitchens.com/cabinets" id="footer-mobile-menu-2-2" class="footer-mobile-menu-2-btn">
         <span class="label default">cabinets</span>
@@ -18,12 +18,16 @@
 </div>
 
 <script>
-    document.querySelectorAll('.footer-mobile-menu-2-btn').forEach(btn => {
+  window.addEventListener('DOMContentLoaded', () => {
+    setTimeout(() => {
+      document.querySelectorAll('.footer-mobile-menu-2-btn').forEach(btn => {
         btn.addEventListener('touchstart', function() {
-            this.classList.add('active');
-        });
+          this.classList.add('active');
+        }, { passive: true });
         btn.addEventListener('touchend', function() {
-            this.classList.remove('active');
-        });
-    });
+          this.classList.remove('active');
+        }, { passive: true });
+      });
+    }, 100);
+  });
 </script>

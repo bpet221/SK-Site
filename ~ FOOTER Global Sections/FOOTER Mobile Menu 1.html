@@ -22,12 +22,16 @@
 </div>
 
 <script>
-    document.querySelectorAll('.footer-mobile-menu-1-btn').forEach(btn => {
+  window.addEventListener('DOMContentLoaded', () => {
+    setTimeout(() => {
+      document.querySelectorAll('.footer-mobile-menu-1-btn').forEach(btn => {
         btn.addEventListener('touchstart', function() {
-            this.classList.add('active');
-        });
+          this.classList.add('active');
+        }, { passive: true });
         btn.addEventListener('touchend', function() {
-            this.classList.remove('active');
-        });
-    });
+          this.classList.remove('active');
+        }, { passive: true });
+      });
+    }, 100);
+  });
 </script>

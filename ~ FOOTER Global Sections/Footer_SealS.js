@@ -15,89 +15,85 @@
         <img class="image-item" src="https://assets.cdn.filesafe.space/FahnfAK4Y2D0yi846rOF/media/67e0bf107c855478e2d01a0e.png" alt="Image 3">
       </div>
     </a>
-    <a href="#" onclick="document.getElementById('popup1').style.display='flex'; return false;">
+    <a href="#" data-popup="popup1">
       <div class="image-wrapper">
         <img class="image-item" src="https://assets.cdn.filesafe.space/FahnfAK4Y2D0yi846rOF/media/67e0bf107c855444b8d01a0f.png" alt="Image 4">
       </div>
     </a>
-    <a href="#" onclick="document.getElementById('popup2').style.display='flex'; return false;">
+    <a href="#" data-popup="popup2">
       <div class="image-wrapper">
         <img class="image-item" src="https://assets.cdn.filesafe.space/FahnfAK4Y2D0yi846rOF/media/67e0bf107c8554332bd01a10.png" alt="Image 5">
       </div>
     </a>
   </div>
 
-  <div id="popup1" class="popup-overlay" onclick="this.style.display='none';">
+  <div id="popup1" class="popup-overlay">
     <img class="popup-image" src="https://assets.cdn.filesafe.space/FahnfAK4Y2D0yi846rOF/media/67e0bf107c855444b8d01a0f.png" alt="Image 4 Large">
   </div>
-  <div id="popup2" class="popup-overlay" onclick="this.style.display='none';">
+  <div id="popup2" class="popup-overlay">
     <img class="popup-image" src="https://assets.cdn.filesafe.space/FahnfAK4Y2D0yi846rOF/media/67e0bf107c8554332bd01a10.png" alt="Image 5 Large">
   </div>
 </div>
 
 <script>
-    // Handle touch events for mobile animation
-    document.querySelectorAll('.image-wrapper').forEach(wrapper => {
+  window.addEventListener('DOMContentLoaded', () => {
+    setTimeout(() => {
+      document.querySelectorAll('.image-wrapper').forEach(wrapper => {
+        const parentLink = wrapper.parentElement;
         wrapper.addEventListener('touchstart', function(e) {
-            this.classList.add('active');
-        });
-
+          this.classList.add('active');
+        }, { passive: true });
         wrapper.addEventListener('touchend', function(e) {
-            this.classList.remove('active');
-            const parentLink = this.parentElement;
-            if (parentLink.href.includes('#')) {
-                parentLink.click();
-            } else {
-                window.open(parentLink.href, '_blank');
-            }
-        });
-
+          this.classList.remove('active');
+          if (parentLink.href.includes('#')) {
+            const popupId = parentLink.getAttribute('data-popup');
+            if (popupId) document.getElementById(popupId).style.display = 'flex';
+          } else {
+            window.open(parentLink.href, '_blank');
+          }
+        }, { passive: true });
         wrapper.addEventListener('click', function(e) {
-            e.preventDefault();
-            const parentLink = this.parentElement;
-            if (parentLink.href.includes('#')) {
-                parentLink.click();
-            } else {
-                window.open(parentLink.href, '_blank');
-            }
+          e.preventDefault();
+          if (parentLink.href.includes('#')) {
+            const popupId = parentLink.getAttribute('data-popup');
+            if (popupId) document.getElementById(popupId).style.display = 'flex';
+          } else {
+            window.open(parentLink.href, '_blank');
+          }
         });
-    });
+      });
 
-    // Dynamically adjust image sizes to maintain 15% margin
-    function adjustImageSizes() {
+      document.querySelectorAll('.popup-overlay').forEach(popup => {
+        popup.addEventListener('click', () => {
+          popup.style.display = 'none';
+        });
+      });
+
+      function adjustImageSizes() {
         const codeSection = document.querySelector('#custom-code-bQNqrT9J15');
         const images = document.querySelectorAll('.image-item');
         const viewportWidth = window.innerWidth;
-        
-        // Calculate 15% of viewport width in pixels
         const minMarginPx = viewportWidth * 0.15;
-        
-        // Get the code section's width and margins
         const codeSectionStyle = window.getComputedStyle(codeSection);
         const currentMarginLeft = parseFloat(codeSectionStyle.marginLeft);
         const currentMarginRight = parseFloat(codeSectionStyle.marginRight);
-        
-        // If margins are less than 15% of viewport, adjust image sizes
         if (currentMarginLeft < minMarginPx || currentMarginRight < minMarginPx) {
-            // Calculate the total width available for images (viewport - 30% for margins)
-            const availableWidth = viewportWidth * 0.7; // 70% of viewport after 15% margins on each side
-            const numImages = images.length;
-            const gapPx = (numImages - 1) * (viewportWidth * 0.02); // 2% gap between images
-            const maxImageWidth = (availableWidth - gapPx) / numImages;
-
-            // Apply the new max-width, but cap at 100px
-            images.forEach(image => {
-                image.style.maxWidth = `${Math.min(Math.max(maxImageWidth, 40), 100)}px`; // Cap at 100px, min 40px
-            });
+          const availableWidth = viewportWidth * 0.7;
+          const numImages = images.length;
+          const gapPx = (numImages - 1) * (viewportWidth * 0.02);
+          const maxImageWidth = (availableWidth - gapPx) / numImages;
+          images.forEach(image => {
+            image.style.maxWidth = `${Math.min(Math.max(maxImageWidth, 40), 100)}px`;
+          });
         } else {
-            // Reset to default max-width (capped at 100px)
-            images.forEach(image => {
-                image.style.maxWidth = viewportWidth <= 767.9 ? '60px' : '100px';
-            });
+          images.forEach(image => {
+            image.style.maxWidth = viewportWidth <= 767.9 ? '60px' : '100px';
+          });
         }
-    }
+      }
 
-    // Run on load and resize
-    window.addEventListener('load', adjustImageSizes);
-    window.addEventListener('resize', adjustImageSizes);
+      adjustImageSizes();
+      window.addEventListener('resize', adjustImageSizes);
+    }, 100);
+  });
 </script>

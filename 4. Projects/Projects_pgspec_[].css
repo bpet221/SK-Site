@@ -1,0 +1,220 @@
+/* 🟢🟢🟢 PAGE SPECIFIC CSS */
+
+/* Ensure the image containers crop any overflow */
+#image-mJbv0uLbNt .image-container,
+#image-5RoIaYTDXS .image-container,
+#image-9Vv9G4ifWH .image-container,
+#image-KZWFK91N36 .image-container,
+#image-26QCG4pKo6 .image-container,
+#image-1LFJJ8J1cy .image-container {
+    overflow: hidden;
+}
+
+/* For screens 768px and wider: Zoom on hover with smooth easing */
+@media (min-width: 768px) {
+    #image-mJbv0uLbNt .image-container img,
+    #image-5RoIaYTDXS .image-container img,
+    #image-9Vv9G4ifWH .image-container img {
+        transition: transform 4s cubic-bezier(0.165, 0.84, 0.44, 1);
+    }
+
+    #image-mJbv0uLbNt .image-container img:hover,
+    #image-5RoIaYTDXS .image-container img:hover,
+    #image-9Vv9G4ifWH .image-container img:hover {
+        transform: scale(1.1);
+    }
+}
+
+/* For screens less than 768px: Auto zoom via added class with smooth easing */
+@media (max-width: 767px) {
+    #image-KZWFK91N36 .image-container img,
+    #image-26QCG4pKo6 .image-container img,
+    #image-1LFJJ8J1cy .image-container img {
+        transition: transform 4s cubic-bezier(0.165, 0.84, 0.44, 1);
+    }
+    /* When the .zoomed class is applied, the image zooms in */
+    #image-KZWFK91N36 .image-container img.zoomed,
+    #image-26QCG4pKo6 .image-container img.zoomed,
+    #image-1LFJJ8J1cy .image-container img.zoomed {
+        transform: scale(1.1);
+    }
+}
+
+
+/* ↘️ BUTTONS FOR CABINETS PAGE (DESKTOP) */
+.btn-cabinets-desktop-1,
+.btn-cabinets-desktop-2,
+.btn-cabinets-desktop-3 {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid var(--desktop-btn-text-color);
+    border-radius: var(--desktop-btn-border-radius);
+    background: transparent;
+    color: var(--desktop-btn-text-color);
+    padding: var(--desktop-btn-padding);
+    margin: 0 30px;
+    overflow: hidden;
+    font-family: 'Open Sans', sans-serif;
+    font-size: var(--desktop-btn-font-size);
+    font-weight: 400;
+    text-transform: uppercase;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    box-sizing: border-box;
+}
+
+.btn-cabinets-desktop-1:hover,
+.btn-cabinets-desktop-2:hover,
+.btn-cabinets-desktop-3:hover {
+    padding: var(--desktop-btn-hover-padding);
+ /* Use the hover padding variable */
+    border: 1px solid var(--desktop-btn-text-color);
+ /* Ensure border remains consistent */
+}
+
+.btn-cabinets-desktop-1 .label,
+.btn-cabinets-desktop-2 .label,
+.btn-cabinets-desktop-3 .label {
+    display: inline-block;
+    white-space: nowrap;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+.btn-cabinets-desktop-1 .label.default,
+.btn-cabinets-desktop-2 .label.default,
+.btn-cabinets-desktop-3 .label.default {
+    position: relative;
+}
+
+.btn-cabinets-desktop-1 .label.hover,
+.btn-cabinets-desktop-2 .label.hover,
+.btn-cabinets-desktop-3 .label.hover {
+    position: absolute;
+    top: 50%;
+    left: 10px;
+    transform: translateY(150%);
+    opacity: 0;
+}
+
+.btn-cabinets-desktop-1:hover .label.default,
+.btn-cabinets-desktop-2:hover .label.default,
+.btn-cabinets-desktop-3:hover .label.default {
+    transform: translateY(-150%);
+    opacity: 0;
+}
+
+.btn-cabinets-desktop-1:hover .label.hover,
+.btn-cabinets-desktop-2:hover .label.hover,
+.btn-cabinets-desktop-3:hover .label.hover {
+    transform: translateY(-50%);
+    opacity: 1;
+}
+
+/* Override alignment for button 2 only */
+.btn-cabinets-desktop-2 {
+    justify-content: flex-end;
+}
+
+/* Desktop-specific custom properties */
+:root {
+    --desktop-btn-padding: 6px 10px 6px 10px;
+    --desktop-btn-hover-padding: 4px 8px 4px 8px;
+ /* Now used in hover state */
+    --desktop-btn-border-radius: 99px;
+    --desktop-btn-font-size: 12px;
+    --desktop-btn-text-color: #1B1B18;
+}
+
+/* ↘️ BUTTONS FOR CABINETS PAGE (MOBILE) */
+.btn-cabinets-mobile-1,
+.btn-cabinets-mobile-2,
+.btn-cabinets-mobile-3 {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid var(--mobile-btn-border-color);
+    border-radius: var(--mobile-btn-border-radius);
+    background: var(--mobile-btn-bg-color);
+    color: var(--mobile-btn-text-color);
+    padding: var(--mobile-btn-padding);
+    margin: 0 0px;
+    overflow: hidden;
+    font-family: 'Open Sans', sans-serif;
+    font-size: var(--mobile-btn-font-size);
+    font-weight: 500;
+    text-transform: uppercase;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    box-sizing: border-box;
+}
+
+.btn-cabinets-mobile-1:hover,
+.btn-cabinets-mobile-2:hover,
+.btn-cabinets-mobile-3:hover {
+    padding: var(--mobile-btn-hover-padding);
+ /* Use the hover padding variable to match desktop */
+    border: 1px solid var(--mobile-btn-border-color);
+ /* Ensure border remains consistent, matching desktop */
+}
+
+.btn-cabinets-mobile-1 .label,
+.btn-cabinets-mobile-2 .label,
+.btn-cabinets-mobile-3 .label {
+    display: inline-block;
+    white-space: nowrap;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+.btn-cabinets-mobile-1 .label.default,
+.btn-cabinets-mobile-2 .label.default,
+.btn-cabinets-mobile-3 .label.default {
+    position: relative;
+}
+
+.btn-cabinets-mobile-1 .label.hover,
+.btn-cabinets-mobile-2 .label.hover,
+.btn-cabinets-mobile-3 .label.hover {
+    position: absolute;
+    top: 50%;
+    left: 10px;
+ /* Updated to match desktop */
+    transform: translateY(150%);
+    opacity: 0;
+}
+
+.btn-cabinets-mobile-1:hover .label.default,
+.btn-cabinets-mobile-2:hover .label.default,
+.btn-cabinets-mobile-3:hover .label.default {
+    transform: translateY(-150%);
+    opacity: 0;
+}
+
+.btn-cabinets-mobile-1:hover .label.hover,
+.btn-cabinets-mobile-2:hover .label.hover,
+.btn-cabinets-mobile-3:hover .label.hover {
+    transform: translateY(-50%);
+    opacity: 1;
+}
+
+/* Override alignment for button 2 only */
+.btn-cabinets-mobile-2 {
+    justify-content: flex-end;
+}
+
+/* Mobile-specific custom properties */
+:root {
+    --mobile-btn-padding: 6px 10px 6px 10px;
+    --mobile-btn-hover-padding: 4px 8px 4px 8px;
+ /* Updated to match desktop’s shrinkage ratio */
+    --mobile-btn-border-radius: 99px;
+    --mobile-btn-font-size: 9px;
+    --mobile-btn-text-color: #1B1B18;
+    --mobile-btn-border-color: #EDE7DB;
+    --mobile-btn-bg-color: #EDE7DB;
+}
+
+/* 🛑🛑🛑 PAGE SPECIFIC CSS
+--------------------------------------------------*/

@@ -1,0 +1,38 @@
+/* 🟢🟢🟢 PAGE SPECIFIC CSS */
+
+/* Ensure the image containers crop any overflow */
+#image-eWa5e1h85O .image-container,
+#image-dmBx7KyUO_ .image-container,
+#image-21M_ZDSMkZ .image-container,
+#image-y5O9OVVdu8 .image-container {
+    overflow: hidden;
+}
+
+/* For screens 768px and wider: Zoom on hover with smooth easing */
+@media (min-width: 768px) {
+    #image-eWa5e1h85O .image-container img,
+    #image-dmBx7KyUO_ .image-container img {
+        transition: transform 4s cubic-bezier(0.165, 0.84, 0.44, 1);
+    }
+
+    #image-eWa5e1h85O .image-container img:hover,
+    #image-dmBx7KyUO_ .image-container img:hover {
+        transform: scale(1.03);
+    }
+}
+
+/* For screens less than 768px: Auto zoom via added class with smooth easing */
+@media (max-width: 767px) {
+    #image-21M_ZDSMkZ .image-container img,
+    #image-y5O9OVVdu8 .image-container img {
+        transition: transform 4s cubic-bezier(0.165, 0.84, 0.44, 1);
+    }
+    /* When the .zoomed class is applied, the image zooms in */
+    #image-21M_ZDSMkZ .image-container img.zoomed,
+    #image-y5O9OVVdu8 .image-container img.zoomed {
+        transform: scale(1.03);
+    }
+}
+
+/* 🛑🛑🛑 PAGE SPECIFIC CSS
+--------------------------------------------------*/

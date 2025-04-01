@@ -1,0 +1,444 @@
+/* 🟢🟢🟢 PAGE SPECIFIC CSS */
+
+/* ↘️ BUTTONS FOR CABINETS PAGE (DESKTOP) */
+.btn-cabinets-desktop-1,
+.btn-cabinets-desktop-2,
+.btn-cabinets-desktop-3 {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid var(--desktop-btn-text-color);
+    border-radius: var(--desktop-btn-border-radius);
+    background: transparent;
+    color: var(--desktop-btn-text-color);
+    padding: var(--desktop-btn-padding);
+    margin: 0 30px;
+    overflow: hidden;
+    font-family: 'Open Sans', sans-serif;
+    font-size: var(--desktop-btn-font-size);
+    font-weight: 400;
+    text-transform: uppercase;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    box-sizing: border-box;
+}
+
+.btn-cabinets-desktop-1:hover,
+.btn-cabinets-desktop-2:hover,
+.btn-cabinets-desktop-3:hover {
+    padding: var(--desktop-btn-hover-padding);
+ /* Use the hover padding variable */
+    border: 1px solid var(--desktop-btn-text-color);
+ /* Ensure border remains consistent */
+}
+
+.btn-cabinets-desktop-1 .label,
+.btn-cabinets-desktop-2 .label,
+.btn-cabinets-desktop-3 .label {
+    display: inline-block;
+    white-space: nowrap;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+.btn-cabinets-desktop-1 .label.default,
+.btn-cabinets-desktop-2 .label.default,
+.btn-cabinets-desktop-3 .label.default {
+    position: relative;
+}
+
+.btn-cabinets-desktop-1 .label.hover,
+.btn-cabinets-desktop-2 .label.hover,
+.btn-cabinets-desktop-3 .label.hover {
+    position: absolute;
+    top: 50%;
+    left: 10px;
+    transform: translateY(150%);
+    opacity: 0;
+}
+
+.btn-cabinets-desktop-1:hover .label.default,
+.btn-cabinets-desktop-2:hover .label.default,
+.btn-cabinets-desktop-3:hover .label.default {
+    transform: translateY(-150%);
+    opacity: 0;
+}
+
+.btn-cabinets-desktop-1:hover .label.hover,
+.btn-cabinets-desktop-2:hover .label.hover,
+.btn-cabinets-desktop-3:hover .label.hover {
+    transform: translateY(-50%);
+    opacity: 1;
+}
+
+/* Override alignment for button 2 only */
+.btn-cabinets-desktop-2 {
+    justify-content: flex-end;
+}
+
+/* Desktop-specific custom properties */
+:root {
+    --desktop-btn-padding: 6px 10px 6px 10px;
+    --desktop-btn-hover-padding: 4px 8px 4px 8px;
+ /* Now used in hover state */
+    --desktop-btn-border-radius: 99px;
+    --desktop-btn-font-size: 10px;
+    --desktop-btn-text-color: #1B1B18;
+}
+
+/* DOOR SECTIONS HIDE/SHOW ANIMATIONS */
+
+#section--epdMQbZ3w,
+#section-7bQxi_kjdQ,
+#section-DDO7pHGYO9 {
+    max-height: 0 !important;
+    transform: translateY(0);
+    opacity: 0 !important;
+    overflow: hidden !important;
+    transition: max-height 2s cubic-bezier(0.1, 0.9, 0.2, 1) 0s, 
+                opacity 1.5s ease-in-out !important;
+    display: block !important;
+    will-change: max-height, opacity;
+}
+
+#section--epdMQbZ3w.open,
+#section-7bQxi_kjdQ.open,
+#section-DDO7pHGYO9.open {
+    max-height: 1000px !important;
+    opacity: 1 !important;
+    transition: max-height 3.5s cubic-bezier(0.1, 0.9, 0.2, 1), 
+                opacity 1.5s ease-in-out 0.3s !important;
+}
+
+@media all {
+    #section--epdMQbZ3w:not(.open),
+    #section-7bQxi_kjdQ:not(.open),
+    #section-DDO7pHGYO9:not(.open) {
+        max-height: 0 !important;
+        opacity: 0 !important;
+    }
+}
+
+@media (max-width: 767px) {
+    #section--epdMQbZ3w,
+    #section-7bQxi_kjdQ,
+    #section-DDO7pHGYO9 {
+        margin-top: 0 !important;
+        margin-bottom: 0 !important;
+        position: relative;
+        top: 0 !important;
+    }
+}
+
+@media (max-width: 480px) {
+    #section-MMafJJHLrH,
+    #section-yWdmqjv2_v,
+    #section-iHWwOYZZdo {
+        margin-bottom: 240px !important;
+        padding-bottom: 0 !important;
+    }
+}
+
+@media (min-width: 481px) and (max-width: 539.9px) {
+    #section-MMafJJHLrH,
+    #section-yWdmqjv2_v,
+    #section-iHWwOYZZdo {
+        margin-bottom: 300px !important;
+        padding-bottom: 0 !important;
+    }
+}
+
+@media (min-width: 540px) and (max-width: 599.9px) {
+    #section-MMafJJHLrH,
+    #section-yWdmqjv2_v,
+    #section-iHWwOYZZdo {
+        margin-bottom: 340px !important;
+        padding-bottom: 0 !important;
+    }
+}
+
+@media (min-width: 600px) and (max-width: 649.9px) {
+    #section-MMafJJHLrH,
+    #section-yWdmqjv2_v,
+    #section-iHWwOYZZdo {
+        margin-bottom: 380px !important;
+        padding-bottom: 0 !important;
+    }
+}
+
+@media (min-width: 650px) and (max-width: 767px) {
+    #section-MMafJJHLrH,
+    #section-yWdmqjv2_v,
+    #section-iHWwOYZZdo {
+        margin-bottom: 440px !important;
+        padding-bottom: 0 !important;
+    }
+}
+
+/* ↘️ BUTTONS FOR CABINETS PAGE (MOBILE) */
+.btn-cabinets-mobile-1,
+.btn-cabinets-mobile-2,
+.btn-cabinets-mobile-3 {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid var(--mobile-btn-border-color);
+    border-radius: var(--mobile-btn-border-radius);
+    background: var(--mobile-btn-bg-color);
+    color: var(--mobile-btn-text-color);
+    padding: var(--mobile-btn-padding);
+    margin: 0 0px;
+    overflow: hidden;
+    font-family: 'Open Sans', sans-serif;
+    font-size: var(--mobile-btn-font-size);
+    font-weight: 500;
+    text-transform: uppercase;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    box-sizing: border-box;
+}
+
+.btn-cabinets-mobile-1:hover,
+.btn-cabinets-mobile-2:hover,
+.btn-cabinets-mobile-3:hover {
+    padding: var(--mobile-btn-hover-padding);
+ /* Use the hover padding variable to match desktop */
+    border: 1px solid var(--mobile-btn-border-color);
+ /* Ensure border remains consistent, matching desktop */
+}
+
+.btn-cabinets-mobile-1 .label,
+.btn-cabinets-mobile-2 .label,
+.btn-cabinets-mobile-3 .label {
+    display: inline-block;
+    white-space: nowrap;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+.btn-cabinets-mobile-1 .label.default,
+.btn-cabinets-mobile-2 .label.default,
+.btn-cabinets-mobile-3 .label.default {
+    position: relative;
+}
+
+.btn-cabinets-mobile-1 .label.hover,
+.btn-cabinets-mobile-2 .label.hover,
+.btn-cabinets-mobile-3 .label.hover {
+    position: absolute;
+    top: 50%;
+    left: 10px;
+ /* Updated to match desktop */
+    transform: translateY(150%);
+    opacity: 0;
+}
+
+.btn-cabinets-mobile-1:hover .label.default,
+.btn-cabinets-mobile-2:hover .label.default,
+.btn-cabinets-mobile-3:hover .label.default {
+    transform: translateY(-150%);
+    opacity: 0;
+}
+
+.btn-cabinets-mobile-1:hover .label.hover,
+.btn-cabinets-mobile-2:hover .label.hover,
+.btn-cabinets-mobile-3:hover .label.hover {
+    transform: translateY(-50%);
+    opacity: 1;
+}
+
+/* Override alignment for button 2 only */
+.btn-cabinets-mobile-2 {
+    justify-content: flex-end;
+}
+
+/* Mobile-specific custom properties */
+:root {
+    --mobile-btn-padding: 6px 10px 6px 10px;
+    --mobile-btn-hover-padding: 4px 8px 4px 8px;
+ /* Updated to match desktop’s shrinkage ratio */
+    --mobile-btn-border-radius: 99px;
+    --mobile-btn-font-size: 8px;
+    --mobile-btn-text-color: #1B1B18;
+    --mobile-btn-border-color: #EDE7DB;
+    --mobile-btn-bg-color: #EDE7DB;
+}
+
+
+/* ↘️ PRIMARY CONTENT IMAGE ANIMATIONS */
+
+/* Ensure the image containers crop any overflow */
+#image-FKnUV9QItw .image-container,
+#image-1G7BuaoH-6 .image-container,
+#image-BMQXGObd4o .image-container,
+#image-2tBXK5wviJ .image-container,
+#image-a7of3bcjvY .image-container,
+#image-wJU8h4Qc8d .image-container {
+    overflow: hidden;
+}
+
+/* Add margin-bottom to sections for 650-767px */
+@media (min-width: 650px) and (max-width: 767px) {
+    #section-MMafJJHLrH,
+    #section-yWdmqjv2_v {
+        margin-bottom: 150px;
+    }
+}
+
+/* Add margin-bottom to sections for 520-649px */
+@media (min-width: 520px) and (max-width: 649.9px) {
+    #section-MMafJJHLrH,
+    #section-yWdmqjv2_v {
+        margin-bottom: 75px;
+    }
+}
+
+/* For screens 768px and wider: Zoom on hover with smooth easing */
+@media (min-width: 768px) {
+    #image-FKnUV9QItw .image-container img,
+    #image-1G7BuaoH-6 .image-container img,
+    #image-BMQXGObd4o .image-container img {
+        transition: transform 4s cubic-bezier(0.165, 0.84, 0.44, 1);
+    }
+
+    #image-FKnUV9QItw .image-container img:hover,
+    #image-1G7BuaoH-6 .image-container img:hover,
+    #image-BMQXGObd4o .image-container img:hover {
+        transform: scale(1.05);
+    }
+}
+
+/* For screens less than 768px: Auto zoom via added class with smooth easing */
+@media (max-width: 767px) {
+    #image-2tBXK5wviJ .image-container img,
+    #image-a7of3bcjvY .image-container img,
+    #image-wJU8h4Qc8d .image-container img {
+        transition: transform 4s cubic-bezier(0.165, 0.84, 0.44, 1);
+    }
+
+    #image-2tBXK5wviJ .image-container img.zoomed,
+    #image-a7of3bcjvY .image-container img.zoomed,
+    #image-wJU8h4Qc8d .image-container img.zoomed {
+        transform: scale(1.05);
+    }
+}
+
+/* CABINET DOOR SECTION STYLES (FULL SCREEN PREVIEW) */
+.door-gallery {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0px;
+    padding: 10px;
+    position: relative;
+}
+
+.door-item {
+    position: relative;
+    text-align: center;
+    cursor: pointer;
+    margin-right: 5px;
+    margin-bottom: 5px;
+}
+
+.door-item span {
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    font-size: 4px;
+    color: #1B1B18;
+    background: rgba(255, 255, 255, 0.7);
+    padding: 1px 3px;
+    z-index: 2;
+}
+
+.door-gallery img {
+    width: 40px;
+    height: auto;
+    border: 1px solid #ddd;
+    position: relative;
+    z-index: 1;
+}
+
+.fullscreen-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.9);
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.fullscreen-overlay img {
+    max-width: calc(100% - 80px);
+    max-height: 90%;
+}
+
+.fullscreen-number {
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    font-size: 16px;
+    color: #fff;
+    background: rgba(0, 0, 0, 0.8);
+    padding: 4px 8px;
+    z-index: 1002;
+    border-radius: 3px;
+}
+
+.close-btn {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    color: white;
+    font-size: 30px;
+    cursor: pointer;
+}
+
+.arrow-left {
+    position: absolute;
+    top: 50%;
+    left: 10px;
+    transform: translateY(-50%);
+    color: #EDE7DC;
+    font-size: 50px;
+    cursor: pointer;
+}
+
+.arrow-right {
+    position: absolute;
+    top: 50%;
+    right: 10px;
+    transform: translateY(-50%);
+    color: #EDE7DC;
+    font-size: 50px;
+    cursor: pointer;
+}
+
+@media (min-width: 430px) and (max-width: 767px) {
+    #section--epdMQbZ3w,
+    #section-7bQxi_kjdQ,
+    #section-DDO7pHGYO9 {
+        margin-top: 70px;
+    }
+}
+
+/* Updated style for the additional text */
+.more-text {
+    font-family: 'Teodor', serif;
+    font-size: 18px;
+    font-weight: 300;
+    color: #1B1B18;
+    padding-top: 22px;
+ /* 40px + 9px */
+    padding-left: 30px;
+ /* Added 30px left padding */
+    text-align: left;
+    font-style: italic;
+}
+
+/* 🛑🛑🛑 PAGE SPECIFIC CSS
+--------------------------------------------------*/

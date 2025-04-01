@@ -1,0 +1,93 @@
+/* 🟢🟢🟢 PAGE SPECIFIC CSS */
+
+
+/* Ensure the image containers crop any overflow */
+#image-UpAwTWc9s2 .image-container,
+#image-P0EUd1AxgU .image-container,
+#image-dzPhllroED .image-container,
+#image-ZCPkultP5J .image-container,
+#image-Ymh_bGdoHs .image-container,
+#image-qyBDrCI5in .image-container,
+#image-B7dD8Gw5_s .image-container,
+#image-qml4WCurkE .image-container,
+#image-WKhloqwiN- .image-container,
+#image-QCW_DmRta5 .image-container,
+#image-RU8rF_zz57 .image-container,
+#image-xlmsv-37NS .image-container,
+#image-lMxbcPRFPW .image-container,
+#image-QWGtjkBzR9 .image-container,
+#image-VJPg-LvPD6 .image-container,
+#image-5VwlpHKoaK .image-container,
+#image-THXwOKxfK4 .image-container,
+#image-olSyE2sCJ5 .image-container,
+#image-5ox58kau0n .image-container,
+#image-ekE1vun9jx .image-container,
+#image--8No4zPaSN .image-container,
+#image-Q1zmquTTvJ .image-container {
+    overflow: hidden;
+}
+
+/* For screens 768px and wider: Zoom on hover with smooth easing */
+@media (min-width: 768px) {
+    #image-UpAwTWc9s2 .image-container img,
+    #image-P0EUd1AxgU .image-container img,
+    #image-dzPhllroED .image-container img,
+    #image-ZCPkultP5J .image-container img,
+    #image-Ymh_bGdoHs .image-container img,
+    #image-qyBDrCI5in .image-container img,
+    #image-B7dD8Gw5_s .image-container img,
+    #image-qml4WCurkE .image-container img,
+    #image-WKhloqwiN- .image-container img,
+    #image-QCW_DmRta5 .image-container img,
+    #image-RU8rF_zz57 .image-container img {
+        transition: transform 4s cubic-bezier(0.165, 0.84, 0.44, 1);
+    }
+
+    #image-UpAwTWc9s2 .image-container img:hover,
+    #image-P0EUd1AxgU .image-container img:hover,
+    #image-dzPhllroED .image-container img:hover,
+    #image-ZCPkultP5J .image-container img:hover,
+    #image-Ymh_bGdoHs .image-container img:hover,
+    #image-qyBDrCI5in .image-container img:hover,
+    #image-B7dD8Gw5_s .image-container img:hover,
+    #image-qml4WCurkE .image-container img:hover,
+    #image-WKhloqwiN- .image-container img:hover,
+    #image-QCW_DmRta5 .image-container img:hover,
+    #image-RU8rF_zz57 .image-container img:hover {
+        transform: scale(1.05);
+    }
+}
+
+/* For screens less than 768px: Auto zoom via added class with smooth easing */
+@media (max-width: 767px) {
+    #image-xlmsv-37NS .image-container img,
+    #image-lMxbcPRFPW .image-container img,
+    #image-QWGtjkBzR9 .image-container img,
+    #image-VJPg-LvPD6 .image-container img,
+    #image-5VwlpHKoaK .image-container img,
+    #image-THXwOKxfK4 .image-container img,
+    #image-olSyE2sCJ5 .image-container img,
+    #image-5ox58kau0n .image-container img,
+    #image-ekE1vun9jx .image-container img,
+    #image--8No4zPaSN .image-container img,
+    #image-Q1zmquTTvJ .image-container img {
+        transition: transform 4s cubic-bezier(0.165, 0.84, 0.44, 1);
+    }
+    /* When the .zoomed class is applied, the image zooms in */
+    #image-xlmsv-37NS .image-container img.zoomed,
+    #image-lMxbcPRFPW .image-container img.zoomed,
+    #image-QWGtjkBzR9 .image-container img.zoomed,
+    #image-VJPg-LvPD6 .image-container img.zoomed,
+    #image-5VwlpHKoaK .image-container img.zoomed,
+    #image-THXwOKxfK4 .image-container img.zoomed,
+    #image-olSyE2sCJ5 .image-container img.zoomed,
+    #image-5ox58kau0n .image-container img.zoomed,
+    #image-ekE1vun9jx .image-container img.zoomed,
+    #image--8No4zPaSN .image-container img.zoomed,
+    #image-Q1zmquTTvJ .image-container img.zoomed {
+        transform: scale(1.05);
+    }
+}
+
+/* 🛑🛑🛑 PAGE SPECIFIC CSS
+--------------------------------------------------*/

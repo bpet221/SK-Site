@@ -1,0 +1,68 @@
+/* 🟢🟢🟢 PAGE SPECIFIC CSS */
+
+/* Ensure the image containers crop any overflow */
+#image-NIHm8oN6Dk .image-container,
+#image-9D66-mZpiQ .image-container,
+#image-jnPzgJsLs0 .image-container,
+#image-hfMOrPTDlP .image-container,
+#image-dg5kiE39wU .image-container,
+#image-nYk_wTbFKF .image-container,
+#image-Ab19g392vh .image-container,
+#image-cFvZwY-zkg .image-container,
+#image-VviaWaVcRq .image-container,
+#image-wCnBharilu .image-container,
+#image-SEfUq4inBK .image-container,
+#image-9J0yImqjav .image-container,
+#image-VGZrZm0Ky1 .image-container,
+#image-seBI8Nwaxe .image-container {
+    overflow: hidden;
+}
+
+/* For screens 768px and wider: Zoom on hover with smooth easing */
+@media (min-width: 768px) {
+    #image-NIHm8oN6Dk .image-container img,
+    #image-9D66-mZpiQ .image-container img,
+    #image-jnPzgJsLs0 .image-container img,
+    #image-hfMOrPTDlP .image-container img,
+    #image-dg5kiE39wU .image-container img,
+    #image-nYk_wTbFKF .image-container img,
+    #image-Ab19g392vh .image-container img {
+        transition: transform 4s cubic-bezier(0.165, 0.84, 0.44, 1);
+    }
+
+    #image-NIHm8oN6Dk .image-container img:hover,
+    #image-9D66-mZpiQ .image-container img:hover,
+    #image-jnPzgJsLs0 .image-container img:hover,
+    #image-hfMOrPTDlP .image-container img:hover,
+    #image-dg5kiE39wU .image-container img:hover,
+    #image-nYk_wTbFKF .image-container img:hover,
+    #image-Ab19g392vh .image-container img:hover {
+        transform: scale(1.05);
+    }
+}
+
+/* For screens less than 768px: Auto zoom via added class with smooth easing */
+@media (max-width: 767px) {
+    #image-cFvZwY-zkg .image-container img,
+    #image-VviaWaVcRq .image-container img,
+    #image-wCnBharilu .image-container img,
+    #image-SEfUq4inBK .image-container img,
+    #image-9J0yImqjav .image-container img,
+    #image-VGZrZm0Ky1 .image-container img,
+    #image-seBI8Nwaxe .image-container img {
+        transition: transform 4s cubic-bezier(0.165, 0.84, 0.44, 1);
+    }
+    /* When the .zoomed class is applied, the image zooms in */
+    #image-cFvZwY-zkg .image-container img.zoomed,
+    #image-VviaWaVcRq .image-container img.zoomed,
+    #image-wCnBharilu .image-container img.zoomed,
+    #image-SEfUq4inBK .image-container img.zoomed,
+    #image-9J0yImqjav .image-container img.zoomed,
+    #image-VGZrZm0Ky1 .image-container img.zoomed,
+    #image-seBI8Nwaxe .image-container img.zoomed {
+        transform: scale(1.05);
+    }
+}
+
+/* 🛑🛑🛑 PAGE SPECIFIC CSS
+--------------------------------------------------*/

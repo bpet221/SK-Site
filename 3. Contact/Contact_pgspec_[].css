@@ -1,0 +1,151 @@
+/* 🟢🟢🟢 PAGE SPECIFIC CSS */
+
+/* ↘️ HEADLINE TEXT FORMATTED */
+
+/* Class to ensure Teodor font applies */
+.teodor-text {
+    font-family: 'Teodor', serif !important;
+    font-style: normal;
+    font-weight: 300;
+    color: #1B1B18;
+    font-size: 60px;
+    line-height: 55px;
+    white-space: nowrap;
+ /* Prevent wrapping */
+    overflow: hidden;
+    max-width: 100%;
+ /* Container boundary */
+}
+
+/* Ensure paragraphs inherit the font and stack as lines */
+.teodor-text p {
+    margin: 0;
+    display: block;
+    font-family: inherit !important;
+    max-width: 100%;
+ /* Reinforce boundary */
+}
+
+/* Add spacing above "Let's talk" with padding */
+.talk-spacing {
+    padding-top: 20px;
+}
+
+/* Shrinks text if it overflows */
+@supports (font-size: clamp(20px, 5vw, 60px)) {
+    .teodor-text p {
+        font-size: clamp(20px, 5vw, 60px);
+ /* Default compression */
+        width: 100%;
+ /* Force full width to trigger clamp */
+    }
+}
+
+/* Media query for screens < 768px */
+@media (max-width: 768px) {
+    .teodor-text p {
+        font-size: calc(15vw / 1.5);
+ /* Original <768px behavior */
+        max-width: 15vw;
+ /* Limit to 70% of viewport */
+    }
+}
+
+/* Media query for 481px-767px: background opacity and font size */
+@media (min-width: 481px) and (max-width: 767px) {
+    #col-h6q9-tCNL6 {
+        background: transparent;
+ /* Sets background opacity to 0 */
+    }
+
+    .teodor-text p {
+        font-size: calc(11vw / 1.5);
+ /* Adjusted font size for this range */
+        max-width: 11vw;
+ /* Match font size scaling */
+    }
+}
+
+/* Underline and italic for 'talk' */
+.underline {
+    text-decoration: underline;
+    text-decoration-thickness: 2px;
+    text-decoration-color: #1B1B18;
+}
+
+.italic {
+    font-style: italic;
+}
+
+/* ↘️ STACK ORDER EDITS FOR ANIMATION OF ARROW + 'OFF' IN PAGE BUILDER MODE */
+
+/* BR arrow covered bottom on load */
+#col-h6q9-tCNL6 {
+    z-index: 1203;
+}
+
+#section-ZsfEeec_Sy, #section-lmLFdkLjFG, #section-fXU274WnRz {
+    z-index: 1204;
+}
+
+/* ↘️ BR MAKES GAP FOR ARROW TO POINT TO BUTTON (expands from center) */ 
+#image-NDRGF_LvfP {
+    animation: rollOut 3s ease-in-out 3s forwards;
+    z-index: 1201;
+    visibility: hidden;
+    transform: scaleX(0);
+    transform-origin: center;
+    position: absolute;
+    top: 0;
+}
+
+/* Class to fix position after animation */
+#image-NDRGF_LvfP.fixed-position {
+    position: fixed !important;
+    transform: scaleX(1) !important;
+    margin-top: 70px;
+ /* Added to offset from top of viewport */
+}
+
+/* ↘️ ARROW STARTS LOW AND EASES UP TO POINT AT BUTTON */
+#image-8Tri9eiOJx {
+    animation: slideUp 7s ease-in-out forwards;
+    animation-delay: 0.75s;
+    z-index: 1202;
+    opacity: 1;
+    transform: translateY(400px);
+    position: relative;
+}
+
+/* Class to fix position after animation */
+#image-8Tri9eiOJx.fixed-position {
+    position: fixed !important;
+    transform: translateY(0) !important;
+    top: 0;
+ /* Final position after animation */
+}
+
+@keyframes rollOut {
+    0% {
+        visibility: visible;
+        transform: scaleX(0);
+    }
+
+    100% {
+        visibility: visible;
+        transform: scaleX(1);
+    }
+}
+
+@keyframes slideUp {
+    0% {
+        transform: translateY(400px);
+    }
+
+    100% {
+        transform: translateY(0);
+    }
+}
+
+/* 🛑🛑🛑 PAGE SPECIFIC CSS
+--------------------------------------------------*/

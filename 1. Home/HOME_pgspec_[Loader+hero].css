@@ -1,4 +1,4 @@
-/* 🟢🟢🟢 PAGE SPECIFIC CSS */
+/* 🟢🟢🟢 HOME PAGE SPECIFIC CSS */
 
 /* 🟢🟢 LOADER CSS ('HOME' PAGE ONLY) */
 
@@ -11,16 +11,16 @@
   body:not(.has-funnel-builder) 
   #section-gs7_Vr7US1, 
   body:not(.has-funnel-builder) 
-  #section-p-41UvcD17          { z-index: 1200 !important; } /* 1 ⚠️⚠️⚠️ */
+  #section-p-41UvcD17          { z-index: 1200 !important; } /* 1 ⚠️ */
   /* Tablet Nav (481px-1250px) */
   @media (min-width: 481px) and (max-width: 1250px) { 
     body:not(.has-funnel-builder) 
-    #section-gs7_Vr7US1.show   { z-index: 1200 !important; } /* 2 ⚠️⚠️⚠️ */
+    #section-gs7_Vr7US1.show   { z-index: 1200 !important; } /* 2 ⚠️ */
   }
   /* Desktop Nav (1251px+) */
   @media (min-width: 1251px) { 
     body:not(.has-funnel-builder) 
-    #section-4hcS9sD17J.show   { z-index: 1200 !important; } /* 3 ⚠️⚠️⚠️ */
+    #section-4hcS9sD17J.show   { z-index: 1200 !important; } /* 3 ⚠️ */
   }
   /* Loader */
   #loader                      { z-index: 9999;            }
@@ -31,7 +31,7 @@
   #second-bg                   { z-index: 1000;            } /* 2nd BG */
 
 /* OVERRIDE GHL PREVIEW CONTAINER ---- */
-  #preview-container           { margin-top: 0 !important; } /* 4 ⚠️⚠️⚠️ */
+  #preview-container           { margin-top: 0 !important; } /* 4 ⚠️ */
 
 /* TIMING VALUES ---------------------- */
   #loader                      { transition: transform 1s ease; }
@@ -140,16 +140,6 @@ body:not(.has-funnel-builder) #section-p-41UvcD17.show {
 body:not(.has-funnel-builder) {
   margin-top: 86px !important;
   padding-top: 0 !important;
-}
-
-/* Popup Overlay */
-#overlay {
-  /* z-index set above */
-}
-
-/* Popup Body */
-#hl_main_popup {
-  /* z-index set above */
 }
 
 /* Second Background */
@@ -439,5 +429,5 @@ body {
     }
 }
 
-/* 🛑🛑🛑 PAGE SPECIFIC CSS
+/* 🛑🛑🛑 HOME PAGE SPECIFIC CSS
 --------------------------------------------------*/

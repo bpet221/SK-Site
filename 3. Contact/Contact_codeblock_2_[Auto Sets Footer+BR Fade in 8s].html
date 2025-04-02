@@ -1,0 +1,34 @@
+<script>
+window.addEventListener('load', function() {
+    setTimeout(function() {
+        const spaceBelowFooter = window.innerHeight - document.querySelector('#section-bsHacmtKd-').getBoundingClientRect().bottom;
+        const colElement = document.querySelector('#col-h6q9-tCNL6');
+        const currentPaddingBottom = parseFloat(window.getComputedStyle(colElement).paddingBottom) || 0;
+        const newPaddingBottom = spaceBelowFooter + currentPaddingBottom + 2; // Adds 2px
+        colElement.style.paddingBottom = `${newPaddingBottom}px`;
+       }, 1000);
+});
+</script>
+
+<script>
+window.addEventListener('load', function () {
+    // Arrow opacity switch
+    const arrow = document.getElementById('image-8Tri9eiOJx');
+    if (arrow) {
+        setTimeout(() => {
+            arrow.classList.add('visible');
+        }, 2500); // 2s delay for opacity 1
+    }
+
+    // Section fade-out
+    const sections = ['section-ZsfEeec_Sy', 'section-lmLFdkLjFG', 'section-fXU274WnRz'];
+    setTimeout(() => {
+        sections.forEach(id => {
+            const section = document.getElementById(id);
+            if (section) {
+                section.classList.add('fade-out');
+            }
+        });
+    }, 8000); // 8s delay for fade-out
+});
+</script>

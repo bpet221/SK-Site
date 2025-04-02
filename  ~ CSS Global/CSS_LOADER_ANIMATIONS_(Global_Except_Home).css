@@ -21,7 +21,7 @@
     min-height: 60px;
     transform: translateY(-100%);
     transition: transform 1.5s cubic-bezier(0.25, 0.1, 0.25, 1) 1s !important;
-    z-index: 1200 !important;
+    z-index: 1200;
     display: none;
 }
 
@@ -40,7 +40,7 @@
     #section-gs7_Vr7US1.show {
         display: block !important;
         transform: translateY(0) !important;
-        z-index: 1200 !important;
+        z-index: 1200;
     }
 
     #section-4hcS9sD17J,
@@ -54,7 +54,7 @@
     #section-4hcS9sD17J.show {
         display: block !important;
         transform: translateY(0) !important;
-        z-index: 1200 !important;
+        z-index: 1200;
     }
 
     #section-gs7_Vr7US1,
@@ -71,7 +71,7 @@ body {
 
 /* Override GHL preview container */
 #preview-container {
-    margin-top: 0 !important;
+    margin-top: 0;
 }
 
 /* Popup overlay - ensure it’s above all navs */
@@ -105,4 +105,3 @@ body {
 }
 
 /* 🛑🛑 LOADER ANIMATIONS (ALL PAGES EXCEPT HOME PAGE) */
- 

@@ -1,3 +1,5 @@
+/* #️⃣ CSS GLOBAL: 4-2-25 3:12 PM */
+
 /* 🟢 EXPANDS BACKGROUND COVERAGE (safari dynamic island) */
 
 html {
@@ -907,10 +909,10 @@ p,
 
 .footer-menu-2-btn:nth-child(1) {
     top: 0;
- /* PROJECT */
-    margin-right: 40px;
+ /* PROJECTS */
+    margin-right: 34px;
     padding-right: 0px;
- /* Default, adjust as needed */
+    /* Default, adjust as needed */
 }
 
 .footer-menu-2-btn:nth-child(2) {
@@ -1115,7 +1117,7 @@ p,
 .footer-mobile-menu-2-btn:nth-child(1) {
     margin-right: 0;
     padding-right: 10px;
-} /* PROJECT */
+} /* PROJECTS */
 .footer-mobile-menu-2-btn:nth-child(2) {
     margin-right: 0;
     padding-right: 10px;

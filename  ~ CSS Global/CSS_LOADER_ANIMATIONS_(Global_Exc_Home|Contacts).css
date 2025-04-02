@@ -40,7 +40,7 @@
     #section-gs7_Vr7US1.show {
         display: block !important;
         transform: translateY(0) !important;
-        z-index: 1200;
+        z-index: 1200 !important;
     }
 
     #section-4hcS9sD17J,
@@ -54,7 +54,7 @@
     #section-4hcS9sD17J.show {
         display: block !important;
         transform: translateY(0) !important;
-        z-index: 1200;
+        z-index: 1200 !important;
     }
 
     #section-gs7_Vr7US1,
@@ -71,7 +71,7 @@ body {
 
 /* Override GHL preview container */
 #preview-container {
-    margin-top: 0;
+    margin-top: 0 !important;
 }
 
 /* Popup overlay - ensure it’s above all navs */

@@ -1,5 +1,114 @@
 /* 🟢🟢🟢 PAGE SPECIFIC CSS */
 
+/* 🟢🟢 LOADER CSS ('CONTACT' PAGE ONLY) */
+/* ⚠️ = difs from Global Loader CSS version */
+
+/* Reference section: Full width always */
+#section-kYksPsq7_h {
+    --nav-width: 100%;
+    width: 100%;
+    margin: 0;
+    position: fixed !important;
+    top: 0 !important;
+    z-index: 99 !important;
+}
+
+/* Nav sections for all modes */
+#section-4hcS9sD17J,
+#section-gs7_Vr7US1,
+#section-p-41UvcD17 {
+    position: fixed !important;
+    top: 0 !important;
+    left: 0;
+    width: 100%;
+    min-height: 60px;
+    transform: translateY(-100%);
+    transition: transform 1.5s cubic-bezier(0.25, 0.1, 0.25, 1) 1s !important;
+    z-index: 1200; /* 1 ⚠️ */
+    display: none;
+}
+
+/* When nav is shown - lock in place */
+#section-4hcS9sD17J.show,
+#section-gs7_Vr7US1.show,
+#section-p-41UvcD17.show {
+    transform: translateY(0) !important;
+    display: block !important;
+    position: fixed !important;
+    top: 0 !important;
+}
+
+/* Ensure tablet nav visibility */
+@media (min-width: 481px) and (max-width: 1250px) {
+    #section-gs7_Vr7US1.show {
+        display: block !important;
+        transform: translateY(0) !important;
+        z-index: 1200; /* 2 ⚠️ */
+    }
+
+    #section-4hcS9sD17J,
+    #section-p-41UvcD17 {
+        display: none !important;
+    }
+}
+
+/* Ensure desktop nav visibility */
+@media (min-width: 1251px) {
+    #section-4hcS9sD17J.show {
+        display: block !important;
+        transform: translateY(0) !important;
+        z-index: 1200;  /* 3 ⚠️ */
+    }
+
+    #section-gs7_Vr7US1,
+    #section-p-41UvcD17 {
+        display: none !important;
+    }
+}
+
+/* Prevent content shift below fixed nav */
+body {
+    margin-top: 86px !important;
+    padding-top: 0 !important;
+}
+
+/* Override GHL preview container */
+#preview-container {
+    margin-top: 0; /* 4 ⚠️ */
+}
+
+/* Popup overlay - ensure it’s above all navs */
+#overlay {
+    z-index: 2000 !important;
+ /* Well above nav’s 1200 */
+}
+
+/* Popup body - reinforce above navs */
+#hl_main_popup {
+    z-index: 2001 !important;
+ /* Above overlay */
+}
+
+/* Second background element */
+#second-bg {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #ede7db;
+    z-index: 1000;
+    opacity: 1;
+    transition: opacity 1.5s cubic-bezier(0.25, 0.1, 0.25, 1) 2s !important;
+}
+
+#second-bg.fade {
+    opacity: 0;
+    pointer-events: none;
+}
+
+/* 🟢🟢 LOADER CSS ('CONTACT' PAGE ONLY) */
+
 /* ↘️ HEADLINE TEXT FORMATTED */
 .teodor-text {
     font-family: 'Teodor', serif !important;

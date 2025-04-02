@@ -95,16 +95,6 @@ body {
   padding-top: 0 !important;
 }
 
-/* Popup Overlay */
-#overlay {
-  /* z-index set above */
-}
-
-/* Popup Body */
-#hl_main_popup {
-  /* z-index set above */
-}
-
 /* Second Background */
 #second-bg {
   position: fixed;
@@ -121,4 +111,4 @@ body {
   pointer-events: none;
 }
 
-/* 🛑🛑 🌎 LOADER CSS GLOBAL(EXCLUDES 'HOME' + 'CONTACT' PAGES) */†
+/* 🛑🛑 🌎 LOADER CSS GLOBAL(EXCLUDES 'HOME' + 'CONTACT' PAGES) */

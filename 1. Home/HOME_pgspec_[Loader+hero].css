@@ -1,155 +1,176 @@
 /* 🟢🟢🟢 PAGE SPECIFIC CSS */
 
-/* 🟢🟢 LOADER ANIMATIONS (HOME PAGE ONLY) */
+/* 🟢🟢 LOADER CSS ('HOME' PAGE ONLY) */
 
-/* Reference section: Set the desired nav width */Home
+/* Z-INDEX VALUES --------------------- */
+  /* Reference Section */
+  #section-kYksPsq7_h          { z-index: 99 !important;   }
+  /* Nav Sections */
+  body:not(.has-funnel-builder) 
+  #section-4hcS9sD17J, 
+  body:not(.has-funnel-builder) 
+  #section-gs7_Vr7US1, 
+  body:not(.has-funnel-builder) 
+  #section-p-41UvcD17          { z-index: 1200 !important; } /* 1 ⚠️⚠️⚠️ */
+  /* Tablet Nav (481px-1250px) */
+  @media (min-width: 481px) and (max-width: 1250px) { 
+    body:not(.has-funnel-builder) 
+    #section-gs7_Vr7US1.show   { z-index: 1200 !important; } /* 2 ⚠️⚠️⚠️ */
+  }
+  /* Desktop Nav (1251px+) */
+  @media (min-width: 1251px) { 
+    body:not(.has-funnel-builder) 
+    #section-4hcS9sD17J.show   { z-index: 1200 !important; } /* 3 ⚠️⚠️⚠️ */
+  }
+  /* Loader */
+  #loader                      { z-index: 9999;            }
+  /* Popup Elements */
+  #overlay                     { z-index: 2000 !important; } /* Overlay */
+  #hl_main_popup               { z-index: 2001 !important; } /* Popup */
+  /* Background */
+  #second-bg                   { z-index: 1000;            } /* 2nd BG */
+
+/* OVERRIDE GHL PREVIEW CONTAINER ---- */
+  #preview-container           { margin-top: 0 !important; } /* 4 ⚠️⚠️⚠️ */
+
+/* TIMING VALUES ---------------------- */
+  #loader                      { transition: transform 1s ease; }
+  body:not(.has-funnel-builder) 
+  #section-4hcS9sD17J, 
+  body:not(.has-funnel-builder) 
+  #section-gs7_Vr7US1, 
+  body:not(.has-funnel-builder) 
+  #section-p-41UvcD17          { transition: transform 1.5s cubic-bezier(0.25, 0.1, 0.25, 1) 2.1s !important; }
+  #second-bg                   { transition: opacity 2.2s cubic-bezier(0.25, 0.1, 0.25, 1) 0s !important; }
+
+/* CORE STYLES ------------------------ */
+
+/* Reference Section - Set Nav Width */
 #section-kYksPsq7_h {
-    --nav-width: 1200px;
-    width: 100%;
-    max-width: var(--nav-width);
-    margin: 0 auto;
-    position: fixed !important;
-    top: 0 !important;
-    z-index: 99 !important;
+  --nav-width: 1200px;
+  width: 100%;
+  max-width: var(--nav-width);
+  margin: 0 auto;
+  position: fixed !important;
+  top: 0 !important;
 }
 
-/* Loader styling */
+/* Loader Styling */
 #loader {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: #1b1b18;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 9999;
-    transition: transform 1s ease;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #1b1b18;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
-/* Spinner styling */
+/* Spinner Styling */
 .spinner {
-    width: 60px;
-    height: 60px;
-    border: 4px solid rgba(0, 0, 0, 0.1);
-    border-top: 4px solid #ede7db;
-    border-radius: 50%;
-    animation: spin 1s linear infinite;
+  width: 60px;
+  height: 60px;
+  border: 4px solid rgba(0, 0, 0, 0.1);
+  border-top: 4px solid #ede7db;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
 }
 
-/* Spinning animation */
+/* Spinning Animation */
 @keyframes spin {
-    0% {
-        transform: rotate(0deg);
-    }
-
-    100% {
-        transform: rotate(360deg);
-    }
+  0%   { transform: rotate(0deg);   }
+  100% { transform: rotate(360deg); }
 }
 
-/* Loader roll-up effect */
+/* Loader Roll-Up Effect */
 #loader.hide {
-    transform: translateY(-100%);
+  transform: translateY(-100%);
 }
 
-/* Nav sections: only apply when not in funnel-builder */
+/* Nav Sections (Not in Funnel Builder) */
 body:not(.has-funnel-builder) #section-4hcS9sD17J,
 body:not(.has-funnel-builder) #section-gs7_Vr7US1,
 body:not(.has-funnel-builder) #section-p-41UvcD17 {
-    position: fixed !important;
-    top: 0 !important;
-    left: 0;
-    width: 100%;
-    min-height: 60px;
-    transform: translateY(-100%);
-    transition: transform 1.5s cubic-bezier(0.25, 0.1, 0.25, 1) 2.1s !important;
-    z-index: 1200 !important;
-    display: none;
+  position: fixed !important;
+  top: 0 !important;
+  left: 0;
+  width: 100%;
+  min-height: 60px;
+  transform: translateY(-100%);
+  display: none;
 }
 
-/* When nav is shown - lock in place */
+/* When Nav is Shown */
 body:not(.has-funnel-builder) #section-4hcS9sD17J.show,
 body:not(.has-funnel-builder) #section-gs7_Vr7US1.show,
 body:not(.has-funnel-builder) #section-p-41UvcD17.show {
-    transform: translateY(0) !important;
-    display: block !important;
-    position: fixed !important;
-    top: 0 !important;
+  transform: translateY(0) !important;
+  display: block !important;
+  position: fixed !important;
+  top: 0 !important;
 }
 
-/* Ensure tablet nav visibility */
+/* Tablet Nav (481px-1250px) */
 @media (min-width: 481px) and (max-width: 1250px) {
-    body:not(.has-funnel-builder) #section-gs7_Vr7US1.show {
-        display: block !important;
-        transform: translateY(0) !important;
-        z-index: 1200 !important;
-    }
-
-    body:not(.has-funnel-builder) #section-4hcS9sD17J,
-    body:not(.has-funnel-builder) #section-p-41UvcD17 {
-        display: none !important;
-    }
+  body:not(.has-funnel-builder) #section-gs7_Vr7US1.show {
+    display: block !important;
+    transform: translateY(0) !important;
+  }
+  body:not(.has-funnel-builder) #section-4hcS9sD17J,
+  body:not(.has-funnel-builder) #section-p-41UvcD17 {
+    display: none !important;
+  }
 }
 
-/* Ensure desktop nav visibility */
+/* Desktop Nav (1251px+) */
 @media (min-width: 1251px) {
-    body:not(.has-funnel-builder) #section-4hcS9sD17J.show {
-        display: block !important;
-        transform: translateY(0) !important;
-        z-index: 1200 !important;
-    }
-
-    body:not(.has-funnel-builder) #section-gs7_Vr7US1,
-    body:not(.has-funnel-builder) #section-p-41UvcD17 {
-        display: none !important;
-    }
+  body:not(.has-funnel-builder) #section-4hcS9sD17J.show {
+    display: block !important;
+    transform: translateY(0) !important;
+  }
+  body:not(.has-funnel-builder) #section-gs7_Vr7US1,
+  body:not(.has-funnel-builder) #section-p-41UvcD17 {
+    display: none !important;
+  }
 }
 
-/* Prevent content shift below fixed nav */
+/* Prevent Content Shift */
 body:not(.has-funnel-builder) {
-    margin-top: 86px !important;
-    padding-top: 0 !important;
+  margin-top: 86px !important;
+  padding-top: 0 !important;
 }
 
-/* Override GHL preview container */
-#preview-container {
-    margin-top: 0 !important;
-}
-
-/* Popup overlay - ensure it’s above all navs */
+/* Popup Overlay */
 #overlay {
-    z-index: 2000 !important;
+  /* z-index set above */
 }
 
-/* Popup body - reinforce above navs */
+/* Popup Body */
 #hl_main_popup {
-    z-index: 2001 !important;
+  /* z-index set above */
 }
 
-/* Second background element */
+/* Second Background */
 #second-bg {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: #ede7db;
-    z-index: 1000;
-    opacity: 1;
-    transition: opacity 2.2s cubic-bezier(0.25, 0.1, 0.25, 1) 0s !important;
- /* 1s sooner, 1s slower */
-    transform: translateY(0);
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #ede7db;
+  opacity: 1;
+  transform: translateY(0);
 }
 
-/* Fade-out effect for the second background */
+/* Fade-Out Effect */
 #second-bg.fade {
-    opacity: 0;
-    pointer-events: none;
+  opacity: 0;
+  pointer-events: none;
 }
 
-/* 🛑🛑 LOADER (HOME PAGE ONLY) */
+/* 🛑🛑 LOADER CSS ('HOME' PAGE ONLY) */
 
 
 

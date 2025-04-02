@@ -56,7 +56,7 @@ document.addEventListener("DOMContentLoaded", function () {
         toggleNav();
         var secondBg = document.getElementById("second-bg");
         if (secondBg) {
-            setTimeout(() => secondBg.classList.add("fade"), 1000); // 2s delay
+            setTimeout(() => secondBg.classList.add("fade"), 0); // Updated from 1000 to 0
         }
     }
 
@@ -75,4 +75,4 @@ document.addEventListener("DOMContentLoaded", function () {
     // Lock against GHL overrides
     setInterval(toggleNav, 500);
 });
-</script>†
+</script>

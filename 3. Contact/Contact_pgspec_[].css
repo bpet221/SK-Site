@@ -179,13 +179,13 @@ body {
     z-index: 1203;
 }
 
-#section-ZsfEeec_Sy, #section-lmLFdkLjFG, #section-fXU274WnRz {
+#section-Aas1WrEClJ, #section-ZsfEeec_Sy, #section-lmLFdkLjFG, #section-fXU274WnRz {
     z-index: 1204;
     position: relative;
 }
 
 /* ↘️ COVER WITH FADING BACKGROUND */
-#section-ZsfEeec_Sy::before, #section-lmLFdkLjFG::before, #section-fXU274WnRz::before {
+#section-Aas1WrEClJ::before, #section-ZsfEeec_Sy::before, #section-lmLFdkLjFG::before, #section-fXU274WnRz::before {
     content: '';
     position: absolute;
     top: 0;
@@ -197,14 +197,14 @@ body {
     opacity: 1;
 }
 
-#section-ZsfEeec_Sy.fade-out::before, #section-lmLFdkLjFG.fade-out::before, #section-fXU274WnRz.fade-out::before {
+#section-Aas1WrEClJ.fade-out::before, #section-ZsfEeec_Sy.fade-out::before, #section-lmLFdkLjFG.fade-out::before, #section-fXU274WnRz.fade-out::before {
     animation: fadeOut 2.5s ease-in forwards;
 }
 
 /* ↘️ BR MAKES GAP FOR ARROW TO POINT TO BUTTON */
 #image-NDRGF_LvfP {
     animation: rollOut 3s ease-in-out 3s forwards;
-    z-index: 1300;
+    z-index: 1298;
     visibility: hidden;
     transform: scaleX(0);
     transform-origin: center;
@@ -216,7 +216,7 @@ body {
     position: fixed !important;
     top: 86px !important;
     transform: scaleX(1) !important;
-    z-index: 1300 !important;
+    z-index: 1299 !important;
     visibility: visible !important;
 }
 
@@ -233,7 +233,7 @@ body {
     z-index: 1300;
     opacity: 0;
  /* Start invisible */
-    transform: translateY(400px);
+    transform: translateY(140px);
     position: relative;
 }
 

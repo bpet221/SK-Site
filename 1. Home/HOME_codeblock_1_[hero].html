@@ -6,9 +6,29 @@
   <title>SETS Hero Section</title>
   <link rel="stylesheet" href="styles.css" />
   <script>
+/***************************************
+ * JS CONFIGURATION SECTION - EDITABLE SETTINGS
+ ***************************************/
+ const config = {
+  // Animation Timing Settings (scroll positions in pixels)
+  text21Start: 800,    // Scroll start for Hero Text 2.1 animation (matches CSS)
+  text21End: 1600,     // Scroll end for Hero Text 2.1 animation (matches CSS)
+  text22Start: 2400,   // Scroll start for Hero Text 2.2 animation (updated to 2400)
+  text22End: 3200,     // Scroll end for Hero Text 2.2 animation (updated to 3200)
+  buttonStart: 4000,   // Scroll start for Hero Button animation (updated to 4000)
+  buttonEnd: 4800,     // Scroll end for Hero Button animation (updated to 4800)
+  pushRange: 20,       // Maximum extra push (px) to fade out text when pushed
+  
+  // Layout Settings
+  heroTextStartTop: 1000 // Starting top for Hero Text 2 elements (in px)
+};
+/***************************************
+ * End of JS CONFIGURATION SECTION
+ ***************************************/ 
+    
     let lastScrollPos = 0;
     let isUnsticky = false, storedFixedBottom = null;
-    const manualVerticalOffset = -130;
+    const manualVerticalOffset = -130; // Editable if needed
     const downHysteresis = 0, upHysteresis = 0;
     
     function updateClipPath() {
@@ -27,23 +47,17 @@
       
       if (window.innerWidth > 800) {
         document.querySelector(".hero-image").style.objectPosition = "50% 50%";
-        if (scrollFactor >= 0.95) {
-          document.querySelector(".hero-container-2").classList.add("slide-up");
-        } else {
-          document.querySelector(".hero-container-2").classList.remove("slide-up");
-        }
       } else {
         if (effectiveScroll < maxCrop + panDelayEffective) {
           document.querySelector(".hero-image").style.objectPosition = "0% 50%";
-          document.querySelector(".hero-container-2").classList.remove("slide-up");
         } else {
           let panProgress = Math.min((effectiveScroll - maxCrop - panDelayEffective) / panRange, 1);
           document.querySelector(".hero-image").style.objectPosition =
             (panProgress * 100) + "% 50%";
-          document.querySelector(".hero-container-2").classList.add("slide-up");
         }
       }
       
+      // Animate hero-text-1 (existing behavior)
       const initialScroll = 190;
       const initialMaxOffset = 1;
       const additionalDownMultiplier = 0.5;
@@ -51,22 +65,91 @@
       
       let textOffset = 0;
       if (scrollPos <= initialScroll) {
-        textOffset = (scrollPos / initialScroll) * initialMaxOffset;
+          textOffset = (scrollPos / initialScroll) * initialMaxOffset;
       } else {
-        textOffset = scrollPos >= lastScrollPos ?
-          initialMaxOffset + (scrollPos - initialScroll) * additionalDownMultiplier :
-          initialMaxOffset + (scrollPos - initialScroll) * additionalUpMultiplier;
+          textOffset = scrollPos >= lastScrollPos ?
+            initialMaxOffset + (scrollPos - initialScroll) * additionalDownMultiplier :
+            initialMaxOffset + (scrollPos - initialScroll) * additionalUpMultiplier;
       }
       lastScrollPos = scrollPos;
       document.querySelector(".hero-text-1").style.top = `calc(11vh - ${textOffset}px)`;
-      document.querySelector(".hero-text-2").style.top = "0px";
+      
+      // Animate Hero Text 2.1: from heroTextStartTop to 0 as scroll goes from text21Start to text21End.
+      let text21Progress = 0;
+      if (scrollPos < config.text21Start) {
+          text21Progress = 0;
+      } else if (scrollPos > config.text21End) {
+          text21Progress = 1;
+      } else {
+          text21Progress = (scrollPos - config.text21Start) / (config.text21End - config.text21Start);
+      }
+      let baseText21Offset = parseInt(config.heroTextStartTop) * (1 - text21Progress);
+      if (baseText21Offset < 0) baseText21Offset = 0;
+      
+      // As Hero Text 2.2 comes in (scroll from text22Start to text22End), push Hero Text 2.1 up and fade it out.
+      let text22Progress = 0;
+      if (scrollPos < config.text22Start) {
+          text22Progress = 0;
+      } else if (scrollPos > config.text22End) {
+          text22Progress = 1;
+      } else {
+          text22Progress = (scrollPos - config.text22Start) / (config.text22End - config.text22Start);
+      }
+      const extraPushForText21 = config.pushRange * text22Progress; // extra push (max pushRange px)
+      const effectiveText21Offset = baseText21Offset - extraPushForText21;
+      const text21Opacity = 1 - text22Progress;
+      const heroText21Elem = document.querySelector(".hero-text-2-1");
+      heroText21Elem.style.top = `${effectiveText21Offset}px`;
+      heroText21Elem.style.opacity = text21Opacity;
+      if (text22Progress >= 1) {
+          heroText21Elem.style.display = "none";
+      } else {
+          heroText21Elem.style.display = "block";
+      }
+      
+      // Animate Hero Text 2.2: from heroTextStartTop to 0 as scroll goes from text22Start to text22End.
+      let text22ProgressForText = 0;
+      if (scrollPos < config.text22Start) {
+          text22ProgressForText = 0;
+      } else if (scrollPos > config.text22End) {
+          text22ProgressForText = 1;
+      } else {
+          text22ProgressForText = (scrollPos - config.text22Start) / (config.text22End - config.text22Start);
+      }
+      const baseText22Offset = parseInt(config.heroTextStartTop) * (1 - text22ProgressForText);
+      
+      // As Hero Button comes in (scroll from buttonStart to buttonEnd), push Hero Text 2.2 up and fade it out.
+      let buttonProgress = 0;
+      if (scrollPos < config.buttonStart) {
+          buttonProgress = 0;
+      } else if (scrollPos > config.buttonEnd) {
+          buttonProgress = 1;
+      } else {
+          buttonProgress = (scrollPos - config.buttonStart) / (config.buttonEnd - config.buttonStart);
+      }
+      const extraPushForText22 = config.pushRange * buttonProgress;
+      const effectiveText22Offset = baseText22Offset - extraPushForText22;
+      const text22Opacity = 1 - buttonProgress;
+      const heroText22Elem = document.querySelector(".hero-text-2-2");
+      heroText22Elem.style.top = `${effectiveText22Offset}px`;
+      heroText22Elem.style.opacity = text22Opacity;
+      if (buttonProgress >= 1) {
+          heroText22Elem.style.display = "none";
+      } else {
+          heroText22Elem.style.display = "block";
+      }
+      
+      // Animate hero-button: from a 1000px offset to 0px and scale from 0.5 to 1 as scroll goes from buttonStart to buttonEnd.
+      const buttonOffset = 1000 * (1 - buttonProgress);
+      const buttonScale = 0.5 + 0.5 * buttonProgress;
+      document.querySelector(".hero-button").style.transform = `translateY(${buttonOffset}px) scale(${buttonScale})`;
       
       // Fade out hero down arrow when scrolling begins.
       const heroDownArrow = document.querySelector(".hero-down-arrow");
       if (scrollPos > 0) {
-        heroDownArrow.classList.add("fade");
+          heroDownArrow.classList.add("fade");
       } else {
-        heroDownArrow.classList.remove("fade");
+          heroDownArrow.classList.remove("fade");
       }
     }
     
@@ -83,13 +166,13 @@
         if (!isUnsticky && triggerRect.top <= heroRect.bottom - downHysteresis) {
           storedFixedBottom = heroRect.bottom;
           const absTop = window.scrollY + heroRect.top + manualVerticalOffset +
-            parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--abs-hero-offset'));
+                           parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--abs-hero-offset'));
           heroImage.style.top = absTop + "px";
           heroImage.classList.remove("fixed-hero");
           heroImage.classList.add("absolute-hero");
           
           const absContainerOffset = parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--abs-container-offset'));
-          const extraOffset = window.innerWidth > 800 ? 31 : -8;
+          const extraOffset = window.innerWidth > 800 ? 31 : 31;
           const newTextAbsTop = absTop + heroImage.offsetHeight - absContainerOffset + extraOffset;
           heroContainer.style.position = "absolute";
           heroContainer.style.top = newTextAbsTop + "px";
@@ -103,7 +186,7 @@
           if (window.innerWidth > 800) {
               heroContainer.style.top = "calc(var(--text2-top-offset) + 40px)";
           } else {
-              heroContainer.style.top = "calc(var(--text2-top-offset) + 4px)";
+              heroContainer.style.top = "calc(var(--text2-top-offset) + 40px)";
           }
           heroContainer.style.position = "fixed";
           heroContainer.classList.remove("absolute");
@@ -115,27 +198,27 @@
         if (isUnsticky) {
           const heroRect = heroImage.getBoundingClientRect();
           const absContainerOffset = parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--abs-container-offset'));
-          const extraOffset = window.innerWidth > 800 ? 31 : -8;
+          const extraOffset = window.innerWidth > 800 ? 31 : 31;
           const newTextAbsTop = window.scrollY + heroRect.bottom + 20 - absContainerOffset + 10 + extraOffset;
           heroContainer.style.top = newTextAbsTop + "px";
         }
       }
       
-      // Fade out .top-bar when the hero image is no longer visible in the viewport.
+      // Fade out .top-bar when the hero image is no longer visible.
       const topBar = document.querySelector(".top-bar");
       const heroImageRect = heroImage.getBoundingClientRect();
       if (heroImageRect.bottom <= 0) {
-        topBar.style.opacity = "0";
+          topBar.style.opacity = "0";
       } else {
-        topBar.style.opacity = "1";
+          topBar.style.opacity = "1";
       }
     }
     
     document.addEventListener("DOMContentLoaded", () => {
       document.querySelector(".hero-text-1").style.top = "14vh";
-      document.querySelector(".hero-text-2").style.top = "0px";
+      // Let the scroll-based animation control positions for hero-text-2-1 and hero-text-2-2.
       
-      // Trigger initial update to set positions and initial state.
+      // Trigger initial update to set positions.
       setTimeout(() => {
         updateClipPath();
       }, 50);
@@ -184,20 +267,22 @@
   <!-- HERO DOWN ARROW -->
   <img class="hero-down-arrow" src="https://storage.googleapis.com/msgsndr/FahnfAK4Y2D0yi846rOF/media/67bba9160f0b26304605e14c.png" alt="Down Arrow" />
   
-  <!-- HERO IMAGE CONTAINER -->
+  <!-- HERO IMAGE CONTAINER (CONTAINER 1) -->
   <div class="hero-container-1">
     <div class="hero-text-1">The Kitchen You’ve Always Wanted.</div>
     <img class="hero-image fixed-hero" src="https://storage.googleapis.com/msgsndr/FahnfAK4Y2D0yi846rOF/media/67e88d113792944820e8487c.jpeg" alt="Hero Image" />
   </div>
   
-  <!-- TRIGGER ELEMENT -->
-  <div id="heading-VBJYPPhLuK" style="margin-top:1500px; padding:0; background:#767676; font-size:2rem;"></div>
+  <!-- TRIGGER ELEMENT (adjusted margin-top) -->
+  <div id="heading-VBJYPPhLuK" style="margin-top:6000px; padding:0; background:#767676; font-size:2rem;"></div>
   
-  <!-- HERO CONTAINER (TEXT 2 + BUTTON) -->
+  <!-- HERO CONTAINER 2 (TEXT 2.1 + TEXT 2.2 + BUTTON) -->
   <div class="hero-container-2 fixed">
-    <div class="hero-text-2">Created not just for you. But with you.
-</div>
-    <button id="cta-btn" class="hero-button" onclick="window.open('https://sandwichkitchens.com/projects', '_blank');">
+    <div class="hero-text-2-wrapper">
+      <div class="hero-text-2-1">Created not just for you.</div>
+      <div class="hero-text-2-2">But with you.</div>
+    </div>
+    <button id="cta-btn" class="hero-button" onclick="window.open('https://sandwichkitchens.com/projects', '_self');">
       <span class="label default">View Our Latest Projects</span>
       <span class="label hover">View Our Latest Projects</span>
     </button>

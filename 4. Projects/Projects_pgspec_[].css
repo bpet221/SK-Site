@@ -119,11 +119,11 @@
 
 /* Desktop-specific custom properties */
 :root {
-    --desktop-btn-padding: 6px 10px 6px 10px;
-    --desktop-btn-hover-padding: 4px 8px 4px 8px;
+    --desktop-btn-padding: 9px 15px 9px 15px;
+    --desktop-btn-hover-padding: 7px 10px 7px 10px;
  /* Now used in hover state */
     --desktop-btn-border-radius: 99px;
-    --desktop-btn-font-size: 12px;
+    --desktop-btn-font-size: 14px;
     --desktop-btn-text-color: #1B1B18;
 }
 
@@ -206,13 +206,13 @@
 
 /* Mobile-specific custom properties */
 :root {
-    --mobile-btn-padding: 6px 10px 6px 10px;
-    --mobile-btn-hover-padding: 4px 8px 4px 8px;
+    --mobile-btn-padding: 8px 11px 8px 11px;
+    --mobile-btn-hover-padding: 6px 9px 6px 9px;
  /* Updated to match desktop’s shrinkage ratio */
     --mobile-btn-border-radius: 99px;
-    --mobile-btn-font-size: 9px;
+    --mobile-btn-font-size: 11px;
     --mobile-btn-text-color: #1B1B18;
-    --mobile-btn-border-color: #EDE7DB;
+    --mobile-btn-border-color: #1B1B18;
     --mobile-btn-bg-color: #EDE7DB;
 }
 

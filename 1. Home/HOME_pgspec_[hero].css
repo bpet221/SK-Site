@@ -5,36 +5,35 @@
  ***************************************/
  :root {
   /* Colors & Fonts */
-  --primary-color: #1B1B18;            /* Primary text & border color */
-  --secondary-color: #212B33;          /* Secondary text color */
-  --font-primary: 'Teodor', sans-serif;/* Primary font */
-  --font-secondary: 'Open Sans', sans-serif; /* Secondary font */
+  --primary-color: #1B1B18;
+  --secondary-color: #212B33;
+  --font-primary: 'Teodor', sans-serif;
+  --font-secondary: 'Open Sans', sans-serif;
 
-  /* Global Transitions */
-  --transition-speed: 0.8s ease-out;    /* Global transition speed */
+  /* Global Transitions (faster now) */
+  --transition-speed: 0.15s ease-out;
 
   /* HERO CONTAINER 1 (Background Image) */
-  --hero-height-desktop: 100vh;         /* Full viewport height */
-  --hero-height-sticky: 60vh;           /* Height for sticky hero image */
-  --hero-image-top: 115px;              /* Top offset for fixed hero image */
+  --hero-height-desktop: 100vh;
+  --hero-height-sticky: 60vh;
+  --hero-image-top: 115px;
 
   /* HERO CONTAINER 2 (Text & Button) */
-  --text2-top-offset: calc(var(--hero-image-top) + var(--hero-height-sticky) + 20px); /* Container top offset */
-  --abs-hero-offset: 45px;              /* Absolute hero image offset */
-  --abs-container-offset: 86px;         /* Absolute container offset */
+  --text2-top-offset: calc(var(--hero-image-top) + var(--hero-height-sticky) + 20px);
+  --abs-hero-offset: 45px;
+  --abs-container-offset: 86px;
 
   /* Animation Timing (scroll positions in pixels) */
-  /* Note: Both Hero Text animations are delayed an extra 200px */
-  --text21-start: 800;                /* Scroll start for Hero Text 2.1 animation (was 600) */
-  --text21-end: 1600;                 /* Scroll end for Hero Text 2.1 animation (was 1400) */
-  --text22-start: 2400;               /* Scroll start for Hero Text 2.2 animation (was 1700) */
-  --text22-end: 3200;                 /* Scroll end for Hero Text 2.2 animation (was 2500) */
-  --button-start: 4000;               /* Scroll start for Hero Button animation */
-  --button-end: 4800;                 /* Scroll end for Hero Button animation */
-  --push-range: 20;                   /* Maximum extra push (px) to fade out text */
+  --text21-start: 800;
+  --text21-end: 1600;
+  --text22-start: 2400;
+  --text22-end: 3200;
+  --button-start: 4000;
+  --button-end: 4800;
+  --push-range: 20;
 
   /* Layout & Starting Positions */
-  --hero-text-start-top: 1000px;       /* Starting top for Hero Text 2 elements */
+  --hero-text-start-top: 1000px;
 }
 /***************************************
  * END CONFIGURATION SECTION (CSS)
@@ -54,23 +53,19 @@
   font-family: var(--font-primary);
   color: var(--secondary-color);
   z-index: 20;
-  transition: top 0.3s ease-out;
+  transition: top var(--transition-speed);
   will-change: top;
+  font-size: 2rem;
+}
 
-  font-size: 2rem; /* Base size (~20% increase from original 1.8rem) */
-
-  @media (max-width: 767px) { /* Mobile: +10% from base */
-    font-size: 2.2rem;
-  }
-  
-  @media (min-width: 768px) and (max-width: 1023px) { /* Tablet: +30% from base */
-    font-size: 2.6rem;
-  }
-  
-  @media (min-width: 1024px) { /* Desktop: +20% from base */
-    font-size: 2.4rem;
-  }
-
+@media (max-width: 767px) {
+  .hero-text-1 { font-size: 2.2rem; }
+}
+@media (min-width: 768px) and (max-width: 1023px) {
+  .hero-text-1 { font-size: 2.6rem; }
+}
+@media (min-width: 1024px) {
+  .hero-text-1 { font-size: 3rem; }
 }
 
 /* --- HERO IMAGE SETTINGS (Container 1) --- */
@@ -97,7 +92,6 @@
   left: 30px;
 }
 
-/* DESKTOP: CENTER THE HERO IMAGE */
 @media (min-width: 801px) {
   .hero-image.fixed-hero,
   .hero-image.absolute-hero {
@@ -108,7 +102,6 @@
   }
 }
 
-/* SMALL SCREENS: ALIGN LEFT (No transform) */
 @media (max-width: 800px) {
   .hero-image.fixed-hero,
   .hero-image.absolute-hero {
@@ -126,49 +119,34 @@
   font-family: var(--font-primary);
   z-index: 20;
   opacity: 1;
-  /* Force vertical stacking & right alignment on all screens */
   display: flex;
   flex-direction: column;
   align-items: flex-end;
   gap: 1rem;
+  transition: top var(--transition-speed);
+  font-size: 2rem;
+}
 
-  font-size: 2rem; /* Base size (~20% increase from original 1.8rem) */
-
-  @media (max-width: 767px) { /* Mobile: +10% from base */
-    font-size: 2.2rem;
-  }
-  
-  @media (min-width: 768px) and (max-width: 1023px) { /* Tablet: +30% from base */
-    font-size: 2.6rem;
-  }
-  
-  @media (min-width: 1024px) { /* Desktop: +20% from base */
-    font-size: 2.4rem;
-  }
-
+@media (max-width: 767px) {
+  .hero-container-2 { font-size: 2.2rem; }
+}
+@media (min-width: 768px) and (max-width: 1023px) {
+  .hero-container-2 { font-size: 2.6rem; }
+}
+@media (min-width: 1024px) {
+  .hero-container-2 { font-size: 3rem; }
 }
 
 @media (min-width: 801px) {
-  .hero-container-2 {
-    top: calc(var(--text2-top-offset) + 40px);
-  }
+  .hero-container-2 { top: calc(var(--text2-top-offset) + 40px); }
 }
-
 @media (max-width: 800px) {
-  .hero-container-2 {
-    top: calc(var(--text2-top-offset) + 40px);
-  }
+  .hero-container-2 { top: calc(var(--text2-top-offset) + 40px); }
 }
 
-/* Fixed/Absolute mode helper */
-.hero-container-2.fixed {
-  position: fixed;
-}
-.hero-container-2.absolute {
-  position: absolute;
-}
+.hero-container-2.fixed { position: fixed; }
+.hero-container-2.absolute { position: absolute; }
 
-/* Absolute mode adjustments on medium screens */
 @media (min-width: 481px) and (max-width: 767px) {
   .hero-container-2.absolute {
     left: -10px !important;
@@ -177,7 +155,6 @@
 }
 
 /* --- HERO TEXT 2 SETTINGS --- */
-/* Wrapper to group texts (vertical stacking on all screens) */
 .hero-text-2-wrapper {
   display: flex;
   flex-direction: column;
@@ -185,14 +162,13 @@
   gap: 0.5rem;
 }
 
-/* Hero Text 2.1 & 2.2 initial settings */
 .hero-container-2 .hero-text-2-1,
 .hero-container-2 .hero-text-2-2 {
   display: inline-block;
-  transition: top 0.3s ease-out, opacity 0.3s ease-out;
+  transition: top var(--transition-speed), opacity var(--transition-speed);
   will-change: top, opacity;
   position: relative;
-  top: var(--hero-text-start-top); /* Starts at 1000px as per config */
+  top: var(--hero-text-start-top);
   margin-top: -30px;
 }
 
@@ -213,24 +189,20 @@
   font-weight: 200;
   text-transform: uppercase;
   text-decoration: none;
-  transition: transform 0.3s ease-out;
+  transition: transform var(--transition-speed);
   will-change: transform;
   white-space: nowrap;
   margin-top: -45px;
 }
 
-.hero-button:hover {
-  padding: 7px 15px;
-}
+.hero-button:hover { padding: 7px 15px; }
 
 .hero-button .label {
   display: inline-block;
-  transition: transform 0.3s ease, opacity 0.3s ease;
+  transition: transform var(--transition-speed), opacity var(--transition-speed);
 }
 
-.hero-button .label.default {
-  position: relative;
-}
+.hero-button .label.default { position: relative; }
 
 .hero-button .label.hover {
   position: absolute;
@@ -261,7 +233,7 @@
   max-width: 40px;
   width: 100%;
   z-index: 30;
-  transition: transform 0.3s ease, max-width 0.3s ease, opacity 0.3s ease;
+  transition: transform 0.15s ease, max-width 0.15s ease, opacity 0.15s ease;
   transform-origin: top center;
 }
 
@@ -284,7 +256,6 @@
   height: 20vh;
 }
 
-/* MEDIA QUERY: Adjustments for Absolute Mode on Medium Screens */
 @media (min-width: 481px) and (max-width: 767px) {
   .hero-image.absolute-hero {
     left: 20px;

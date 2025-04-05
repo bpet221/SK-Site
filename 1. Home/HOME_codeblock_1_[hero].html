@@ -10,17 +10,14 @@
  * JS CONFIGURATION SECTION - EDITABLE SETTINGS
  ***************************************/
  const config = {
-  // Animation Timing Settings (scroll positions in pixels)
-  text21Start: 800,    // Scroll start for Hero Text 2.1 animation (matches CSS)
-  text21End: 1600,     // Scroll end for Hero Text 2.1 animation (matches CSS)
-  text22Start: 2400,   // Scroll start for Hero Text 2.2 animation (updated to 2400)
-  text22End: 3200,     // Scroll end for Hero Text 2.2 animation (updated to 3200)
-  buttonStart: 4000,   // Scroll start for Hero Button animation (updated to 4000)
-  buttonEnd: 4800,     // Scroll end for Hero Button animation (updated to 4800)
-  pushRange: 20,       // Maximum extra push (px) to fade out text when pushed
-  
-  // Layout Settings
-  heroTextStartTop: 1000 // Starting top for Hero Text 2 elements (in px)
+  text21Start: 800,
+  text21End: 1600,
+  text22Start: 2400,
+  text22End: 3200,
+  buttonStart: 4000,
+  buttonEnd: 4800,
+  pushRange: 20,
+  heroTextStartTop: 1000
 };
 /***************************************
  * End of JS CONFIGURATION SECTION
@@ -28,12 +25,13 @@
     
     let lastScrollPos = 0;
     let isUnsticky = false, storedFixedBottom = null;
-    const manualVerticalOffset = -130; // Editable if needed
+    const manualVerticalOffset = -130;
     const downHysteresis = 0, upHysteresis = 0;
     
     function updateClipPath() {
       const scrollPos = window.scrollY;
-      const factor = 0.3125;
+      // Double the original factor for twice-as-fast behavior.
+      const factor = 0.625;
       const effectiveScroll = scrollPos * factor;
       const vh = window.innerHeight;
       const maxCrop = vh * 0.24;
@@ -57,75 +55,69 @@
         }
       }
       
-      // Animate hero-text-1 (existing behavior)
+      // Animate hero-text-1 with doubled multipliers.
       const initialScroll = 190;
       const initialMaxOffset = 1;
-      const additionalDownMultiplier = 0.5;
-      const additionalUpMultiplier = 0.2;
+      const additionalDownMultiplier = 2;
+      const additionalUpMultiplier = 2;
       
       let textOffset = 0;
       if (scrollPos <= initialScroll) {
           textOffset = (scrollPos / initialScroll) * initialMaxOffset;
       } else {
-          textOffset = scrollPos >= lastScrollPos ?
-            initialMaxOffset + (scrollPos - initialScroll) * additionalDownMultiplier :
-            initialMaxOffset + (scrollPos - initialScroll) * additionalUpMultiplier;
+          textOffset = initialMaxOffset + (scrollPos - initialScroll) * (scrollPos >= lastScrollPos ? additionalDownMultiplier : additionalUpMultiplier);
       }
       lastScrollPos = scrollPos;
       document.querySelector(".hero-text-1").style.top = `calc(11vh - ${textOffset}px)`;
       
-      // Animate Hero Text 2.1: from heroTextStartTop to 0 as scroll goes from text21Start to text21End.
+      // Animate Hero Text 2.1 with progress reaching 1 in half the scroll range.
       let text21Progress = 0;
       if (scrollPos < config.text21Start) {
           text21Progress = 0;
       } else if (scrollPos > config.text21End) {
           text21Progress = 1;
       } else {
-          text21Progress = (scrollPos - config.text21Start) / (config.text21End - config.text21Start);
+          text21Progress = Math.min((scrollPos - config.text21Start) * 2 / (config.text21End - config.text21Start), 1);
       }
       let baseText21Offset = parseInt(config.heroTextStartTop) * (1 - text21Progress);
       if (baseText21Offset < 0) baseText21Offset = 0;
       
-      // As Hero Text 2.2 comes in (scroll from text22Start to text22End), push Hero Text 2.1 up and fade it out.
+      // Push Hero Text 2.1 and fade it out as Hero Text 2.2 appears.
       let text22Progress = 0;
       if (scrollPos < config.text22Start) {
           text22Progress = 0;
       } else if (scrollPos > config.text22End) {
           text22Progress = 1;
       } else {
-          text22Progress = (scrollPos - config.text22Start) / (config.text22End - config.text22Start);
+          text22Progress = Math.min((scrollPos - config.text22Start) * 2 / (config.text22End - config.text22Start), 1);
       }
-      const extraPushForText21 = config.pushRange * text22Progress; // extra push (max pushRange px)
+      const extraPushForText21 = config.pushRange * text22Progress;
       const effectiveText21Offset = baseText21Offset - extraPushForText21;
       const text21Opacity = 1 - text22Progress;
       const heroText21Elem = document.querySelector(".hero-text-2-1");
       heroText21Elem.style.top = `${effectiveText21Offset}px`;
       heroText21Elem.style.opacity = text21Opacity;
-      if (text22Progress >= 1) {
-          heroText21Elem.style.display = "none";
-      } else {
-          heroText21Elem.style.display = "block";
-      }
+      heroText21Elem.style.display = text22Progress >= 1 ? "none" : "block";
       
-      // Animate Hero Text 2.2: from heroTextStartTop to 0 as scroll goes from text22Start to text22End.
+      // Animate Hero Text 2.2 with doubled progress.
       let text22ProgressForText = 0;
       if (scrollPos < config.text22Start) {
           text22ProgressForText = 0;
       } else if (scrollPos > config.text22End) {
           text22ProgressForText = 1;
       } else {
-          text22ProgressForText = (scrollPos - config.text22Start) / (config.text22End - config.text22Start);
+          text22ProgressForText = Math.min((scrollPos - config.text22Start) * 2 / (config.text22End - config.text22Start), 1);
       }
       const baseText22Offset = parseInt(config.heroTextStartTop) * (1 - text22ProgressForText);
       
-      // As Hero Button comes in (scroll from buttonStart to buttonEnd), push Hero Text 2.2 up and fade it out.
+      // Animate Hero Button with doubled progress.
       let buttonProgress = 0;
       if (scrollPos < config.buttonStart) {
           buttonProgress = 0;
       } else if (scrollPos > config.buttonEnd) {
           buttonProgress = 1;
       } else {
-          buttonProgress = (scrollPos - config.buttonStart) / (config.buttonEnd - config.buttonStart);
+          buttonProgress = Math.min((scrollPos - config.buttonStart) * 2 / (config.buttonEnd - config.buttonStart), 1);
       }
       const extraPushForText22 = config.pushRange * buttonProgress;
       const effectiveText22Offset = baseText22Offset - extraPushForText22;
@@ -133,13 +125,9 @@
       const heroText22Elem = document.querySelector(".hero-text-2-2");
       heroText22Elem.style.top = `${effectiveText22Offset}px`;
       heroText22Elem.style.opacity = text22Opacity;
-      if (buttonProgress >= 1) {
-          heroText22Elem.style.display = "none";
-      } else {
-          heroText22Elem.style.display = "block";
-      }
+      heroText22Elem.style.display = buttonProgress >= 1 ? "none" : "block";
       
-      // Animate hero-button: from a 1000px offset to 0px and scale from 0.5 to 1 as scroll goes from buttonStart to buttonEnd.
+      // Animate hero-button.
       const buttonOffset = 1000 * (1 - buttonProgress);
       const buttonScale = 0.5 + 0.5 * buttonProgress;
       document.querySelector(".hero-button").style.transform = `translateY(${buttonOffset}px) scale(${buttonScale})`;
@@ -172,7 +160,7 @@
           heroImage.classList.add("absolute-hero");
           
           const absContainerOffset = parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--abs-container-offset'));
-          const extraOffset = window.innerWidth > 800 ? 31 : 31;
+          const extraOffset = 31;
           const newTextAbsTop = absTop + heroImage.offsetHeight - absContainerOffset + extraOffset;
           heroContainer.style.position = "absolute";
           heroContainer.style.top = newTextAbsTop + "px";
@@ -183,11 +171,7 @@
           heroImage.classList.remove("absolute-hero");
           heroImage.classList.add("fixed-hero");
           heroImage.style.top = "";
-          if (window.innerWidth > 800) {
-              heroContainer.style.top = "calc(var(--text2-top-offset) + 40px)";
-          } else {
-              heroContainer.style.top = "calc(var(--text2-top-offset) + 40px)";
-          }
+          heroContainer.style.top = "calc(var(--text2-top-offset) + 40px)";
           heroContainer.style.position = "fixed";
           heroContainer.classList.remove("absolute");
           heroContainer.classList.add("fixed");
@@ -198,7 +182,7 @@
         if (isUnsticky) {
           const heroRect = heroImage.getBoundingClientRect();
           const absContainerOffset = parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--abs-container-offset'));
-          const extraOffset = window.innerWidth > 800 ? 31 : 31;
+          const extraOffset = 31;
           const newTextAbsTop = window.scrollY + heroRect.bottom + 20 - absContainerOffset + 10 + extraOffset;
           heroContainer.style.top = newTextAbsTop + "px";
         }
@@ -207,41 +191,27 @@
       // Fade out .top-bar when the hero image is no longer visible.
       const topBar = document.querySelector(".top-bar");
       const heroImageRect = heroImage.getBoundingClientRect();
-      if (heroImageRect.bottom <= 0) {
-          topBar.style.opacity = "0";
-      } else {
-          topBar.style.opacity = "1";
-      }
+      topBar.style.opacity = heroImageRect.bottom <= 0 ? "0" : "1";
     }
     
     document.addEventListener("DOMContentLoaded", () => {
       document.querySelector(".hero-text-1").style.top = "14vh";
-      // Let the scroll-based animation control positions for hero-text-2-1 and hero-text-2-2.
+      setTimeout(updateClipPath, 50);
       
-      // Trigger initial update to set positions.
-      setTimeout(() => {
-        updateClipPath();
-      }, 50);
-      
-      // Auto hover effect on the hero down arrow after 4 seconds.
+      // Auto hover effect on hero down arrow.
       setTimeout(() => {
         const downArrow = document.querySelector(".hero-down-arrow");
         downArrow.classList.add("hover-animate");
-        setTimeout(() => {
-          downArrow.classList.remove("hover-animate");
-        }, 1000);
+        setTimeout(() => downArrow.classList.remove("hover-animate"), 1000);
       }, 4000);
       
       // Click event for hero down arrow.
       const downArrow = document.querySelector(".hero-down-arrow");
       downArrow.addEventListener("click", () => {
         const vh = window.innerHeight;
-        let scrollTarget;
-        if (window.innerWidth < 801) {
-          scrollTarget = ((vh * 0.24) + 200) / 0.3125;
-        } else {
-          scrollTarget = vh * 0.768;
-        }
+        let scrollTarget = window.innerWidth < 801 ?
+          ((vh * 0.24) + 200) / 0.625 :
+          vh * 0.768;
         window.scrollTo({ top: scrollTarget, behavior: 'smooth' });
       });
     });
@@ -273,7 +243,7 @@
     <img class="hero-image fixed-hero" src="https://storage.googleapis.com/msgsndr/FahnfAK4Y2D0yi846rOF/media/67e88d113792944820e8487c.jpeg" alt="Hero Image" />
   </div>
   
-  <!-- TRIGGER ELEMENT (adjusted margin-top) -->
+  <!-- TRIGGER ELEMENT -->
   <div id="heading-VBJYPPhLuK" style="margin-top:6000px; padding:0; background:#767676; font-size:2rem;"></div>
   
   <!-- HERO CONTAINER 2 (TEXT 2.1 + TEXT 2.2 + BUTTON) -->

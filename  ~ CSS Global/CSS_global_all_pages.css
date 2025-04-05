@@ -1,6 +1,6 @@
-/* #️⃣ CSS GLOBAL: 4-3-25 12:48 AM */
+/* #️⃣ CSS GLOBAL: 4-4-25 4:23 PM */
 
-/* 🟢 EXPANDS BACKGROUND COVERAGE (safari dynamic island) */
+/* 🟢 EXPANDS BACKGRåOUND COVERAGE (safari dynamic island) */
 
 html {
     background-color: #EDE7DB;
@@ -132,8 +132,12 @@ html {
     color: #1B1B18 !important;
     padding: 8px 16px;
     overflow: hidden;
+    white-space: nowrap;        /* Prevent text wrapping */
+    text-overflow: ellipsis;    /* Show ellipsis if text overflows */
+    flex-shrink: 1;             /* Allow button to shrink */
+    max-width: 25vw;            /* Limit button max width to 25% of viewport width */
     font-family: 'Open Sans', sans-serif !important;
-    font-size: 12px !important;
+    font-size: clamp(9px, 1.5vw, 12px) !important;  /* Shrink text proportionately */
     font-weight: 400 !important;
     text-transform: uppercase !important;
     text-decoration: none !important;
@@ -152,8 +156,7 @@ html {
     color: #1B1B18 !important;
     font-weight: 400 !important;
     outline: none !important;
-    padding: 8px 16px !important;
- /* Match default, not hover */
+    padding: 8px 16px !important; /* Match default, not hover */
 }
 
 .btn .dot {
@@ -201,10 +204,15 @@ html {
 
 @media (max-width: 767.9px) {
     .btn {
-        padding: 8px 16px;
- /* Ensure consistent padding on mobile */
+        padding: 8px 16px; /* Ensure consistent padding on mobile */
     }
 }
+
+/* Ensure the logo does not shrink below 100px */
+#image-9sP-pE5Wox {
+    min-width: 100px;
+}
+
 
 /* 🛑 MENU BAR
 --------------------------------------------------*/
@@ -481,7 +489,7 @@ html {
     }
     
     #custom-code-tablet-menu.tight .nav-menu-btn {
-        font-size: clamp(8px, 1vw, 12px); /* Shrink font size */
+        font-size: 12px;
         margin: 0 10px;
     }
 }
@@ -516,7 +524,7 @@ html {
         height: auto !important;
         min-height: 20px !important;
         min-width: 0 !important; /* Allow shrinking */
-        font-size: clamp(8px, 1.5vw, 12px) !important; /* Shrink font if needed */
+        font-size: 12px !important;
         padding: 5px 10px !important; /* Adjust padding */
         margin: 0 10px !important; /* Tighten spacing */
         flex-shrink: 1 !important; /* Allow buttons to shrink */
@@ -608,6 +616,27 @@ html {
 
 #custom-code-tablet-menu .submenu-btn:last-child {
     margin-bottom: 0 !important;
+}
+
+/* Toggle visibility of alternate elements based on page width */
+/* For page width >620px */
+@media (min-width: 621px) {
+    #custom-code-xc1czzITiD {
+        display: none !important;
+    }
+    #custom-code-PatfC-EbxU {
+        display: block !important;
+    }
+}
+
+/* For page width <=620px */
+@media (max-width: 620px) {
+    #custom-code-xc1czzITiD {
+        display: block !important;
+    }
+    #custom-code-PatfC-EbxU {
+        display: none !important;
+    }
 }
 
 /* 🛑 NAV MENU CSS (TABLET) */

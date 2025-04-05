@@ -1,0 +1,91 @@
+<div id="custom-code-tablet-menu" class="custom-code-container">
+  <div class="nav-menu">
+    <!-- Main button: Phone Number -->
+    <a href="tel:7742683099" class="nav-menu-btn">
+      <span class="label default">774-268-3099</span>
+      <span class="label hover">774-268-3099</span>
+    </a>
+    <!-- Main button: MENU with submenu -->
+    <div class="nav-menu-btn" id="menu-btn">
+      <span class="label default">MENU</span>
+      <span class="label hover">MENU</span>
+      <div id="menu-submenu">
+        <a href="/" class="submenu-btn">
+          <span class="label default">HOME</span>
+          <span class="label hover">HOME</span>
+        </a>
+        <a href="https://sandwichkitchens.com/about" class="submenu-btn">
+          <span class="label default">ABOUT</span>
+          <span class="label hover">ABOUT</span>
+        </a>
+        <a href="https://sandwichkitchens.com/projects" class="submenu-btn">
+          <span class="label default">PROJECTS</span>
+          <span class="label hover">PROJECTS</span>
+        </a>
+        <a href="https://sandwichkitchens.com/cabinets" class="submenu-btn">
+          <span class="label default">CABINETS</span>
+          <span class="label hover">CABINETS</span>
+        </a>
+        <a href="https://sandwichkitchens.com/countertops" class="submenu-btn">
+          <span class="label default">COUNTERTOPS</span>
+          <span class="label hover">COUNTERTOPS</span>
+        </a>
+        <a href="https://sandwichkitchens.com/knobs-pulls" class="submenu-btn">
+          <span class="label default">KNOBS + PULLS</span>
+          <span class="label hover">KNOBS + PULLS</span>
+        </a>
+        <a href="https://sandwichkitchens.com/contact" class="submenu-btn">
+          <span class="label default">CONTACT</span>
+          <span class="label hover">CONTACT</span>
+        </a>
+        <a href="https://sandwichkitchens.com/faq" class="submenu-btn">
+          <span class="label default">FAQ</span>
+          <span class="label hover">FAQ</span>
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+    const menuBtn = document.getElementById("menu-btn");
+    const submenu = document.getElementById("menu-submenu");
+    const container = document.getElementById("custom-code-tablet-menu");
+
+    // Attach click events to submenu items for navigation
+    submenu.querySelectorAll(".submenu-btn").forEach(btn => {
+        btn.addEventListener("click", function (e) {
+            e.preventDefault();
+            window.location.href = this.href;
+        });
+    });
+
+    function adjustMenu() {
+        const containerWidth = container.offsetWidth;
+        const buttons = container.querySelectorAll(".nav-menu-btn");
+        const totalButtonsWidth = Array.from(buttons).reduce((sum, btn) => sum + btn.offsetWidth, 0);
+        const minSpacing = 5; /* Tighten for <768px */
+        const maxSpacing = 10; /* Match CSS margin */
+        const gapsNeeded = buttons.length - 1;
+
+        const availableSpace = containerWidth - totalButtonsWidth;
+        const gapSize = availableSpace / gapsNeeded;
+
+        if (gapSize < minSpacing) {
+            container.classList.add("tight");
+        } else {
+            container.classList.remove("tight");
+            // Let CSS handle gap; remove inline style
+        }
+
+        // Prevent wrapping (already in CSS, but reinforce)
+        container.style.flexWrap = "nowrap";
+    }
+
+    // Run immediately and on resize/load
+    adjustMenu();
+    window.addEventListener("resize", adjustMenu);
+    window.addEventListener("load", adjustMenu);
+});
+</script>

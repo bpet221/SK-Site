@@ -6,22 +6,22 @@
   <title>SETS Hero Section</title>
   <link rel="stylesheet" href="styles.css" />
   <script>
-/***************************************
- * JS CONFIGURATION SECTION - EDITABLE SETTINGS
- ***************************************/
- const config = {
-  text21Start: 800,
-  text21End: 1600,
-  text22Start: 2400,
-  text22End: 3200,
-  buttonStart: 4000,
-  buttonEnd: 4800,
-  pushRange: 20,
-  heroTextStartTop: 1000
-};
-/***************************************
- * End of JS CONFIGURATION SECTION
- ***************************************/ 
+    /***************************************
+     * JS CONFIGURATION SECTION - EDITABLE SETTINGS
+     ***************************************/
+    const config = {
+      text21Start: 800,
+      text21End: 1600,
+      text22Start: 2400,
+      text22End: 3200,
+      buttonStart: 4000,
+      buttonEnd: 4800,
+      pushRange: 20,
+      heroTextStartTop: 1000
+    };
+    /***************************************
+     * End of JS CONFIGURATION SECTION
+     ***************************************/
     
     let lastScrollPos = 0;
     let isUnsticky = false, storedFixedBottom = null;
@@ -30,7 +30,7 @@
     
     function updateClipPath() {
       const scrollPos = window.scrollY;
-      // Double the original factor for twice-as-fast behavior.
+      // Animate hero-image clip-path & object position:
       const factor = 0.625;
       const effectiveScroll = scrollPos * factor;
       const vh = window.innerHeight;
@@ -55,7 +55,7 @@
         }
       }
       
-      // Animate hero-text-1 with doubled multipliers.
+      // Animate hero-text-1:
       const initialScroll = 190;
       const initialMaxOffset = 1;
       const additionalDownMultiplier = 2;
@@ -63,81 +63,121 @@
       
       let textOffset = 0;
       if (scrollPos <= initialScroll) {
-          textOffset = (scrollPos / initialScroll) * initialMaxOffset;
+        textOffset = (scrollPos / initialScroll) * initialMaxOffset;
       } else {
-          textOffset = initialMaxOffset + (scrollPos - initialScroll) * (scrollPos >= lastScrollPos ? additionalDownMultiplier : additionalUpMultiplier);
+        textOffset = initialMaxOffset + (scrollPos - initialScroll) * (scrollPos >= lastScrollPos ? additionalDownMultiplier : additionalUpMultiplier);
       }
       lastScrollPos = scrollPos;
       document.querySelector(".hero-text-1").style.top = `calc(11vh - ${textOffset}px)`;
       
-      // Animate Hero Text 2.1 with progress reaching 1 in half the scroll range.
-      let text21Progress = 0;
-      if (scrollPos < config.text21Start) {
-          text21Progress = 0;
-      } else if (scrollPos > config.text21End) {
-          text21Progress = 1;
-      } else {
-          text21Progress = Math.min((scrollPos - config.text21Start) * 2 / (config.text21End - config.text21Start), 1);
-      }
-      let baseText21Offset = parseInt(config.heroTextStartTop) * (1 - text21Progress);
-      if (baseText21Offset < 0) baseText21Offset = 0;
-      
-      // Push Hero Text 2.1 and fade it out as Hero Text 2.2 appears.
-      let text22Progress = 0;
-      if (scrollPos < config.text22Start) {
+      // Animate Hero Text 2:
+      if (window.innerWidth > 767) {
+        // ***** For larger screens (>767px), use the current horizontal/vertical logic *****
+        const heroText21Elem = document.querySelector(".hero-text-2-1");
+        // Vertical animation: animate from offscreen (config.heroTextStartTop) to 0
+        let verticalProgress = 0;
+        if (scrollPos < config.text21Start) {
+          verticalProgress = 0;
+        } else if (scrollPos > config.text21End) {
+          verticalProgress = 1;
+        } else {
+          verticalProgress = Math.min((scrollPos - config.text21Start) / (config.text21End - config.text21Start), 1);
+        }
+        let verticalOffset = parseInt(config.heroTextStartTop) * (1 - verticalProgress);
+        if (verticalOffset < 0) verticalOffset = 0;
+        heroText21Elem.style.top = `${verticalOffset}px`;
+        heroText21Elem.style.opacity = verticalProgress;
+        
+        // Determine horizontal start offset based on screen width.
+        let heroText21StartOffset;
+        if (window.innerWidth >= 1024) {
+           heroText21StartOffset = 295;  // for ≥1024px
+        } else { 
+           heroText21StartOffset = 295 - 40;  // for 768-1023px => 255px offset
+        }
+        let sharedProgress = Math.min((scrollPos - config.text22Start) / (config.text22End - config.text22Start), 1);
+        sharedProgress = Math.max(0, sharedProgress); // Clamp
+        heroText21Elem.style.transform = `translateX(${heroText21StartOffset * (1 - sharedProgress)}px)`;
+        
+        // Animate Hero Text 2.2: slide in from right (horizontally)
+        const heroText22Elem = document.querySelector(".hero-text-2-2");
+        let text22Progress = 0;
+        if (scrollPos < config.text22Start) {
           text22Progress = 0;
-      } else if (scrollPos > config.text22End) {
+        } else if (scrollPos > config.text22End) {
           text22Progress = 1;
-      } else {
+        } else {
           text22Progress = Math.min((scrollPos - config.text22Start) * 2 / (config.text22End - config.text22Start), 1);
-      }
-      const extraPushForText21 = config.pushRange * text22Progress;
-      const effectiveText21Offset = baseText21Offset - extraPushForText21;
-      const text21Opacity = 1 - text22Progress;
-      const heroText21Elem = document.querySelector(".hero-text-2-1");
-      heroText21Elem.style.top = `${effectiveText21Offset}px`;
-      heroText21Elem.style.opacity = text21Opacity;
-      heroText21Elem.style.display = text22Progress >= 1 ? "none" : "block";
-      
-      // Animate Hero Text 2.2 with doubled progress.
-      let text22ProgressForText = 0;
-      if (scrollPos < config.text22Start) {
-          text22ProgressForText = 0;
-      } else if (scrollPos > config.text22End) {
-          text22ProgressForText = 1;
+        }
+        heroText22Elem.style.transform = `translateX(${310 * (1 - sharedProgress)}px)`;
+        heroText22Elem.style.top = "0px";
+        heroText22Elem.style.opacity = text22Progress;
+        heroText22Elem.style.display = "inline-block";
       } else {
-          text22ProgressForText = Math.min((scrollPos - config.text22Start) * 2 / (config.text22End - config.text22Start), 1);
+        // ***** For mobile screens (<768px) we use a stacked vertical animation *****
+        const heroText21Elem = document.querySelector(".hero-text-2-1");
+        const heroText22Elem = document.querySelector(".hero-text-2-2");
+        
+        // Animate Text 2.1: Slide from offscreen (using heroTextStartTop) to its final position (0).
+        let text21Progress = 0;
+        if(scrollPos < config.text21Start) {
+          text21Progress = 0;
+        } else if(scrollPos > config.text21End) {
+          text21Progress = 1;
+        } else {
+          text21Progress = (scrollPos - config.text21Start) / (config.text21End - config.text21Start);
+        }
+        let text21Pos = parseInt(config.heroTextStartTop) * (1 - text21Progress);
+        if(text21Pos < 0) text21Pos = 0;
+        heroText21Elem.style.top = `${text21Pos}px`;
+        heroText21Elem.style.opacity = text21Progress; 
+        // Once fully visible, keep it at top=0, opacity=1.
+        if(text21Progress >= 1) {
+          heroText21Elem.style.top = "0px";
+          heroText21Elem.style.opacity = 1;
+        }
+        // Ensure no horizontal transform on mobile.
+        heroText21Elem.style.transform = "translateX(0)";
+        
+        // Animate Text 2.2: It will stack below Text 2.1.
+        // Define a gap (for example 20px) between the two headlines.
+        const gap = 20;
+        let text22Progress = 0;
+        if(scrollPos < config.text22Start) {
+          text22Progress = 0;
+        } else if(scrollPos > config.text22End) {
+          text22Progress = 1;
+        } else {
+          text22Progress = (scrollPos - config.text22Start) / (config.text22End - config.text22Start);
+        }
+        // Use an initial vertical offset so that Text 2.2 starts lower (e.g. gap + 50px) and slides up into position (final value 0).
+        const initialOffsetText22 = gap + 50;
+        let text22Pos = initialOffsetText22 * (1 - text22Progress);
+        heroText22Elem.style.top = `${text22Pos}px`;
+        heroText22Elem.style.opacity = text22Progress;
+        heroText22Elem.style.display = "block";
+        heroText22Elem.style.transform = "translateX(0)";
       }
-      const baseText22Offset = parseInt(config.heroTextStartTop) * (1 - text22ProgressForText);
       
-      // Animate Hero Button with doubled progress.
+      // Animate Hero Button (same for all screens).
       let buttonProgress = 0;
       if (scrollPos < config.buttonStart) {
-          buttonProgress = 0;
+        buttonProgress = 0;
       } else if (scrollPos > config.buttonEnd) {
-          buttonProgress = 1;
+        buttonProgress = 1;
       } else {
-          buttonProgress = Math.min((scrollPos - config.buttonStart) * 2 / (config.buttonEnd - config.buttonStart), 1);
+        buttonProgress = Math.min((scrollPos - config.buttonStart) * 2 / (config.buttonEnd - config.buttonStart), 1);
       }
-      const extraPushForText22 = config.pushRange * buttonProgress;
-      const effectiveText22Offset = baseText22Offset - extraPushForText22;
-      const text22Opacity = 1 - buttonProgress;
-      const heroText22Elem = document.querySelector(".hero-text-2-2");
-      heroText22Elem.style.top = `${effectiveText22Offset}px`;
-      heroText22Elem.style.opacity = text22Opacity;
-      heroText22Elem.style.display = buttonProgress >= 1 ? "none" : "block";
-      
-      // Animate hero-button.
       const buttonOffset = 1000 * (1 - buttonProgress);
       const buttonScale = 0.5 + 0.5 * buttonProgress;
       document.querySelector(".hero-button").style.transform = `translateY(${buttonOffset}px) scale(${buttonScale})`;
       
-      // Fade out hero down arrow when scrolling begins.
+      // Fade out hero down arrow when scrolling.
       const heroDownArrow = document.querySelector(".hero-down-arrow");
       if (scrollPos > 0) {
-          heroDownArrow.classList.add("fade");
+        heroDownArrow.classList.add("fade");
       } else {
-          heroDownArrow.classList.remove("fade");
+        heroDownArrow.classList.remove("fade");
       }
     }
     
@@ -237,7 +277,7 @@
   <!-- HERO DOWN ARROW -->
   <img class="hero-down-arrow" src="https://storage.googleapis.com/msgsndr/FahnfAK4Y2D0yi846rOF/media/67bba9160f0b26304605e14c.png" alt="Down Arrow" />
   
-  <!-- HERO IMAGE CONTAINER (CONTAINER 1) -->
+  <!-- HERO IMAGE CONTAINER (CONTAINER 1) --->
   <div class="hero-container-1">
     <div class="hero-text-1">The Kitchen You’ve Always Wanted.</div>
     <img class="hero-image fixed-hero" src="https://storage.googleapis.com/msgsndr/FahnfAK4Y2D0yi846rOF/media/67e88d113792944820e8487c.jpeg" alt="Hero Image" />
@@ -246,7 +286,7 @@
   <!-- TRIGGER ELEMENT -->
   <div id="heading-VBJYPPhLuK" style="margin-top:6000px; padding:0; background:#767676; font-size:2rem;"></div>
   
-  <!-- HERO CONTAINER 2 (TEXT 2.1 + TEXT 2.2 + BUTTON) -->
+  <!-- HERO CONTAINER 2 (TEXT 2.1 + TEXT 2.2 + BUTTON) --->
   <div class="hero-container-2 fixed">
     <div class="hero-text-2-wrapper">
       <div class="hero-text-2-1">Created not just for you.</div>
@@ -258,7 +298,7 @@
     </button>
   </div>
   
-  <!-- SPACER -->
+  <!-- SPACER --->
   <div class="spacer"></div>
 </body>
 </html>

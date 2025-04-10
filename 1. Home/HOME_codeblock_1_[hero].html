@@ -75,7 +75,7 @@
       if (window.innerWidth > 767) {
         // ***** For larger screens (>767px): horizontal/vertical animation *****
         const heroText21Elem = document.querySelector(".hero-text-2-1");
-        // Vertical animation: animate from offscreen (config.heroTextStartTop) to 0
+        // Vertical animation: from offscreen (config.heroTextStartTop) to 0
         let verticalProgress = 0;
         if (scrollPos < config.text21Start) {
           verticalProgress = 0;
@@ -92,12 +92,12 @@
         // Determine horizontal start offset based on screen width.
         let heroText21StartOffset;
         if (window.innerWidth >= 1024) {
-          heroText21StartOffset = 295;
+          heroText21StartOffset = 295;  // for screens ≥1024px
         } else {
-          heroText21StartOffset = 295 - 40;
+          heroText21StartOffset = 295 - 40;  // for 768-1023px => 255px offset
         }
         let sharedProgress = Math.min((scrollPos - config.text22Start) / (config.text22End - config.text22Start), 1);
-        sharedProgress = Math.max(0, sharedProgress);
+        sharedProgress = Math.max(0, sharedProgress); // Clamp
         heroText21Elem.style.transform = `translateX(${heroText21StartOffset * (1 - sharedProgress)}px)`;
 
         // Animate Hero Text 2.2: slide in from right
@@ -119,7 +119,7 @@
         const heroText21Elem = document.querySelector(".hero-text-2-1");
         const heroText22Elem = document.querySelector(".hero-text-2-2");
 
-        // Animate Text 2.1 from offscreen to final position (0).
+        // Animate Text 2.1 from offscreen to final position (0)
         let text21Progress = 0;
         if (scrollPos < config.text21Start) {
           text21Progress = 0;
@@ -138,8 +138,8 @@
         }
         heroText21Elem.style.transform = "translateX(0)";
 
-        // Animate Text 2.2: stack below Text 2.1 with a 20px gap.
-        const gap = 20;
+        // Animate Text 2.2: it stacks below Text 2.1 with a 20px gap
+        const gap = 0;
         let text22Progress = 0;
         if (scrollPos < config.text22Start) {
           text22Progress = 0;
@@ -148,7 +148,7 @@
         } else {
           text22Progress = (scrollPos - config.text22Start) / (config.text22End - config.text22Start);
         }
-        const initialOffsetText22 = gap + 50;
+        const initialOffsetText22 = gap + 45; // starting offset for animation
         let text22Pos = initialOffsetText22 * (1 - text22Progress);
         heroText22Elem.style.top = `${text22Pos + gap}px`;
         heroText22Elem.style.opacity = text22Progress;
@@ -170,11 +170,11 @@
       document.querySelector(".hero-button").style.transform = `translateY(${buttonOffset}px) scale(${buttonScale})`;
 
       if (window.innerWidth < 768) {
-        const buttonSpacingAbove = 24;
+        const buttonSpacingAbove = 10;
         document.querySelector(".hero-button").style.marginTop = `${buttonSpacingAbove}px`;
       }
 
-      // Fade out hero down arrow.
+      // Fade out hero down arrow during scroll.
       const heroDownArrow = document.querySelector(".hero-down-arrow");
       if (scrollPos > 0) {
         heroDownArrow.classList.add("fade");
@@ -193,6 +193,7 @@
         const heroRect = heroImage.getBoundingClientRect();
         const triggerRect = triggerEl.getBoundingClientRect();
 
+
         if (!isUnsticky && triggerRect.top <= heroRect.bottom - downHysteresis) {
           storedFixedBottom = heroRect.bottom;
           const absTop = window.scrollY + heroRect.top + manualVerticalOffset +
@@ -200,35 +201,51 @@
           heroImage.style.top = absTop + "px";
           heroImage.classList.remove("fixed-hero");
           heroImage.classList.add("absolute-hero");
-          // Absolute mode: remove extra padding by CSS (ensured by .absolute-hero rule)
 
-          const absContainerOffset = parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--abs-container-offset'));
+          // ❌ Stop transition temporarily
+          heroContainer.style.transition = 'none';
 
-          // Set gap to 30px below the image (no extraOffset)
+          // Position switch
           const newTextAbsTop = absTop + heroImage.offsetHeight + 30;
           heroContainer.style.position = "absolute";
           heroContainer.style.top = newTextAbsTop + "px";
-
           heroContainer.classList.remove("fixed");
           heroContainer.classList.add("absolute");
           isUnsticky = true;
-        } else if (isUnsticky && triggerRect.top > storedFixedBottom + upHysteresis) {
+
+          // ✅ Re-enable it after 1 frame
+          requestAnimationFrame(() => {
+            heroContainer.style.transition = '';
+          });
+        }
+
+        else if (isUnsticky && triggerRect.top > storedFixedBottom + upHysteresis) {
           heroImage.classList.remove("absolute-hero");
           heroImage.classList.add("fixed-hero");
           heroImage.style.top = "";
-          // When switching back to fixed, use CSS variable which already yields a 30px gap.
+
+          // ❌ Disable transition to prevent pop-in animation
+          heroContainer.style.transition = 'none';
+
+          // Switch back to fixed
           heroContainer.style.top = "var(--text2-top-offset)";
           heroContainer.style.position = "fixed";
           heroContainer.classList.remove("absolute");
           heroContainer.classList.add("fixed");
           isUnsticky = false;
           storedFixedBottom = null;
+
+          // ✅ Re-enable transition
+          requestAnimationFrame(() => {
+            heroContainer.style.transition = '';
+          });
         }
 
         if (isUnsticky) {
           const heroRect = heroImage.getBoundingClientRect();
-          const newTextAbsTop = window.scrollY + heroRect.bottom + 30;
-          heroContainer.style.top = `${newTextAbsTop}px`;
+          const absContainerOffset = parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--abs-container-offset'));
+          const newTextAbsTop = window.scrollY + heroRect.bottom + 20 - absContainerOffset + 10;
+          heroContainer.style.top = newTextAbsTop + "px";
         }
       }
 

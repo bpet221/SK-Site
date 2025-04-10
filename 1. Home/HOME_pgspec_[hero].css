@@ -16,7 +16,7 @@
     --hero-height-sticky: 60vh;
     --hero-image-top: 115px;
   /* HERO CONTAINER 2 (Text & Button) */
-    /* Gap is now 30px – this variable is used for fixed mode positioning */
+    /* Now a 30px gap is built in below the hero image */
     --text2-top-offset: calc(var(--hero-image-top) + var(--hero-height-sticky) + 30px);
     --abs-hero-offset: 45px;
     --abs-container-offset: 86px;
@@ -40,7 +40,7 @@
     position: static;
     overflow: hidden;
     height: var(--hero-height-desktop);
-    /* Remove extra padding below container 1 – spacing will be managed via the hero image */
+    /* Removed any extra bottom spacing – spacing between container 1 and container 2 will be controlled by the image */
     margin-bottom: 0;
 }
 
@@ -84,25 +84,23 @@
     z-index: 10;
     transition: clip-path 0.03s linear;
     box-sizing: border-box;
-    /* Ensure no extra bottom spacing from margins/padding added by defaults */
+    /* Ensure no extra bottom spacing */
     margin-bottom: 0 !important;
     padding-bottom: 0 !important;
 }
 
-/* In fixed mode, add 30px padding-bottom to the hero image */
 .hero-image.fixed-hero {
     position: fixed;
     top: var(--hero-image-top);
     left: 30px;
+    /* Add 30px padding-bottom to guarantee a fixed 30px gap below the image */
     padding-bottom: 30px;
 }
 
-/* In absolute mode, force 0px padding-bottom */
 .hero-image.absolute-hero {
     position: absolute;
     top: var(--hero-image-top);
     left: 30px;
-    padding-bottom: 0 !important;
 }
 
 @media (min-width: 801px) {
@@ -126,6 +124,7 @@
 /* --- HERO CONTAINER 2 SETTINGS (Text & Button) --- */
 .hero-container-2 {
     position: fixed;
+    /* Use the CSS variable directly for a 30px gap */
     top: var(--text2-top-offset);
     left: 0 !important;
     right: 30px !important;
@@ -174,7 +173,7 @@
     .hero-container-2 {
         top: var(--text2-top-offset);
     }
-    /* Force headings to have 0 top margin/padding */
+    /* Ensure headings always have 0 top margin/padding */
     .hero-container-2 .hero-text-2-1,
     .hero-container-2 .hero-text-2-2 {
         margin-top: 0 !important;

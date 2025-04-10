@@ -16,7 +16,8 @@
     --hero-height-sticky: 60vh;
     --hero-image-top: 115px;
   /* HERO CONTAINER 2 (Text & Button) */
-    --text2-top-offset: calc(var(--hero-image-top) + var(--hero-height-sticky) + 20px);
+    /* Gap is now 30px – this variable is used for fixed mode positioning */
+    --text2-top-offset: calc(var(--hero-image-top) + var(--hero-height-sticky) + 30px);
     --abs-hero-offset: 45px;
     --abs-container-offset: 86px;
   /* Animation Timing (scroll positions in pixels) */
@@ -39,6 +40,8 @@
     position: static;
     overflow: hidden;
     height: var(--hero-height-desktop);
+    /* Remove extra padding below container 1 – spacing will be managed via the hero image */
+    margin-bottom: 0;
 }
 
 /* --- HERO TEXT 1 SETTINGS --- */
@@ -81,23 +84,30 @@
     z-index: 10;
     transition: clip-path 0.03s linear;
     box-sizing: border-box;
+    /* Ensure no extra bottom spacing from margins/padding added by defaults */
+    margin-bottom: 0 !important;
+    padding-bottom: 0 !important;
 }
 
+/* In fixed mode, add 30px padding-bottom to the hero image */
 .hero-image.fixed-hero {
     position: fixed;
     top: var(--hero-image-top);
     left: 30px;
+    padding-bottom: 30px;
 }
 
+/* In absolute mode, force 0px padding-bottom */
 .hero-image.absolute-hero {
     position: absolute;
     top: var(--hero-image-top);
     left: 30px;
+    padding-bottom: 0 !important;
 }
 
 @media (min-width: 801px) {
     .hero-image.fixed-hero,
-  .hero-image.absolute-hero {
+    .hero-image.absolute-hero {
         left: 50%;
         transform: translateX(-50%);
         width: calc(100% - 60px);
@@ -107,7 +117,7 @@
 
 @media (max-width: 800px) {
     .hero-image.fixed-hero,
-  .hero-image.absolute-hero {
+    .hero-image.absolute-hero {
         left: 30px;
         transform: none;
     }
@@ -116,7 +126,7 @@
 /* --- HERO CONTAINER 2 SETTINGS (Text & Button) --- */
 .hero-container-2 {
     position: fixed;
-    top: calc(var(--text2-top-offset) + 10px);
+    top: var(--text2-top-offset);
     left: 0 !important;
     right: 30px !important;
     font-family: var(--font-primary);
@@ -150,27 +160,30 @@
 
 @media (min-width: 801px) {
     .hero-container-2 {
-        top: calc(var(--text2-top-offset) + 8px);
+        top: var(--text2-top-offset);
     }
 }
 
 @media (max-width: 800px) {
     .hero-container-2 {
-        top: calc(var(--text2-top-offset) + 8px);
+        top: var(--text2-top-offset);
     }
 }
 
 @media (max-width: 767px) {
-  .hero-container-2 {
-    top: calc(var(--text2-top-offset) + 22px); /* <768px headline 2.1 2.2 padding top */
-  }
-  .hero-container-2 .hero-text-2-2 {
-    margin-top: -5px !important; /* Adjust this value to increase/decrease spacing above headline 2.2 */
-  }
+    .hero-container-2 {
+        top: var(--text2-top-offset);
+    }
+    /* Force headings to have 0 top margin/padding */
+    .hero-container-2 .hero-text-2-1,
+    .hero-container-2 .hero-text-2-2 {
+        margin-top: 0 !important;
+        padding-top: 0 !important;
+    }
 
-  .hero-button {
-    margin-top: 0px !important; /* Adjust this to control spacing above the button */
-  }
+    .hero-button {
+        margin-top: 0 !important;
+    }
 }
 
 .hero-container-2.fixed {
@@ -313,8 +326,7 @@
     }
 
     .hero-container-2 .hero-text-2-1,
-  .hero-container-2 .hero-text-2-2 {
-    /* Allow JS to control top positioning */
+    .hero-container-2 .hero-text-2-2 {
         top: auto;
         margin-top: 0;
         transition: transform var(--transition-speed), opacity var(--transition-speed), top var(--transition-speed);

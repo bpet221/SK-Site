@@ -10,13 +10,29 @@
     /***************************************
      * JS CONFIGURATION SECTION - EDITABLE SETTINGS
      ***************************************/
-    const config = {
-      text21Start: 800,
-      text21End: 1600,
-      text22Start: 2400,
-      text22End: 3200,
-      buttonStart: 4000,
-      buttonEnd: 4800,
+    // New helper to generate a config based on captured baseScrollY
+    function getDynamicConfig(baseY) {
+      if (isNaN(baseY)) baseY = 800; // fallback default
+      return {
+        text21Start: baseY + 200,
+        text21End: baseY + 700,
+        text22Start: baseY + 1300,
+        text22End: baseY + 1700,
+        buttonStart: baseY + 1900,
+        buttonEnd: baseY + 2500,
+        pushRange: 20,
+        heroTextStartTop: 1000
+      };
+    }
+
+    // Initial static config fallback if dynamic config isn’t available yet
+    let config = {
+      text21Start: 500,
+      text21End: 1000,
+      text22Start: 1600,
+      text22End: 2000,
+      buttonStart: 2200,
+      buttonEnd: 2800,
       pushRange: 20,
       heroTextStartTop: 1000
     };
@@ -28,6 +44,13 @@
     let isUnsticky = false, storedFixedBottom = null;
     const manualVerticalOffset = -130;
     const downHysteresis = 0, upHysteresis = 0;
+
+    // NEW: Global variable to capture scrollY when hero-image reaches full reveal
+    window.baseScrollY = null;
+    window.allowScrollCapture = false;
+    setTimeout(() => {
+      window.allowScrollCapture = true;
+    }, 2000); // delay capture for 2s to let autoscroll settle
 
     function updateClipPath() {
       const scrollPos = window.scrollY;
@@ -43,6 +66,14 @@
       let inset = 35 - Math.pow(scrollFactor, 2.7) * 35;
       document.querySelector(".hero-image").style.clipPath =
         `inset(${inset}% ${inset}% ${inset}% ${inset}%)`;
+
+      // Capture baseScrollY when clip-path reaches 0%
+      if (window.allowScrollCapture && window.baseScrollY === null && inset <= 0) {
+        window.baseScrollY = scrollPos - 300;
+        // Update our config to the dynamic version using the captured baseScrollY
+        config = getDynamicConfig(window.baseScrollY);
+        console.log("✅ baseScrollY captured (adjusted):", window.baseScrollY);
+      }
 
       if (window.innerWidth > 800) {
         document.querySelector(".hero-image").style.objectPosition = "50% 50%";
@@ -61,7 +92,6 @@
       const initialMaxOffset = 1;
       const additionalDownMultiplier = 2;
       const additionalUpMultiplier = 2;
-
       let textOffset = 0;
       if (scrollPos <= initialScroll) {
         textOffset = (scrollPos / initialScroll) * initialMaxOffset;
@@ -71,18 +101,28 @@
       lastScrollPos = scrollPos;
       document.querySelector(".hero-text-1").style.top = `calc(11vh - ${textOffset}px)`;
 
+      /*************************************************************
+       * Recalculate animation thresholds based on dynamic config if available.
+       *************************************************************/
+      const adjText21Start = window.baseScrollY !== null ? config.text21Start : 500;
+      const adjText21End = window.baseScrollY !== null ? config.text21End : 1000;
+      const adjText22Start = window.baseScrollY !== null ? config.text22Start : 1600;
+      const adjText22End = window.baseScrollY !== null ? config.text22End : 2000;
+      const adjButtonStart = window.baseScrollY !== null ? config.buttonStart : 2200;
+      const adjButtonEnd = window.baseScrollY !== null ? config.buttonEnd : 2600;
+
       // Animate Hero Text 2:
       if (window.innerWidth > 767) {
-        // ***** For larger screens (>767px): horizontal/vertical animation *****
+        // For larger screens (>767px): horizontal/vertical animation
         const heroText21Elem = document.querySelector(".hero-text-2-1");
         // Vertical animation: from offscreen (config.heroTextStartTop) to 0
         let verticalProgress = 0;
-        if (scrollPos < config.text21Start) {
+        if (scrollPos < adjText21Start) {
           verticalProgress = 0;
-        } else if (scrollPos > config.text21End) {
+        } else if (scrollPos > adjText21End) {
           verticalProgress = 1;
         } else {
-          verticalProgress = Math.min((scrollPos - config.text21Start) / (config.text21End - config.text21Start), 1);
+          verticalProgress = (scrollPos - adjText21Start) / (adjText21End - adjText21Start);
         }
         let verticalOffset = parseInt(config.heroTextStartTop) * (1 - verticalProgress);
         if (verticalOffset < 0) verticalOffset = 0;
@@ -92,41 +132,48 @@
         // Determine horizontal start offset based on screen width.
         let heroText21StartOffset;
         if (window.innerWidth >= 1024) {
-          heroText21StartOffset = 295;  // for screens ≥1024px
+          heroText21StartOffset = 295;
         } else {
-          heroText21StartOffset = 295 - 40;  // for 768-1023px => 255px offset
+          heroText21StartOffset = 295 - 40;
         }
-        let sharedProgress = Math.min((scrollPos - config.text22Start) / (config.text22End - config.text22Start), 1);
-        sharedProgress = Math.max(0, sharedProgress); // Clamp
+        let sharedProgress = Math.min((scrollPos - adjText22Start) / (adjText22End - adjText22Start), 1);
+        sharedProgress = Math.max(0, sharedProgress);
         heroText21Elem.style.transform = `translateX(${heroText21StartOffset * (1 - sharedProgress)}px)`;
 
-        // Animate Hero Text 2.2: slide in from right
+        // Animate Hero Text 2.2: slide in from right and stagger opacity
         const heroText22Elem = document.querySelector(".hero-text-2-2");
+
         let text22Progress = 0;
-        if (scrollPos < config.text22Start) {
+        const fade1End = adjText22End - 200;
+        const fade2End = adjText22End - 100;
+        const fade3End = adjText22End;
+        const fade4Start = adjText22End + 100;
+        const fade4End = adjText22End + 400;
+
+        if (scrollPos < adjText22Start) {
           text22Progress = 0;
-        } else if (scrollPos > config.text22End) {
+        } else if (scrollPos >= fade4Start && scrollPos < fade4End) {
+          text22Progress = 0.7 + 0.9 * ((scrollPos - fade4Start) / (fade4End - fade4Start));
+        } else if (scrollPos >= fade4End) {
           text22Progress = 1;
-        } else {
-          text22Progress = Math.min((scrollPos - config.text22Start) * 2 / (config.text22End - config.text22Start), 1);
         }
+
         heroText22Elem.style.transform = `translateX(${310 * (1 - sharedProgress)}px)`;
         heroText22Elem.style.top = "0px";
         heroText22Elem.style.opacity = text22Progress;
         heroText22Elem.style.display = "inline-block";
       } else {
-        // ***** For mobile screens (<768px): stacked vertical animation *****
+        // For mobile screens (<768px): stacked vertical animation
         const heroText21Elem = document.querySelector(".hero-text-2-1");
         const heroText22Elem = document.querySelector(".hero-text-2-2");
 
-        // Animate Text 2.1 from offscreen to final position (0)
         let text21Progress = 0;
-        if (scrollPos < config.text21Start) {
+        if (scrollPos < adjText21Start) {
           text21Progress = 0;
-        } else if (scrollPos > config.text21End) {
+        } else if (scrollPos > adjText21End) {
           text21Progress = 1;
         } else {
-          text21Progress = (scrollPos - config.text21Start) / (config.text21End - config.text21Start);
+          text21Progress = (scrollPos - adjText21Start) / (adjText21End - adjText21Start);
         }
         let text21Pos = parseInt(config.heroTextStartTop) * (1 - text21Progress);
         if (text21Pos < 0) text21Pos = 0;
@@ -138,17 +185,16 @@
         }
         heroText21Elem.style.transform = "translateX(0)";
 
-        // Animate Text 2.2: it stacks below Text 2.1 with a 20px gap
         const gap = 0;
         let text22Progress = 0;
-        if (scrollPos < config.text22Start) {
+        if (scrollPos < adjText22Start) {
           text22Progress = 0;
-        } else if (scrollPos > config.text22End) {
+        } else if (scrollPos > adjText22End) {
           text22Progress = 1;
         } else {
-          text22Progress = (scrollPos - config.text22Start) / (config.text22End - config.text22Start);
+          text22Progress = (scrollPos - adjText22Start) / (adjText22End - adjText22Start);
         }
-        const initialOffsetText22 = gap + 45; // starting offset for animation
+        const initialOffsetText22 = gap + 45;
         let text22Pos = initialOffsetText22 * (1 - text22Progress);
         heroText22Elem.style.top = `${text22Pos + gap}px`;
         heroText22Elem.style.opacity = text22Progress;
@@ -156,14 +202,14 @@
         heroText22Elem.style.transform = "translateX(0)";
       }
 
-      // Animate Hero Button (all screens).
+      // Animate Hero Button (all screens) using adjusted thresholds.
       let buttonProgress = 0;
-      if (scrollPos < config.buttonStart) {
+      if (scrollPos < adjButtonStart) {
         buttonProgress = 0;
-      } else if (scrollPos > config.buttonEnd) {
+      } else if (scrollPos > adjButtonEnd) {
         buttonProgress = 1;
       } else {
-        buttonProgress = Math.min((scrollPos - config.buttonStart) * 2 / (config.buttonEnd - config.buttonStart), 1);
+        buttonProgress = Math.min((scrollPos - adjButtonStart) * 2 / (adjButtonEnd - adjButtonStart), 1);
       }
       const buttonOffset = 1000 * (1 - buttonProgress);
       const buttonScale = 0.5 + 0.5 * buttonProgress;
@@ -193,7 +239,6 @@
         const heroRect = heroImage.getBoundingClientRect();
         const triggerRect = triggerEl.getBoundingClientRect();
 
-
         if (!isUnsticky && triggerRect.top <= heroRect.bottom - downHysteresis) {
           storedFixedBottom = heroRect.bottom;
           const absTop = window.scrollY + heroRect.top + manualVerticalOffset +
@@ -202,7 +247,7 @@
           heroImage.classList.remove("fixed-hero");
           heroImage.classList.add("absolute-hero");
 
-          // ❌ Stop transition temporarily
+          // Stop transition temporarily
           heroContainer.style.transition = 'none';
 
           // Position switch
@@ -213,18 +258,17 @@
           heroContainer.classList.add("absolute");
           isUnsticky = true;
 
-          // ✅ Re-enable it after 1 frame
+          // Re-enable transition after one frame
           requestAnimationFrame(() => {
             heroContainer.style.transition = '';
           });
         }
-
         else if (isUnsticky && triggerRect.top > storedFixedBottom + upHysteresis) {
           heroImage.classList.remove("absolute-hero");
           heroImage.classList.add("fixed-hero");
           heroImage.style.top = "";
 
-          // ❌ Disable transition to prevent pop-in animation
+          // Disable transition to prevent pop-in animation
           heroContainer.style.transition = 'none';
 
           // Switch back to fixed
@@ -235,7 +279,7 @@
           isUnsticky = false;
           storedFixedBottom = null;
 
-          // ✅ Re-enable transition
+          // Re-enable transition
           requestAnimationFrame(() => {
             heroContainer.style.transition = '';
           });
@@ -307,7 +351,7 @@
   </div>
 
   <!-- TRIGGER ELEMENT -->
-  <div id="heading-VBJYPPhLuK" style="margin-top:6000px; padding:0; background:#767676; font-size:2rem;"></div>
+  <div id="heading-VBJYPPhLuK" style="margin-top:2500px; padding:0; background:#767676; font-size:2rem;"></div>
 
   <!-- HERO CONTAINER 2 (TEXT 2.1 + TEXT 2.2 + BUTTON) --->
   <div class="hero-container-2 fixed">

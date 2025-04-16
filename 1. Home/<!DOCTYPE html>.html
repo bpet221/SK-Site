@@ -127,8 +127,7 @@
       /*************************************************************
        * Animate Hero Text 2 (Responsive)
        *************************************************************/
-      // Use desktop settings when width is 801px or wider; otherwise use mobile settings.
-      if (window.innerWidth >= 801) {
+      if (window.innerWidth > 767) {
         const heroText21Elem = document.querySelector(".hero-text-2-1");
         let verticalProgress = (scrollPos < adjText21Start) ? 0 :
                 (scrollPos > adjText21End) ? 1 :
@@ -149,17 +148,13 @@
                   0.7 + 0.9 * ((scrollPos - (adjText22End + 100)) / 300) :
                 (scrollPos >= adjText22End + 400) ? 1 : 0;
         heroText22Elem.style.transform = `translateX(${310 * (1 - sharedProgress)}px)`;
-        // For desktop, leave top as "0px"
         heroText22Elem.style.top = "0px";
         heroText22Elem.style.opacity = text22Progress;
         heroText22Elem.style.display = "inline-block";
-        // Remove any inline margin-bottom from mobile
-        heroText22Elem.style.marginBottom = "";
       } else {
-        // Mobile branch (<801px)
+        // Mobile: Fixed top gap will be added in JS updates below.
         const heroText21Elem = document.querySelector(".hero-text-2-1");
         const heroText22Elem = document.querySelector(".hero-text-2-2");
-
         let text21Progress = (scrollPos < adjText21Start) ? 0 :
                 (scrollPos > adjText21End) ? 1 :
                 (scrollPos - adjText21Start) / (adjText21End - adjText21Start);
@@ -179,10 +174,7 @@
                 (scrollPos - adjText22Start) / (adjText22End - adjText22Start);
         const initialOffsetText22 = gap + 45;
         let text22Pos = initialOffsetText22 * (1 - text22Progress);
-        // Add extra spacing: previously added 21px becomes 5px less → 16px added above hero text 2.2,
-        // and below hero text 2.2 add 10px margin-bottom (set separately)
-        heroText22Elem.style.top = `${text22Pos + gap + 16}px`;
-        heroText22Elem.style.marginBottom = "10px";
+        heroText22Elem.style.top = `${text22Pos + gap}px`;
         heroText22Elem.style.opacity = text22Progress;
         heroText22Elem.style.display = "block";
         heroText22Elem.style.transform = "translateX(0)";
@@ -209,15 +201,15 @@
         heroDownArrow.classList.remove("fade");
       }
 
-      // For mobile fixed state, update container top with extra 15px gap (was 20px previously)
+      // For mobile fixed state, update container top with extra 20px gap
       if (window.innerWidth < 801) {
         let heroContainer = document.querySelector(".hero-container-2");
         if (heroContainer.classList.contains("fixed")) {
           if (baseHeroContainerTop === null) {
             baseHeroContainerTop = parseFloat(window.getComputedStyle(heroContainer).top);
           }
-          // Use extra 15px now instead of 20px
-          heroContainer.style.top = (baseHeroContainerTop - window.currentCropPixels + 15) + "px";
+          // Add extra 20px above the text
+          heroContainer.style.top = (baseHeroContainerTop - window.currentCropPixels + 20) + "px";
         }
       }
     }
@@ -251,8 +243,8 @@
           }
 
           let newTextAbsTop = absTop + heroImage.offsetHeight + 30 - absoluteCropOffset;
-          // On mobile add extra 15px gap above hero text 2.1 in absolute state (was 20px)
-          if (window.innerWidth < 801) { newTextAbsTop += 15; }
+          // On mobile add extra 20px gap above hero text 2.1 in absolute state
+          if (window.innerWidth < 801) { newTextAbsTop += 20; }
           heroContainer.style.position = "absolute";
           heroContainer.style.top = newTextAbsTop + "px";
           heroContainer.classList.remove("fixed");
@@ -289,12 +281,12 @@
           }
         }
 
-        // While in absolute state on mobile, update container top with extra 15px gap
+        // While in absolute state on mobile, update container top with extra 20px gap
         if (isUnsticky && window.innerWidth < 801) {
           const heroRect = heroImage.getBoundingClientRect();
           const absContainerOffset = parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--abs-container-offset'));
           let newTextAbsTop = window.scrollY + heroRect.bottom + 20 - absContainerOffset + 10 - absoluteCropOffset;
-          newTextAbsTop += 15; // now extra 15px gap for mobile
+          newTextAbsTop += 20; // extra 20px gap for mobile
           heroContainer.style.top = newTextAbsTop + "px";
         }
       }

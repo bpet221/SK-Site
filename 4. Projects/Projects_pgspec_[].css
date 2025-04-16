@@ -1,5 +1,7 @@
 /* 🟢🟢🟢 PAGE SPECIFIC CSS */
 
+/* ↘️ IMAGE ZOOM SCROLL POS + HOVER */
+
 /* Ensure the image containers crop any overflow */
 #image-mJbv0uLbNt .image-container,
 #image-5RoIaYTDXS .image-container,
@@ -40,6 +42,115 @@
     }
 }
 
+/* ↘️ BUTTONS FOR CABINETS PAGE (MOBILE) */
+
+:root {
+    --mobile-btn-padding: 5.3px 8.35px;
+    --mobile-btn-hover-padding: 5.3px 8.35px;
+    --mobile-btn-border-radius: 2.06rem;
+    --mobile-btn-font-size: 7.99px;
+    --mobile-btn-text-color: #1B1B18;
+    --mobile-btn-border-color: #1B1B18;
+    --mobile-btn-bg-color: #EDE7DB;
+}
+
+.project-headline-button-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  box-sizing: border-box;
+  gap: 10px; /* fixed spacing between headline and button */
+}
+
+.project-headline {
+  font-family: 'Teodor', serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: clamp(0.75rem, 6vw, 1.588rem); /* ~12px to ~25.4px */
+  line-height: 1.314;
+  color: #1B1B18;
+  flex-shrink: 1;
+  min-width: 0; /* allow flex shrink to take effect */
+}
+
+.btn-cabinets-mobile-1,
+.btn-cabinets-mobile-2,
+.btn-cabinets-mobile-3 {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border: 0.75px solid var(--mobile-btn-border-color);
+    border-radius: var(--mobile-btn-border-radius);
+    background: var(--mobile-btn-bg-color);
+    color: var(--mobile-btn-text-color);
+    padding: var(--mobile-btn-padding);
+    margin: 0;
+    overflow: hidden;
+    font-family: 'Open Sans', sans-serif;
+    font-size: var(--mobile-btn-font-size);
+    font-weight: 500;
+    text-transform: uppercase;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    box-sizing: border-box;
+}
+
+.btn-cabinets-mobile-1:hover,
+.btn-cabinets-mobile-2:hover,
+.btn-cabinets-mobile-3:hover {
+    padding: var(--mobile-btn-hover-padding); /* fixed same as normal */
+}
+
+.btn-cabinets-mobile-1 .label,
+.btn-cabinets-mobile-2 .label,
+.btn-cabinets-mobile-3 .label {
+    display: inline-block;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+.btn-cabinets-mobile-1 .label.default,
+.btn-cabinets-mobile-2 .label.default,
+.btn-cabinets-mobile-3 .label.default {
+    position: relative;
+}
+
+.btn-cabinets-mobile-1 .label.hover,
+.btn-cabinets-mobile-2 .label.hover,
+.btn-cabinets-mobile-3 .label.hover {
+    position: absolute;
+    top: 50%;
+    left: 10px;
+    transform: translateY(150%);
+    opacity: 0;
+}
+
+.btn-cabinets-mobile-1:hover .label.default,
+.btn-cabinets-mobile-2:hover .label.default,
+.btn-cabinets-mobile-3:hover .label.default {
+    transform: translateY(-150%);
+    opacity: 0;
+}
+
+.btn-cabinets-mobile-1:hover .label.hover,
+.btn-cabinets-mobile-2:hover .label.hover,
+.btn-cabinets-mobile-3:hover .label.hover {
+    transform: translateY(-50%);
+    opacity: 1;
+}
+
+/* Optional override for alignment differences */
+.btn-cabinets-mobile-2 {
+    justify-content: flex-end;
+}
+
+/* 🛑🛑🛑 PAGE SPECIFIC CSS
+--------------------------------------------------*/
+
+
+/* ↘️ BUTTONS FOR CABINETS PAGE (DESKTOP) */
+
 
 /* ↘️ BUTTONS FOR CABINETS PAGE (DESKTOP) */
 .btn-cabinets-desktop-1,
@@ -49,15 +160,15 @@
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    border: 1px solid var(--desktop-btn-text-color);
-    border-radius: var(--desktop-btn-border-radius);
+    border: 0.043rem solid #1B1B18; /* ~0.6px */
+    border-radius: 2rem;
     background: transparent;
-    color: var(--desktop-btn-text-color);
-    padding: var(--desktop-btn-padding);
+    color: #1B1B18;
+    padding: clamp(0.3rem, 0.8vw, 0.5625rem) clamp(0.5rem, 1.2vw, 0.9375rem); /* ~9px 15px max */
     margin: 0 30px;
     overflow: hidden;
     font-family: 'Open Sans', sans-serif;
-    font-size: var(--desktop-btn-font-size);
+    font-size: clamp(0.5rem, 1vw, 0.875rem); /* 8px – 14px */
     font-weight: 400;
     text-transform: uppercase;
     text-decoration: none;
@@ -68,18 +179,16 @@
 .btn-cabinets-desktop-1:hover,
 .btn-cabinets-desktop-2:hover,
 .btn-cabinets-desktop-3:hover {
-    padding: var(--desktop-btn-hover-padding);
- /* Use the hover padding variable */
-    border: 1px solid var(--desktop-btn-text-color);
- /* Ensure border remains consistent */
+    padding: clamp(0.25rem, 0.7vw, 0.4375rem) clamp(0.45rem, 1vw, 0.75rem); /* ~7px 12px max */
+    border: 0.043rem solid #1B1B18;
 }
 
 .btn-cabinets-desktop-1 .label,
 .btn-cabinets-desktop-2 .label,
 .btn-cabinets-desktop-3 .label {
     display: inline-block;
-    white-space: nowrap;
     transition: transform 0.3s ease, opacity 0.3s ease;
+    white-space: nowrap;
 }
 
 .btn-cabinets-desktop-1 .label.default,
@@ -116,105 +225,3 @@
 .btn-cabinets-desktop-2 {
     justify-content: flex-end;
 }
-
-/* Desktop-specific custom properties */
-:root {
-    --desktop-btn-padding: 9px 15px 9px 15px;
-    --desktop-btn-hover-padding: 7px 10px 7px 10px;
- /* Now used in hover state */
-    --desktop-btn-border-radius: 99px;
-    --desktop-btn-font-size: 14px;
-    --desktop-btn-text-color: #1B1B18;
-}
-
-/* ↘️ BUTTONS FOR CABINETS PAGE (MOBILE) */
-.btn-cabinets-mobile-1,
-.btn-cabinets-mobile-2,
-.btn-cabinets-mobile-3 {
-    position: relative;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    border: 1px solid var(--mobile-btn-border-color);
-    border-radius: var(--mobile-btn-border-radius);
-    background: var(--mobile-btn-bg-color);
-    color: var(--mobile-btn-text-color);
-    padding: var(--mobile-btn-padding);
-    margin: 0 0px;
-    overflow: hidden;
-    font-family: 'Open Sans', sans-serif;
-    font-size: var(--mobile-btn-font-size);
-    font-weight: 500;
-    text-transform: uppercase;
-    text-decoration: none;
-    transition: all 0.3s ease;
-    box-sizing: border-box;
-}
-
-.btn-cabinets-mobile-1:hover,
-.btn-cabinets-mobile-2:hover,
-.btn-cabinets-mobile-3:hover {
-    padding: var(--mobile-btn-hover-padding);
- /* Use the hover padding variable to match desktop */
-    border: 1px solid var(--mobile-btn-border-color);
- /* Ensure border remains consistent, matching desktop */
-}
-
-.btn-cabinets-mobile-1 .label,
-.btn-cabinets-mobile-2 .label,
-.btn-cabinets-mobile-3 .label {
-    display: inline-block;
-    white-space: nowrap;
-    transition: transform 0.3s ease, opacity 0.3s ease;
-}
-
-.btn-cabinets-mobile-1 .label.default,
-.btn-cabinets-mobile-2 .label.default,
-.btn-cabinets-mobile-3 .label.default {
-    position: relative;
-}
-
-.btn-cabinets-mobile-1 .label.hover,
-.btn-cabinets-mobile-2 .label.hover,
-.btn-cabinets-mobile-3 .label.hover {
-    position: absolute;
-    top: 50%;
-    left: 10px;
- /* Updated to match desktop */
-    transform: translateY(150%);
-    opacity: 0;
-}
-
-.btn-cabinets-mobile-1:hover .label.default,
-.btn-cabinets-mobile-2:hover .label.default,
-.btn-cabinets-mobile-3:hover .label.default {
-    transform: translateY(-150%);
-    opacity: 0;
-}
-
-.btn-cabinets-mobile-1:hover .label.hover,
-.btn-cabinets-mobile-2:hover .label.hover,
-.btn-cabinets-mobile-3:hover .label.hover {
-    transform: translateY(-50%);
-    opacity: 1;
-}
-
-/* Override alignment for button 2 only */
-.btn-cabinets-mobile-2 {
-    justify-content: flex-end;
-}
-
-/* Mobile-specific custom properties */
-:root {
-    --mobile-btn-padding: 8px 11px 8px 11px;
-    --mobile-btn-hover-padding: 6px 9px 6px 9px;
- /* Updated to match desktop’s shrinkage ratio */
-    --mobile-btn-border-radius: 99px;
-    --mobile-btn-font-size: 11px;
-    --mobile-btn-text-color: #1B1B18;
-    --mobile-btn-border-color: #1B1B18;
-    --mobile-btn-bg-color: #EDE7DB;
-}
-
-/* 🛑🛑🛑 PAGE SPECIFIC CSS
---------------------------------------------------*/

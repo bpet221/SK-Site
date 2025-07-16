@@ -119,8 +119,8 @@
       const initialScroll = 190, initialMaxOffset = 1;
       const additionalDownMultiplier = 2, additionalUpMultiplier = 2;
       let textOffset = (scrollPos <= initialScroll) ?
-              (scrollPos / initialScroll) * initialMaxOffset :
-              initialMaxOffset + (scrollPos - initialScroll) * (scrollPos >= lastScrollPos ? additionalDownMultiplier : additionalUpMultiplier);
+        (scrollPos / initialScroll) * initialMaxOffset :
+        initialMaxOffset + (scrollPos - initialScroll) * (scrollPos >= lastScrollPos ? additionalDownMultiplier : additionalUpMultiplier);
       lastScrollPos = scrollPos;
       document.querySelector(".hero-text-1").style.top = `calc(11vh - ${textOffset}px)`;
 
@@ -131,8 +131,8 @@
       if (window.innerWidth >= 801) {
         const heroText21Elem = document.querySelector(".hero-text-2-1");
         let verticalProgress = (scrollPos < adjText21Start) ? 0 :
-                (scrollPos > adjText21End) ? 1 :
-                (scrollPos - adjText21Start) / (adjText21End - adjText21Start);
+          (scrollPos > adjText21End) ? 1 :
+            (scrollPos - adjText21Start) / (adjText21End - adjText21Start);
         let verticalOffset = parseInt(config.heroTextStartTop) * (1 - verticalProgress);
         if (verticalOffset < 0) verticalOffset = 0;
         heroText21Elem.style.top = `${verticalOffset}px`;
@@ -141,13 +141,13 @@
         let heroText21StartOffset = (window.innerWidth >= 1024) ? 295 : 295 - 40;
         let sharedProgress = Math.min((scrollPos - adjText22Start) / (adjText22End - adjText22Start), 1);
         sharedProgress = Math.max(0, sharedProgress);
-        heroText21Elem.style.transform = `translateX(${heroText21StartOffset * (1 - sharedProgress)}px)`;
+        heroText21Elem.style.transform = `translateX(${heroText21StartOffset * (1 - sharedProgress) + 13}px)`;
 
         const heroText22Elem = document.querySelector(".hero-text-2-2");
         let text22Progress = (scrollPos < adjText22Start) ? 0 :
-                (scrollPos >= adjText22End + 100 && scrollPos < adjText22End + 400) ?
-                  0.7 + 0.9 * ((scrollPos - (adjText22End + 100)) / 300) :
-                (scrollPos >= adjText22End + 400) ? 1 : 0;
+          (scrollPos >= adjText22End + 100 && scrollPos < adjText22End + 400) ?
+            0.7 + 0.9 * ((scrollPos - (adjText22End + 100)) / 300) :
+            (scrollPos >= adjText22End + 400) ? 1 : 0;
         heroText22Elem.style.transform = `translateX(${310 * (1 - sharedProgress)}px)`;
         // For desktop, leave top as "0px"
         heroText22Elem.style.top = "0px";
@@ -161,8 +161,8 @@
         const heroText22Elem = document.querySelector(".hero-text-2-2");
 
         let text21Progress = (scrollPos < adjText21Start) ? 0 :
-                (scrollPos > adjText21End) ? 1 :
-                (scrollPos - adjText21Start) / (adjText21End - adjText21Start);
+          (scrollPos > adjText21End) ? 1 :
+            (scrollPos - adjText21Start) / (adjText21End - adjText21Start);
         let text21Pos = parseInt(config.heroTextStartTop) * (1 - text21Progress);
         if (text21Pos < 0) text21Pos = 0;
         heroText21Elem.style.top = `${text21Pos}px`;
@@ -175,8 +175,8 @@
 
         const gap = 0;
         let text22Progress = (scrollPos < adjText22Start) ? 0 :
-                (scrollPos > adjText22End) ? 1 :
-                (scrollPos - adjText22Start) / (adjText22End - adjText22Start);
+          (scrollPos > adjText22End) ? 1 :
+            (scrollPos - adjText22Start) / (adjText22End - adjText22Start);
         const initialOffsetText22 = gap + 45;
         let text22Pos = initialOffsetText22 * (1 - text22Progress);
         // Add extra spacing: previously added 21px becomes 5px less → 16px added above hero text 2.2,
@@ -190,8 +190,8 @@
 
       // Animate Hero Button
       let buttonProgress = (scrollPos < adjButtonStart) ? 0 :
-              (scrollPos > adjButtonEnd) ? 1 :
-              Math.min((scrollPos - adjButtonStart) * 2 / (adjButtonEnd - adjButtonStart), 1);
+        (scrollPos > adjButtonEnd) ? 1 :
+          Math.min((scrollPos - adjButtonStart) * 2 / (adjButtonEnd - adjButtonStart), 1);
       const buttonOffset = 1000 * (1 - buttonProgress);
       const buttonScale = 0.5 + 0.5 * buttonProgress;
       document.querySelector(".hero-button").style.transform = `translateY(${buttonOffset}px) scale(${buttonScale})`;
@@ -348,12 +348,16 @@
   <div class="top-bar"></div>
 
   <!-- HERO DOWN ARROW -->
-  <img class="hero-down-arrow" src="https://storage.googleapis.com/msgsndr/FahnfAK4Y2D0yi846rOF/media/67bba9160f0b26304605e14c.png" alt="Down Arrow" />
+  <img class="hero-down-arrow"
+    src="https://storage.googleapis.com/msgsndr/FahnfAK4Y2D0yi846rOF/media/67bba9160f0b26304605e14c.png"
+    alt="Down Arrow" />
 
   <!-- HERO IMAGE CONTAINER (CONTAINER 1) -->
   <div class="hero-container-1">
     <div class="hero-text-1">The Kitchen You’ve Always Wanted.</div>
-    <img class="hero-image fixed-hero" src="https://storage.googleapis.com/msgsndr/FahnfAK4Y2D0yi846rOF/media/67f9af98c7a015775dd3a849.jpeg" alt="Hero Image" />
+    <img class="hero-image fixed-hero"
+      src="https://storage.googleapis.com/msgsndr/FahnfAK4Y2D0yi846rOF/media/67f9af98c7a015775dd3a849.jpeg"
+      alt="Hero Image" />
   </div>
 
   <!-- TRIGGER ELEMENT -->

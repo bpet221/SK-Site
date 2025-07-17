@@ -1,0 +1,321 @@
+/* 🟢🟢🟢 HOME PAGE SPECIFIC CSS */
+
+/***************************************
+ * CONFIGURATION SECTION - EDITABLE SETTINGS (CSS)
+ ***************************************/
+
+:root {
+  /* Colors & Fonts */
+    --primary-color: #1B1B18;
+    --secondary-color: #212B33;
+    --font-primary: 'Teodor', sans-serif;
+    --font-secondary: 'Open Sans', sans-serif;
+  
+    /* Global Transitions (faster now) */
+    --transition-speed: 0.15s ease-out;
+
+  /* HERO CONTAINER 1 (Background Image) */
+    --hero-height-desktop: 100vh;
+    --hero-height-sticky: 60vh;
+    --hero-image-top: 115px;
+
+  /* HERO CONTAINER 2 (Text & Button) */
+    /* Now a 30px gap is built in below the hero image */
+    --text2-top-offset: calc(var(--hero-image-top) + var(--hero-height-sticky) + 30px);
+    --abs-hero-offset: 45px;
+    --abs-container-offset: 86px;
+
+  /* Animation Timing (scroll positions in pixels) */
+    --text21-start: 500;
+    --text21-end: 1000;
+    --text22-start: 1600;
+    --text22-end: 2000;
+    --button-start: 2200;
+    --button-end: 2600;
+    --push-range: 20;
+
+  /* Layout & Starting Positions */
+    --hero-text-start-top: 1000px;
+}
+/***************************************
+ * END CONFIGURATION SECTION (CSS)
+ ***************************************/
+
+/* --- HERO CONTAINER 1 SETTINGS (Background Image) --- */
+.hero-container-1 {
+    position: static;
+    overflow: hidden;
+    height: var(--hero-height-desktop);
+    margin-bottom: 0;
+}
+
+/* --- HERO TEXT 1 SETTINGS --- */
+.hero-text-1 {
+    position: absolute;
+    left: 5%;
+    font-family: var(--font-primary);
+    color: var(--secondary-color);
+    z-index: 20;
+    transition: top var(--transition-speed);
+    will-change: top;
+    font-size: 2rem;
+}
+
+@media (max-width: 767px) {
+    .hero-text-1 {
+        font-size: 2.2rem;
+    }
+}
+
+@media (min-width: 768px) and (max-width: 1023px) {
+    .hero-text-1 {
+        font-size: 2.6rem;
+    }
+}
+
+@media (min-width: 1024px) {
+    .hero-text-1 {
+        font-size: 3rem;
+    }
+}
+
+/* --- HERO IMAGE SETTINGS (Container 1) --- */
+.hero-image.fixed-hero,
+.hero-image.absolute-hero {
+    width: calc(100% - 60px);
+    height: var(--hero-height-sticky);
+    object-fit: cover;
+    clip-path: inset(35% 35% 35% 35%);
+    z-index: 10;
+    transition: clip-path 0.03s linear;
+    box-sizing: border-box;
+    margin-bottom: 0 !important;
+    padding-bottom: 0 !important;
+}
+
+.hero-image.fixed-hero {
+    position: fixed;
+    top: var(--hero-image-top);
+    left: 30px;
+    padding-bottom: 30px;
+}
+
+.hero-image.absolute-hero {
+    position: absolute;
+    top: var(--hero-image-top);
+    left: 30px;
+}
+
+@media (min-width: 801px) {
+    .hero-image.fixed-hero,
+    .hero-image.absolute-hero {
+        left: 50%;
+        transform: translateX(-50%);
+        width: calc(100% - 60px);
+        object-position: 50% 50%;
+    }
+}
+
+@media (max-width: 800px) {
+    .hero-image.fixed-hero,
+    .hero-image.absolute-hero {
+        left: 30px;
+        transform: none;
+    }
+}
+
+/* --- HERO CONTAINER 2 SETTINGS (Text & Button) --- */
+.hero-container-2 {
+    position: fixed;
+    top: var(--text2-top-offset);
+    left: 0 !important;
+    right: 30px !important;
+    font-family: var(--font-primary);
+    z-index: 20;
+    opacity: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 1rem;
+    transition: top var(--transition-speed);
+    font-size: 2rem;
+}
+
+@media (max-width: 767px) {
+    .hero-container-2 {
+        font-size: 2.2rem;
+    }
+}
+
+@media (min-width: 768px) and (max-width: 1023px) {
+    .hero-container-2 {
+        font-size: 2.6rem;
+    }
+}
+
+@media (min-width: 1024px) {
+    .hero-container-2 {
+        font-size: 3rem;
+    }
+}
+
+/* On mobile, disable the top transition (JS controls spacing) */
+@media (max-width: 800px) {
+    .hero-container-2 {
+        transition: none !important;
+    }
+}
+
+.hero-container-2.fixed {
+    position: fixed;
+}
+
+.hero-container-2.absolute {
+    position: absolute;
+}
+
+@media (min-width: 481px) and (max-width: 767px) {
+    .hero-container-2.absolute {
+        left: -10px !important;
+        right: 20px !important;
+    }
+}
+
+/* --- HERO TEXT 2 SETTINGS --- */
+.hero-text-2-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 0.5rem;
+}
+
+.hero-container-2 .hero-text-2-1,
+.hero-container-2 .hero-text-2-2 {
+    display: inline-block;
+    transition: top var(--transition-speed), opacity var(--transition-speed);
+    will-change: top, opacity;
+    position: relative;
+    top: var(--hero-text-start-top);
+    margin-top: -30px;
+}
+
+/* --- HERO BUTTON SETTINGS --- */
+.hero-button {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid var(--primary-color);
+    border-radius: 99px;
+    background: transparent;
+    color: var(--primary-color);
+    padding: 8px 16px;
+    overflow: hidden;
+    font-family: var(--font-secondary);
+    font-size: clamp(0.75rem, 1.2vw, 1rem);
+    font-weight: 200;
+    text-transform: uppercase;
+    text-decoration: none;
+    transition: transform var(--transition-speed);
+    will-change: transform;
+    white-space: nowrap;
+    margin-top: -45px;
+}
+
+.hero-button:hover {
+    padding: 7px 15px;
+}
+
+.hero-button .label {
+    display: inline-block;
+    transition: transform var(--transition-speed), opacity var(--transition-speed);
+}
+
+.hero-button .label.default {
+    position: relative;
+}
+
+.hero-button .label.hover {
+    position: absolute;
+    top: 50%;
+    left: 17px;
+    transform: translateY(150%);
+    opacity: 0;
+}
+
+.hero-button:hover .label.default,
+.hero-button.touch-hover .label.default {
+    transform: translateY(-150%);
+    opacity: 0;
+}
+
+.hero-button:hover .label.hover,
+.hero-button.touch-hover .label.hover {
+    transform: translateY(-50%);
+    opacity: 1;
+}
+
+/* --- HERO DOWN ARROW SETTINGS --- */
+.hero-down-arrow {
+    position: fixed;
+    top: 70vh;
+    left: 50%;
+    transform: translateX(-50%);
+    max-width: 40px;
+    width: 100%;
+    z-index: 30;
+    transition: transform 0.15s ease, max-width 0.15s ease, opacity 0.15s ease;
+    transform-origin: top center;
+}
+
+.hero-down-arrow.fade {
+    opacity: 0;
+    max-width: 35px;
+}
+
+.hero-down-arrow:hover {
+    transform: translateX(-50%) scale(1.14);
+}
+
+.hero-down-arrow.hover-animate {
+    transform: translateX(-50%) scale(1.40);
+}
+
+/* --- SPACER --- */
+.spacer {
+    display: block;
+    height: 20vh;
+}
+
+@media (min-width: 481px) and (max-width: 767px) {
+    .hero-image.absolute-hero {
+        left: 20px;
+        transform: none;
+        width: calc(100% - 40px);
+    }
+}
+
+/* --- UPDATES FOR HERO CONTAINER 2 & TEXT ELEMENTS (LARGE Screens) --- */
+@media (min-width: 768px) {
+    .hero-text-2-wrapper {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        gap: 1rem;
+        justify-content: flex-end;
+    }
+
+    .hero-container-2 .hero-text-2-1,
+    .hero-container-2 .hero-text-2-2 {
+        top: auto;
+        margin-top: 0;
+        transition: transform var(--transition-speed), opacity var(--transition-speed), top var(--transition-speed);
+    }
+
+    .hero-button {
+        margin-top: 0;
+    }
+}
+
+/* 🛑🛑🛑 HOME PAGE SPECIFIC CSS
+--------------------------------------------------*/

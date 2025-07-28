@@ -39,12 +39,14 @@
         const solutionsBtn = document.getElementById("solutions-btn");
         const submenu = document.getElementById("solutions-submenu");
         const container = document.getElementById("custom-code-Owq07THfuX");
+
         submenu.querySelectorAll(".submenu-btn").forEach(btn => {
             btn.addEventListener("click", function (e) {
                 e.preventDefault();
                 window.location.href = this.href;
             });
         });
+
         function adjustMenu() {
             const containerWidth = container.offsetWidth;
             const buttons = container.querySelectorAll(".nav-menu-btn");
@@ -54,16 +56,16 @@
             const gapsNeeded = buttons.length - 1;
             const availableSpace = containerWidth - totalButtonsWidth;
             const gapSize = availableSpace / gapsNeeded;
+
             if (gapSize < minSpacing) {
                 container.classList.add("tight");
             } else {
                 container.classList.remove("tight");
                 container.style.gap = `${Math.min(maxSpacing, Math.max(minSpacing, gapSize))}px`;
             }
-            // Prevent wrapping by forcing single row
             container.style.flexWrap = "nowrap";
         }
-        // Run immediately and on resize
+
         adjustMenu();
         window.addEventListener("resize", adjustMenu);
         window.addEventListener("load", adjustMenu);

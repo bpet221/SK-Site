@@ -23,6 +23,10 @@
                 <span class="label default">KNOBS + PULLS</span>
                 <span class="label hover">KNOBS + PULLS</span>
             </a>
+            <a href="https://sandwichkitchens.com/pools" class="submenu-btn">
+                <span class="label default">POOLS</span>
+                <span class="label hover">POOLS</span>
+            </a>
         </div>
     </div>
     <a href="https://sandwichkitchens.com/contact" class="nav-menu-btn">
@@ -30,45 +34,38 @@
         <span class="label hover">CONTACT</span>
     </a>
 </div>
-
 <script>
-document.addEventListener("DOMContentLoaded", function () {
-    const productsBtn = document.getElementById("products-btn");
-    const submenu = document.getElementById("products-submenu");
-    const container = document.getElementById("custom-code-Owq07THfuX");
-
-    submenu.querySelectorAll(".submenu-btn").forEach(btn => {
-        btn.addEventListener("click", function (e) {
-            e.preventDefault();
-            window.location.href = this.href;
+    document.addEventListener("DOMContentLoaded", function () {
+        const productsBtn = document.getElementById("products-btn");
+        const submenu = document.getElementById("products-submenu");
+        const container = document.getElementById("custom-code-Owq07THfuX");
+        submenu.querySelectorAll(".submenu-btn").forEach(btn => {
+            btn.addEventListener("click", function (e) {
+                e.preventDefault();
+                window.location.href = this.href;
+            });
         });
-    });
-
-    function adjustMenu() {
-        const containerWidth = container.offsetWidth;
-        const buttons = container.querySelectorAll(".nav-menu-btn");
-        const totalButtonsWidth = Array.from(buttons).reduce((sum, btn) => sum + btn.offsetWidth, 0);
-        const minSpacing = 20;
-        const maxSpacing = 45;
-        const gapsNeeded = buttons.length - 1;
-
-        const availableSpace = containerWidth - totalButtonsWidth;
-        const gapSize = availableSpace / gapsNeeded;
-
-        if (gapSize < minSpacing) {
-            container.classList.add("tight");
-        } else {
-            container.classList.remove("tight");
-            container.style.gap = `${Math.min(maxSpacing, Math.max(minSpacing, gapSize))}px`;
+        function adjustMenu() {
+            const containerWidth = container.offsetWidth;
+            const buttons = container.querySelectorAll(".nav-menu-btn");
+            const totalButtonsWidth = Array.from(buttons).reduce((sum, btn) => sum + btn.offsetWidth, 0);
+            const minSpacing = 20;
+            const maxSpacing = 45;
+            const gapsNeeded = buttons.length - 1;
+            const availableSpace = containerWidth - totalButtonsWidth;
+            const gapSize = availableSpace / gapsNeeded;
+            if (gapSize < minSpacing) {
+                container.classList.add("tight");
+            } else {
+                container.classList.remove("tight");
+                container.style.gap = `${Math.min(maxSpacing, Math.max(minSpacing, gapSize))}px`;
+            }
+            // Prevent wrapping by forcing single row
+            container.style.flexWrap = "nowrap";
         }
-
-        // Prevent wrapping by forcing single row
-        container.style.flexWrap = "nowrap";
-    }
-
-    // Run immediately and on resize
-    adjustMenu();
-    window.addEventListener("resize", adjustMenu);
-    window.addEventListener("load", adjustMenu);
-});
+        // Run immediately and on resize
+        adjustMenu();
+        window.addEventListener("resize", adjustMenu);
+        window.addEventListener("load", adjustMenu);
+    });
 </script>

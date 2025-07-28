@@ -1,0 +1,50 @@
+<div class="pool-cta-section">
+    <div class="section-header">
+        <p class="section-subtitle"><strong>Ready to explore your options?</strong> Browse our complete collection of
+            fiberglass pool designs to find the perfect fit for your backyard.</p>
+    </div>
+
+    <div class="cta-buttons">
+        <a href="https://thursdaypools.com/inground-pools/" class="pool-cta-btn learning-center-btn">
+            <div class="dot"></div>
+            <span class="label default">Learning Center</span>
+            <span class="label hover"> Learn</span>
+        </a>
+
+        <a href="https://thursdaypools.com/fiberglass-pool-designs/" class="pool-cta-btn designs-btn primary">
+            <div class="dot"></div>
+            <span class="label default">Pool Designs</span>
+            <span class="label hover"> Browse</span>
+        </a>
+    </div>
+</div>
+
+<script>
+    // Add click tracking and smooth interactions
+    document.addEventListener('DOMContentLoaded', function () {
+        const ctaButtons = document.querySelectorAll('.pool-cta-btn');
+
+        ctaButtons.forEach(button => {
+            // Add active state on click
+            button.addEventListener('click', function (e) {
+                // Add a brief active state for visual feedback
+                this.classList.add('clicked');
+                setTimeout(() => {
+                    this.classList.remove('clicked');
+                }, 200);
+
+                // Optional: Add analytics tracking here
+                // gtag('event', 'click', { 'event_category': 'pool_cta', 'event_label': this.href });
+            });
+
+            // Enhanced hover effects
+            button.addEventListener('mouseenter', function () {
+                this.classList.add('active');
+            });
+
+            button.addEventListener('mouseleave', function () {
+                this.classList.remove('active');
+            });
+        });
+    });
+</script>

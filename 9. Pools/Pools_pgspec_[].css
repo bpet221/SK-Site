@@ -1,0 +1,573 @@
+/* 🟢🟢🟢 PAGE SPECIFIC CSS */
+
+/* Pool Comparison - Mobile-First Responsive Design */
+
+.pool-comparison-container {
+    max-width: 1000px;
+    margin: 0 auto;
+    font-family: 'OpenSans', 'Open Sans', sans-serif;
+}
+
+/* Desktop Table Styles */
+.desktop-table {
+    background: #EDE7DB;
+    border: 1px solid #1B1B18;
+    border-radius: 1px;
+    box-shadow: 1px 1px 3px 0px rgba(27, 27, 24, 0.27);
+    overflow: hidden;
+}
+
+.table-wrapper {
+    overflow-x: auto;
+}
+
+.pool-comparison-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 12px;
+    font-weight: 400;
+    color: #1B1B18;
+}
+
+.pool-comparison-table th {
+    background-color: rgba(27, 27, 24, 0.08);
+    color: #1B1B18;
+    font-family: 'OpenSans', 'Open Sans', sans-serif;
+    font-weight: 600;
+    font-size: 12px;
+    text-transform: uppercase;
+    padding: 16px 14px;
+    text-align: left;
+    border-bottom: 1px solid #1B1B18;
+    white-space: nowrap;
+}
+
+.pool-comparison-table td {
+    padding: 14px;
+    border-bottom: 1px solid rgba(27, 27, 24, 0.15);
+    vertical-align: top;
+    font-family: 'OpenSans', 'Open Sans', sans-serif;
+    font-weight: 300;
+    font-size: 12px;
+    line-height: 1.4;
+}
+
+.pool-comparison-table tr:hover {
+    background-color: rgba(27, 27, 24, 0.04);
+    transition: background-color 0.3s ease;
+}
+
+.pool-type {
+    font-weight: 600;
+    color: #1B1B18;
+    text-transform: uppercase;
+    font-size: 12px;
+}
+
+.price {
+    font-weight: 500;
+    color: #1B1B18;
+}
+
+/* Pool type indicators */
+.fiberglass {
+    border-left: 3px solid rgba(27, 27, 24, 0.6);
+}
+
+.vinyl {
+    border-left: 3px solid rgba(27, 27, 24, 0.4);
+}
+
+.gunite {
+    border-left: 3px solid rgba(27, 27, 24, 0.8);
+}
+
+/* Mobile Card Styles */
+.mobile-cards {
+    display: none;
+}
+
+.pool-card {
+    background: #EDE7DB;
+    border: 1px solid #1B1B18;
+    border-radius: 1px;
+    box-shadow: 1px 1px 3px 0px rgba(27, 27, 24, 0.27);
+    margin-bottom: 20px;
+    overflow: hidden;
+}
+
+.pool-card:last-child {
+    margin-bottom: 0;
+}
+
+.card-header {
+    background-color: rgba(27, 27, 24, 0.08);
+    padding: 16px 20px;
+    border-bottom: 1px solid #1B1B18;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.card-header .pool-type {
+    margin: 0;
+    font-weight: 600;
+    font-size: 14px;
+    text-transform: uppercase;
+    color: #1B1B18;
+}
+
+.card-header .price {
+    font-weight: 600;
+    font-size: 16px;
+    color: #1B1B18;
+}
+
+.card-details {
+    padding: 20px;
+}
+
+.detail-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 12px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid rgba(27, 27, 24, 0.1);
+}
+
+.detail-item:last-child {
+    margin-bottom: 0;
+    padding-bottom: 0;
+    border-bottom: none;
+}
+
+.detail-item .label {
+    font-weight: 600;
+    font-size: 11px;
+    text-transform: uppercase;
+    color: #1B1B18;
+    min-width: 100px;
+    margin-right: 15px;
+    flex-shrink: 0;
+}
+
+.detail-item .value {
+    font-weight: 300;
+    font-size: 12px;
+    color: #1B1B18;
+    text-align: right;
+    line-height: 1.4;
+}
+
+/* Mobile card border indicators */
+.pool-card.fiberglass {
+    border-left: 4px solid rgba(27, 27, 24, 0.6);
+}
+
+.pool-card.vinyl {
+    border-left: 4px solid rgba(27, 27, 24, 0.4);
+}
+
+.pool-card.gunite {
+    border-left: 4px solid rgba(27, 27, 24, 0.8);
+}
+
+/* Responsive Breakpoints */
+
+/* Show desktop table on larger screens */
+@media (min-width: 769px) {
+    .desktop-table {
+        display: block;
+    }
+
+    .mobile-cards {
+        display: none;
+    }
+}
+
+/* Show mobile cards on smaller screens */
+@media (max-width: 768px) {
+    .desktop-table {
+        display: none;
+    }
+
+    .mobile-cards {
+        display: block;
+        padding: 0 15px;
+    }
+
+    .pool-comparison-container {
+        margin: 0;
+    }
+}
+
+/* Fine-tune mobile spacing */
+@media (max-width: 480px) {
+    .mobile-cards {
+        padding: 0 10px;
+    }
+
+    .card-header {
+        padding: 14px 16px;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 8px;
+    }
+
+    .card-header .price {
+        align-self: flex-end;
+        font-size: 18px;
+    }
+
+    .card-details {
+        padding: 16px;
+    }
+
+    .detail-item {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 4px;
+    }
+
+    .detail-item .label {
+        min-width: auto;
+        margin-right: 0;
+    }
+
+    .detail-item .value {
+        text-align: left;
+        font-size: 13px;
+    }
+}
+
+/* Tablet optimization */
+@media (min-width: 481px) and (max-width: 768px) {
+    .mobile-cards {
+        padding: 0 20px;
+    }
+}
+
+/* Pool CTA Section - Matching SK Site Style */
+
+.pool-cta-section {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 0;
+    background: transparent;
+    text-align: center;
+    font-family: 'OpenSans', 'Open Sans', sans-serif;
+}
+
+.section-header {
+    margin: 0 0 35px 0;
+    padding: 0;
+}
+
+.section-subtitle {
+    font-family: 'OpenSans', 'Open Sans', sans-serif;
+    font-weight: 300;
+    font-size: clamp(14px, 2vw, 16px);
+    color: #1B1B18;
+    line-height: 1.5;
+    margin: 0;
+    padding: 0;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.section-subtitle strong {
+    font-weight: 600;
+}
+
+.cta-buttons {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 25px;
+    flex-wrap: wrap;
+    margin: 0;
+    padding: 0;
+}
+
+.pool-cta-btn {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid #1B1B18;
+    border-radius: 99px;
+    background: transparent;
+    color: #1B1B18;
+    padding: 12px 20px;
+    margin: 0;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    flex-shrink: 1;
+    max-width: 200px;
+    font-family: 'OpenSans', 'Open Sans', sans-serif;
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.pool-cta-btn:hover,
+.pool-cta-btn.active {
+    padding: 11px 19px;
+    transform: translateY(-1px);
+    box-shadow: 1px 2px 4px 0px rgba(27, 27, 24, 0.15);
+}
+
+.pool-cta-btn:active,
+.pool-cta-btn:focus,
+.pool-cta-btn.clicked {
+    border: 1px solid #1B1B18;
+    border-radius: 99px;
+    background: transparent;
+    color: #1B1B18;
+    font-weight: 600;
+    outline: none;
+    padding: 12px 20px;
+    transform: translateY(0);
+    box-shadow: none;
+}
+
+.pool-cta-btn.primary {
+    background: #1B1B18;
+    color: #EDE7DB;
+}
+
+.pool-cta-btn.primary:hover,
+.pool-cta-btn.primary.active {
+    background: #1B1B18;
+    color: #EDE7DB;
+    transform: translateY(-1px);
+    box-shadow: 1px 2px 6px 0px rgba(27, 27, 24, 0.25);
+}
+
+.pool-cta-btn.primary:active,
+.pool-cta-btn.primary:focus,
+.pool-cta-btn.primary.clicked {
+    background: #1B1B18;
+    color: #EDE7DB;
+    transform: translateY(0);
+    box-shadow: none;
+}
+
+.pool-cta-btn .dot {
+    width: 8px;
+    height: 8px;
+    background: #1B1B18;
+    border-radius: 50%;
+    margin-right: 10px;
+    transition: transform 0.3s ease;
+    flex-shrink: 0;
+}
+
+.pool-cta-btn.primary .dot {
+    background: #EDE7DB;
+}
+
+.pool-cta-btn .label {
+    display: inline-block;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+.pool-cta-btn .label.default {
+    position: relative;
+}
+
+.pool-cta-btn .label.hover {
+    position: absolute;
+    top: 50%;
+    left: 35px;
+    transform: translateY(150%);
+    opacity: 0;
+}
+
+@media (max-width: 768px) {
+    .pool-cta-btn .label.hover {
+        left: 75px;
+        /* Different value for mobile */
+    }
+}
+
+.pool-cta-btn:hover .label.default,
+.pool-cta-btn.active .label.default {
+    transform: translateY(-150%);
+    opacity: 0;
+}
+
+.pool-cta-btn:hover .label.hover,
+.pool-cta-btn.active .label.hover {
+    transform: translateY(-50%);
+    opacity: 1;
+}
+
+.pool-cta-btn:hover .dot,
+.pool-cta-btn.active .dot {
+    transform: translateX(3px);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .pool-cta-section {
+        margin: 0;
+        padding: 0;
+    }
+
+    .section-header {
+        margin: 0 0 25px 0;
+        padding: 0;
+    }
+
+    .cta-buttons {
+        flex-direction: column;
+        gap: 15px;
+        margin: 0;
+        padding: 0;
+    }
+
+    .pool-cta-btn {
+        width: 100%;
+        max-width: 250px;
+        padding: 14px 20px;
+        margin: 0;
+        font-size: 13px;
+    }
+
+    .pool-cta-btn:hover,
+    .pool-cta-btn.active {
+        padding: 13px 19px;
+    }
+
+    .pool-cta-btn:active,
+    .pool-cta-btn:focus,
+    .pool-cta-btn.clicked {
+        padding: 14px 20px;
+    }
+}
+
+@media (max-width: 480px) {
+    .pool-cta-section {
+        margin: 0;
+        padding: 0;
+    }
+
+    .section-subtitle {
+        font-size: 14px;
+        padding: 0;
+        margin: 0 auto;
+    }
+
+    .pool-cta-btn {
+        max-width: 200px;
+        font-size: 11px;
+        margin: 0;
+    }
+}
+
+/* High-resolution displays */
+@media (min-width: 1200px) {
+    .pool-cta-section {
+        padding: 0;
+        margin: 0 auto;
+    }
+
+    .section-header {
+        margin: 0 0 40px 0;
+        padding: 0;
+    }
+
+    .cta-buttons {
+        gap: 30px;
+        margin: 0;
+        padding: 0;
+    }
+}
+
+/* Fix for text wrapping issues on mobile - More Specific */
+.paragraph-8QxHgq8orn,
+.cparagraph-8QxHgq8orn,
+.paragraph-qpM244HbIb,
+.cparagraph-qpM244HbIb,
+.text-output {
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    hyphens: auto;
+    max-width: 100%;
+    box-sizing: border-box;
+}
+
+.paragraph-8QxHgq8orn p,
+.cparagraph-8QxHgq8orn p,
+.paragraph-qpM244HbIb p,
+.cparagraph-qpM244HbIb p {
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    hyphens: auto;
+    max-width: 100%;
+    margin: 0;
+    padding: 0;
+    line-height: 1.5;
+}
+
+/* General mobile text fix for all similar elements */
+@media (max-width: 768px) {
+
+    .text-output,
+    .text-output p,
+    .c-paragraph,
+    .c-paragraph p {
+        word-wrap: break-word !important;
+        overflow-wrap: break-word !important;
+        white-space: normal !important;
+        max-width: 100% !important;
+        box-sizing: border-box !important;
+    }
+
+    /* More specific targeting - avoid affecting image containers */
+    .c-paragraph.c-wrapper,
+    .c-heading.c-wrapper {
+        max-width: 100% !important;
+        overflow: hidden !important;
+        box-sizing: border-box !important;
+    }
+
+    /* Specific fix for the problematic paragraphs */
+    #paragraph-8QxHgq8orn,
+    .paragraph-8QxHgq8orn,
+    #paragraph-qpM244HbIb,
+    .paragraph-qpM244HbIb {
+        width: 100% !important;
+        max-width: 100% !important;
+        overflow: hidden !important;
+        word-wrap: break-word !important;
+        overflow-wrap: break-word !important;
+    }
+}
+
+/* Extra small screens */
+@media (max-width: 480px) {
+
+    .text-output p,
+    .c-paragraph p {
+        font-size: 14px !important;
+        line-height: 1.4 !important;
+        padding: 0 10px !important;
+    }
+
+    /* Only target text containers, not image containers */
+    .c-paragraph .inner,
+    .c-heading .inner {
+        padding-left: 15px !important;
+        padding-right: 15px !important;
+    }
+}
+
+/* 🛑🛑🛑 PAGE SPECIFIC CSS
+--------------------------------------------------*/

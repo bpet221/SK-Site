@@ -1,5 +1,29 @@
 /* 🟢🟢 LOADER CSS ('HOME' PAGE ONLY) */
 
+/* PREVENT FLASH - MUST BE FIRST */
+html,
+body {
+    background-color: #1b1b18 !important;
+    /* Dark loader background */
+    overflow: hidden;
+}
+
+/* Hide all content until loader is ready */
+body:not(.loader-ready)>*:not(#loader):not(script) {
+    visibility: hidden !important;
+}
+
+/* Show content only after loader completes */
+body.loader-done {
+    background-color: #ede7db !important;
+    /* Light main background */
+    overflow: visible;
+}
+
+body.loader-done>* {
+    visibility: visible !important;
+}
+
 /* Z-INDEX VALUES --------------------- */
 /* Reference Section */
 #section-kYksPsq7_h {
@@ -50,7 +74,7 @@ body:not(.has-funnel-builder) #section-p-41UvcD17 {
 body:not(.has-funnel-builder) #section-4hcS9sD17J,
 body:not(.has-funnel-builder) #section-gs7_Vr7US1,
 body:not(.has-funnel-builder) #section-p-41UvcD17 {
-    transition: transform 1.5s cubic-bezier(0.25, 0.1, 0.25, 1) 2.1s !important;
+    transition: transform 0.08s cubic-bezier(0.25, 0.1, 0.25, 1) 2.1s !important;
 }
 
 #second-bg {

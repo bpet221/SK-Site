@@ -17,85 +17,160 @@
     alt="Scroll Up Arrow" />
 
 <script>
+
     document.addEventListener("DOMContentLoaded", function () {
-        if (document.querySelector("iframe[name='funnel-builder']")) {
-            document.body.classList.add("has-funnel-builder");
-        }
+        // ADD THIS LINE FIRST
+        document.body.classList.add("loader-ready");
 
-        var scrollUpButton = document.querySelector('.scroll-up-arrow');
-        if (scrollUpButton) {
-            scrollUpButton.addEventListener("click", function () {
-                window.scrollTo({ top: 0, behavior: 'smooth' });
-            });
-        }
+        let loaderCompleted = false;
+        let navToggleInterval = null;
 
-        function toggleNav() {
-            var width = window.innerWidth;
-            var navIds = ["section-4hcS9sD17J", "section-gs7_Vr7US1", "section-p-41UvcD17"];
+        document.addEventListener("DOMContentLoaded", function () {
+            let loaderCompleted = false;
+            let navToggleInterval = null;
 
-            navIds.forEach(function (id) {
-                var el = document.getElementById(id);
-                if (el) {
-                    el.classList.remove("show");
-                    el.style.display = "none";
-                    el.style.transform = ""; // Clear overrides
-                    el.style.position = "fixed";
-                    el.style.top = "0px";
-                    el.style.zIndex = "1200";
+            // Detect funnel builder
+            if (document.querySelector("iframe[name='funnel-builder']")) {
+                document.body.classList.add("has-funnel-builder");
+            }
+
+            // Scroll up button functionality
+            var scrollUpButton = document.querySelector('.scroll-up-arrow');
+            if (scrollUpButton) {
+                scrollUpButton.addEventListener("click", function () {
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                });
+            }
+
+            function toggleNav() {
+                var width = window.innerWidth;
+                var navIds = ["section-4hcS9sD17J", "section-gs7_Vr7US1", "section-p-41UvcD17"];
+
+                navIds.forEach(function (id) {
+                    var el = document.getElementById(id);
+                    if (el) {
+                        el.classList.remove("show");
+                        el.style.display = "none";
+                        el.style.transform = "";
+                        el.style.position = "fixed";
+                        el.style.top = "0px";
+                        el.style.zIndex = "1200";
+                    }
+                });
+
+                var nav = null;
+                if (width > 1250) {
+                    nav = document.getElementById("section-4hcS9sD17J");
+                } else if (width >= 481 && width <= 1250) {
+                    nav = document.getElementById("section-gs7_Vr7US1");
+                } else {
+                    nav = document.getElementById("section-p-41UvcD17");
+                }
+
+                if (nav) {
+                    nav.style.display = "block";
+                    nav.classList.add("show");
+                }
+            }
+
+            function completeLoaderSequence() {
+                if (loaderCompleted) return; // Prevent multiple executions
+                loaderCompleted = true;
+
+                // Clear any existing interval
+                if (navToggleInterval) {
+                    clearInterval(navToggleInterval);
+                    navToggleInterval = null;
+                }
+
+                // Force scroll to top
+                if (window.scrollY > 0) {
+                    window.scrollTo({ top: 0, behavior: 'instant' });
+                }
+
+                // STEP 1: Hide the loader
+                var loader = document.getElementById("loader");
+                if (loader) {
+                    loader.classList.add("hide");
+                }
+
+                // STEP 2: After loader hides (1s), show navigation (rolls down)
+                setTimeout(() => {
+                    toggleNav();
+
+                    // STEP 3: After nav rolls down (0.8s), fade background to reveal main content
+                    setTimeout(() => {
+                        var secondBg = document.getElementById("second-bg");
+                        if (secondBg) {
+                            secondBg.classList.add("fade");
+                        }
+                        document.body.classList.add("loader-done");
+                    }, 800); // Wait for nav roll-down animation (matches CSS transition: 0.8s)
+
+                }, 1000); // Wait for loader roll-up
+
+                // Start nav monitoring with MutationObserver after everything is done
+                setTimeout(() => {
+                    const observer = new MutationObserver(() => {
+                        if (!loaderCompleted) return;
+                        toggleNav();
+                    });
+                    observer.observe(document.body, { childList: true, subtree: true });
+                }, 3000); // Start monitoring after all animations complete
+            }
+
+            function startLoader() {
+                // Wait for both DOM ready AND a minimum time (for UX)
+                const minLoaderTime = 1500;
+                const startTime = Date.now();
+
+                function checkAndComplete() {
+                    const elapsed = Date.now() - startTime;
+                    if (elapsed >= minLoaderTime) {
+                        completeLoaderSequence();
+                    } else {
+                        // Wait for remaining time
+                        setTimeout(completeLoaderSequence, minLoaderTime - elapsed);
+                    }
+                }
+
+                // If document is already loaded, start timer
+                if (document.readyState === 'complete') {
+                    checkAndComplete();
+                } else {
+                    // Wait for full page load, but respect minimum time
+                    window.addEventListener('load', checkAndComplete);
+
+                    // Failsafe: if load event doesn't fire within 5 seconds, force completion
+                    setTimeout(() => {
+                        if (!loaderCompleted) {
+                            console.warn('Loader failsafe triggered - forcing completion');
+                            completeLoaderSequence();
+                        }
+                    }, 5000);
+                }
+            }
+
+            // Handle resize events
+            window.addEventListener('resize', () => {
+                if (loaderCompleted) {
+                    toggleNav();
                 }
             });
 
-            var nav = null;
-            if (width > 1250) {
-                nav = document.getElementById("section-4hcS9sD17J");
-            } else if (width >= 481 && width <= 1250) {
-                nav = document.getElementById("section-gs7_Vr7US1");
-            } else {
-                nav = document.getElementById("section-p-41UvcD17");
-            }
-
-            if (nav) {
-                nav.style.display = "block";
-                nav.classList.add("show");
-            }
-        }
-
-        function runLoaderSequence() {
-            if (window.scrollY > 0) {
-                window.scrollTo({ top: 0, behavior: 'instant' });
-            }
-
-            var loader = document.getElementById("loader");
-            loader.classList.add("hide");
-
-            setTimeout(() => {
-                toggleNav();
-                var secondBg = document.getElementById("second-bg");
-                if (secondBg) {
-                    setTimeout(() => secondBg.classList.add("fade"), 0); // Updated from 2000 to 0
+            // Scroll arrow visibility
+            window.addEventListener("scroll", function () {
+                var scrollUpArrow = document.querySelector(".scroll-up-arrow");
+                if (scrollUpArrow) {
+                    if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight) {
+                        scrollUpArrow.classList.add("visible");
+                    } else {
+                        scrollUpArrow.classList.remove("visible");
+                    }
                 }
-                document.body.classList.add("loader-done");
-            }, 1000); // Wait for loader roll-up (1s)
-        }
+            });
 
-        // Start after spinner delay
-        setTimeout(runLoaderSequence, 2000); // 2s spinner delay
-
-        window.addEventListener('resize', toggleNav);
-
-        window.addEventListener("scroll", function () {
-            var scrollUpArrow = document.querySelector(".scroll-up-arrow");
-            if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight) {
-                scrollUpArrow.classList.add("visible");
-            } else {
-                scrollUpArrow.classList.remove("visible");
-            }
+            // Start the loader sequence
+            startLoader();
         });
-
-        // Watch for GHL DOM changes instead of polling
-        const observer = new MutationObserver(() => {
-            toggleNav();
-        });
-        observer.observe(document.body, { childList: true, subtree: true });
-    });
 </script>
